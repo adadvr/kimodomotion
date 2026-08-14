@@ -37,11 +37,20 @@ HUMANOID = {
     "RightUpperArm": ["rightarm", "rupperarm", "rightupperarm"],
     "RightLowerArm": ["rightforearm", "rforearm", "rightlowerarm"],
     "RightHand": ["righthand", "rhand"],
-    "LeftUpperLeg": ["leftupleg", "lthigh", "leftthigh"],
-    "LeftLowerLeg": ["leftleg", "lshin", "leftshin"],
+    # OJO con las piernas: la convencion NO es universal.
+    #   Mixamo : LeftUpLeg = muslo, LeftLeg   = espinilla
+    #   SOMA   : LeftLeg   = muslo, LeftShin  = espinilla
+    # o sea que "leftleg" significa cosas distintas segun el esqueleto. Por eso
+    # va SIEMPRE de ultimo en ambas listas: los nombres inequivocos se reclaman
+    # primero, y como UpperLeg se resuelve antes que LowerLeg (y `used` impide
+    # reasignar), cada convencion cae en su sitio:
+    #   Mixamo -> UpperLeg toma leftupleg; LowerLeg cae a leftleg   (correcto)
+    #   SOMA   -> UpperLeg cae a leftleg;  LowerLeg toma leftshin   (correcto)
+    "LeftUpperLeg": ["leftupleg", "leftthigh", "lthigh", "leftleg"],
+    "LeftLowerLeg": ["leftshin", "lshin", "leftlowerleg", "leftleg"],
     "LeftFoot": ["leftfoot", "lfoot"], "LeftToes": ["lefttoe", "ltoe"],
-    "RightUpperLeg": ["rightupleg", "rthigh", "rightthigh"],
-    "RightLowerLeg": ["rightleg", "rshin", "rightshin"],
+    "RightUpperLeg": ["rightupleg", "rightthigh", "rthigh", "rightleg"],
+    "RightLowerLeg": ["rightshin", "rshin", "rightlowerleg", "rightleg"],
     "RightFoot": ["rightfoot", "rfoot"], "RightToes": ["righttoe", "rtoe"],
 }
 
@@ -127,9 +136,17 @@ def convert(path, outdir, scale, fps):
 
 def main():
     a = parse_args()
-    files = ([a.input] if a.input.lower().endswith(".bvh")
-             else [os.path.join(r, f) for r, _, fs in os.walk(a.input)
-                   for f in fs if f.lower().endswith(".bvh")])
+    def recorrer(raiz):
+        for r, dirs, fs in os.walk(raiz):
+            # Las carpetas con "_" delante son internas del pipeline: _work
+            # (intermedios del postproceso), _rejected (candidatos perdedores),
+            # _constraints. Sin este filtro se exportaban 150 FBX en vez de 50.
+            dirs[:] = [d for d in dirs if not d.startswith("_")]
+            for f in fs:
+                if f.lower().endswith(".bvh"):
+                    yield os.path.join(r, f)
+
+    files = [a.input] if a.input.lower().endswith(".bvh") else list(recorrer(a.input))
     if not files:
         raise SystemExit(f"no encontre BVH en {a.input}")
 
