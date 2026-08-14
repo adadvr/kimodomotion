@@ -38,6 +38,7 @@ import json
 import os
 import queue
 import re
+import subprocess
 import sys
 import threading
 import time
@@ -51,6 +52,7 @@ os.environ.setdefault("TEXT_ENCODER_MODE", "local")
 import numpy as np  # noqa: E402
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import postprocess  # noqa: E402
 from generate import build_constraints  # noqa: E402
 from generate_inproc import (  # noqa: E402
     get_output_skeleton,
@@ -132,6 +134,33 @@ def validar(cuerpo: dict) -> tuple[dict | None, str | None]:
             "candidates": candidatos, "seed": semilla}, None
 
 
+def a_fbx(bvhs: list[str], jid: str) -> list[str]:
+    """Convierte los BVH limpios a FBX llamando a Blender headless.
+
+    to_fbx.py se ejecuta DENTRO de Blender (necesita `bpy`), asi que va por
+    subproceso. Es CPU: no compite por la VRAM con la generacion.
+    """
+    if not bvhs:
+        return []
+    stage = os.path.join(ARGS.outdir, "_fbx_in", jid)
+    os.makedirs(stage, exist_ok=True)
+    for p in bvhs:                      # Blender recibe una carpeta, no archivos sueltos
+        destino = os.path.join(stage, os.path.basename(p))
+        with open(p, "rb") as o, open(destino, "wb") as n:
+            n.write(o.read())
+
+    salida = os.path.join(ARGS.outdir, "fbx")
+    guion = os.path.join(os.path.dirname(os.path.abspath(__file__)), "to_fbx.py")
+    r = subprocess.run(
+        [ARGS.blender, "--background", "--python", guion, "--",
+         "--input", stage, "--out", salida],
+        capture_output=True, text=True, timeout=600,
+    )
+    if r.returncode != 0:
+        raise RuntimeError("blender fallo: " + (r.stderr or r.stdout)[-400:])
+    return [os.path.splitext(os.path.basename(p))[0] + ".fbx" for p in bvhs]
+
+
 # ---------------------------------------------------------------------- worker
 def arrancar_worker():
     """Carga el modelo una vez y consume la cola indefinidamente."""
@@ -155,7 +184,9 @@ def arrancar_worker():
     print(f"modelo listo en {time.time() - t0:.0f}s. Aceptando peticiones.\n")
 
     cdir = os.path.join(ARGS.outdir, "_constraints")
+    crudo_dir = os.path.join(ARGS.outdir, "_crudo")
     os.makedirs(cdir, exist_ok=True)
+    os.makedirs(crudo_dir, exist_ok=True)
 
     while True:
         jid = COLA.get()
@@ -174,7 +205,7 @@ def arrancar_worker():
             cpath = build_constraints(clip, fps, os.path.join(cdir, jid + ".json"))
             constraints = load_constraints(cpath, esq_in, ARGS.device)
 
-            archivos = []
+            crudos = []
             for k in range(pet["candidates"]):
                 torch.manual_seed(semilla + k)
                 np.random.seed((semilla + k) % (2 ** 31))
@@ -188,16 +219,45 @@ def arrancar_worker():
                     post_processing=True,
                     return_numpy=False,
                 )
-                nombre = f"{t['slug']}__{jid[:8]}__v{k}.bvh"
-                destino = os.path.join(ARGS.outdir, nombre)
+                destino = os.path.join(crudo_dir, f"{t['slug']}__{jid[:8]}__v{k}.bvh")
                 save_motion_bvh(destino, out["local_rot_mats"], out["root_positions"],
                                 skeleton=esq_out, fps=fps,
                                 standard_tpose=d.get("bvh_standard_tpose", True))
-                archivos.append(nombre)
+                crudos.append(destino)
+
+            # 2) postproceso: contactos de pie, suelo, politica de root, loop.
+            #    Sin esto el clip patina en Unity, que es el problema que motivo
+            #    todo el pipeline. El BVH limpio va a --outdir; el crudo se queda
+            #    en _crudo/ por si hace falta comparar.
+            with LOCK:
+                t["estado"] = "postproceso"
+            limpios, qc = [], []
+            for ruta in crudos:
+                rep = postprocess.process(
+                    ruta, ARGS.outdir,
+                    policy=pet["policy"],
+                    loop="gait" if pet["policy"] == "strip_xz" else None,
+                )
+                limpios.append(os.path.join(ARGS.outdir, rep["clip"] + ".bvh"))
+                qc.append({
+                    "clip": rep["clip"],
+                    "foot_skate_cm": rep["clean"]["foot_skate_mean_cm_per_frame"],
+                    "ground_cm": rep["clean"]["ground_penetration_cm"],
+                    "root_speed_m_s": rep.get("root_speed_m_per_s"),
+                    "passed": rep["passed"]["all"],
+                })
+
+            # 3) FBX, que es lo que Unity puede importar de verdad
+            fbx = []
+            if ARGS.blender:
+                with LOCK:
+                    t["estado"] = "fbx"
+                fbx = a_fbx(limpios, jid)
 
             with LOCK:
-                t.update(estado="listo", archivos=archivos, seed=semilla,
-                         fin=time.time())
+                t.update(estado="listo", seed=semilla, fin=time.time(),
+                         archivos=[os.path.basename(p) for p in limpios],
+                         fbx=fbx, qc=qc)
         except Exception as e:                                  # noqa: BLE001
             with LOCK:
                 t.update(estado="error", error=f"{type(e).__name__}: {e}",
@@ -284,11 +344,16 @@ async function refrescar(){
       j.trabajos.map(t=>{
         const seg = t.fin&&t.inicio ? (t.fin-t.inicio).toFixed(0)+'s'
                   : t.inicio ? '…' : '';
-        const links = (t.archivos||[]).map(f=>
-          `<a href="/api/bvh/${encodeURIComponent(f)}">${f.split('__').pop()}</a>`).join(' ');
+        const enl = f => `<a href="/api/archivo/${encodeURIComponent(f)}">${f.split('__').pop()}</a>`;
+        const links = [...(t.fbx||[]).map(enl), ...(t.archivos||[]).map(enl)].join(' ');
+        const qc = (t.qc||[]).map(q =>
+          `<code style="color:${q.passed?'var(--ok)':'var(--err)'}">` +
+          `skate ${q.foot_skate_cm.toFixed(2)}cm · suelo ${q.ground_cm.toFixed(2)}cm` +
+          (q.root_speed_m_s ? ` · ${q.root_speed_m_s.toFixed(2)}m/s` : '') + `</code>`).join('<br>');
         return `<tr><td><code>${t.slug}</code></td>
           <td><span class="e e-${t.estado}">${t.estado}</span></td>
-          <td>${seg}</td><td>${t.error?'<code>'+t.error+'</code>':links}</td></tr>`;
+          <td>${seg}</td>
+          <td>${t.error?'<code>'+t.error+'</code>':links+(qc?'<br>'+qc:'')}</td></tr>`;
       }).join('');
   }catch(e){}
   setTimeout(refrescar,3000);
@@ -334,19 +399,25 @@ class Handler(BaseHTTPRequestHandler):
             with LOCK:
                 ts = sorted(TRABAJOS.values(), key=lambda t: t["creado"], reverse=True)
                 return self._responder(200, {"trabajos": ts[:40]})
-        if self.path.startswith("/api/bvh/"):
+        if self.path.startswith("/api/archivo/"):
             from urllib.parse import unquote
-            pedido = unquote(self.path[len("/api/bvh/"):])
-            # solo servimos nombres que nosotros escribimos: nada de rutas
+            pedido = unquote(self.path[len("/api/archivo/"):])
+            # Solo servimos nombres que ESTE proceso escribio, comprobados contra
+            # la tabla de trabajos y no contra el disco. Asi ni un ".." ni un
+            # nombre inventado llegan a tocar el sistema de archivos.
             with LOCK:
-                validos = {f for t in TRABAJOS.values() for f in t.get("archivos", [])}
-            if pedido not in validos:
+                bvhs = {f for t in TRABAJOS.values() for f in t.get("archivos", [])}
+                fbxs = {f for t in TRABAJOS.values() for f in t.get("fbx", [])}
+            if pedido in fbxs:
+                ruta, tipo = os.path.join(ARGS.outdir, "fbx", pedido), "application/octet-stream"
+            elif pedido in bvhs:
+                ruta, tipo = os.path.join(ARGS.outdir, pedido), "text/plain; charset=utf-8"
+            else:
                 return self._responder(404, {"error": "no encontrado"})
-            ruta = os.path.join(ARGS.outdir, pedido)
             if not os.path.exists(ruta):
-                return self._responder(404, {"error": "no encontrado"})
+                return self._responder(404, {"error": "aun no escrito"})
             with open(ruta, "rb") as f:
-                return self._responder(200, f.read(), "text/plain; charset=utf-8")
+                return self._responder(200, f.read(), tipo)
         return self._responder(404, {"error": "ruta desconocida"})
 
     def do_POST(self):
@@ -392,6 +463,9 @@ def main():
     ap.add_argument("--model", default="kimodo-soma-rp")
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--low-vram", action="store_true")
+    ap.add_argument("--blender", default="",
+                    help="ruta a blender.exe; sin esto se sirve solo BVH, y "
+                         "Unity necesita FBX")
     ap.add_argument("--port", type=int, default=8770)
     ap.add_argument("--host", default="127.0.0.1",
                     help="127.0.0.1 = solo esta maquina (default); 0.0.0.0 = red")
@@ -404,6 +478,11 @@ def main():
                  "Sin credenciales no arranco.")
     if len(PASS) < 12:
         sys.exit("KIMODO_PASS es demasiado corta: usa 12 caracteres o mas.")
+
+    if ARGS.blender and not os.path.exists(ARGS.blender):
+        sys.exit(f"no encuentro blender en {ARGS.blender}")
+    if not ARGS.blender:
+        print("AVISO: sin --blender solo se sirven BVH. Unity importa FBX.")
 
     os.makedirs(ARGS.outdir, exist_ok=True)
     threading.Thread(target=arrancar_worker, daemon=True).start()
