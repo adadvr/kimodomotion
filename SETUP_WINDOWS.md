@@ -125,6 +125,59 @@ salida. `--help` le hace escribir un archivo llamado `--help`.
 
 ---
 
+## 6. El pagefile, el disco y el crash 0xC0000005
+
+Síntoma: al cargar el text encoder, el proceso muere sin excepción de Python con
+código `-1073741819` (`0xC0000005`, violación de acceso), típicamente en los
+primeros parámetros del `Loading weights: 6/290`.
+
+No es un bug de kimodo ni de versiones (`transformers 5.1.0` pide `torch>=2.4`,
+y 2.5.1 cumple). Es **agotamiento del límite de commit de Windows**.
+
+Llama-3-8B en bf16 pide ~16 GB en una sola reserva. El límite de commit es
+`RAM + archivo de paginación`. Cuando se agota, las reservas fallan y el código
+nativo que no comprueba el retorno revienta con violación de acceso en vez de
+lanzar `MemoryError`.
+
+La trampa: el pagefile puede estar **configurado** a 32 GB y **asignado** solo a
+2 GB, porque no cabe en el disco. Se ve así:
+
+```powershell
+Get-CimInstance Win32_PageFileSetting | Select Name, InitialSize, MaximumSize
+# -> 32868 / 0        <- lo configurado
+Get-CimInstance Win32_PageFileUsage   | Select Name, AllocatedBaseSize
+# -> 2048             <- lo que Windows realmente pudo crear
+Get-CimInstance Win32_OperatingSystem |
+    Select @{n='CommitLimitGB';e={[math]::Round($_.TotalVirtualMemorySize/1MB,1)}},
+           @{n='CommitLibreGB';e={[math]::Round($_.FreeVirtualMemory/1MB,1)}}
+```
+
+Si `AllocatedBaseSize` es mucho menor que `InitialSize`, **el problema es disco,
+no configuración**. Subir el ajuste no sirve de nada hasta liberar espacio.
+
+### Arreglo
+
+```powershell
+# 1. Liberar disco. La cache de pip suele tener el wheel de torch (2.4 GB) y mas:
+python -m pip cache purge      # aqui libero 17.7 GB
+conda clean -a -y
+
+# 2. Fijar un pagefile que quepa (16 GB basta; 32 GB dejaria el disco al limite).
+#    Requiere admin y REINICIAR.
+$pf = Get-CimInstance Win32_PageFileSetting -Filter "Name='c:\\pagefile.sys'"
+Set-CimInstance -InputObject $pf -Property @{ InitialSize = 16384; MaximumSize = 16384 }
+```
+
+Resultado: límite de commit ~47.7 GB en una máquina de 31.7 GB de RAM, con ~26 GB
+de disco libre. Margen de sobra para las 100 generaciones del lote completo, que
+mantienen los 16 GB reservados durante horas.
+
+Nota: cerrar aplicaciones es un parche, no una solución. En esta máquina el mayor
+consumidor era VS Code, y si el agente corre dentro de VS Code no se puede cerrar
+sin matar la sesión.
+
+---
+
 ## Acceso a Llama-3 (bloqueante, trámite manual)
 
 Kimodo usa `McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp`, que **no** está
