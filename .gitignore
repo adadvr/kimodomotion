@@ -6,6 +6,13 @@ _constraints/
 state.json
 *.npz
 
+# Los FBX son DERIVADOS: se regeneran de los BVH con to_fbx.py en un minuto.
+# Y no son reproducibles byte a byte -- Blender les escribe una marca de tiempo,
+# asi que cada regeneracion seria ~7.5 MB nuevos en el historial para siempre.
+# Se publican como adjunto de release, que vive fuera del historial de git:
+#   https://github.com/adadvr/kimodomotion/releases/latest
+fbx/
+
 # Salida de Blender / trabajo local
 *.blend1
 fbx_tmp/
