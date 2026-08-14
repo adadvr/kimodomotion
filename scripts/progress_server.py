@@ -17,9 +17,11 @@ from __future__ import annotations
 
 import argparse
 import glob
+import io
 import json
 import os
 import time
+import zipfile
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 ARGS = None
@@ -80,13 +82,43 @@ def leer_estado():
         ultimo = {"file": os.path.basename(bvhs[-1]),
                   "hace_s": round(time.time() - os.path.getmtime(bvhs[-1]))}
 
+    n_entregable = 0
+    for carpeta in ARGS.entregable:
+        for raiz, dirs, archivos in os.walk(carpeta):
+            dirs[:] = [d for d in dirs if not d.startswith("_")]
+            n_entregable += len(archivos)
+
     return {
+        "hay_entregable": n_entregable > 0, "entregable_archivos": n_entregable,
         "total": total, "ok": len(ok), "fallo": len(fallo),
         "pendientes": total - len(ok) - len(fallo),
         "errores": fallo, "ritmo_s": ritmo_s, "eta_min": eta_min,
         "por_cat": por_cat, "ultimo": ultimo, "n_cand": n_cand,
         "corriendo": bool(ultimo and ultimo["hace_s"] < 300),
     }
+
+
+def construir_zip():
+    """Empaqueta SOLO el entregable: los BVH limpios y los FBX.
+
+    Nada de scripts, documentacion ni intermedios. Es lo que hace falta para
+    importar en Unity y nada mas. Comprimido ronda los 10 MB.
+    """
+    buf = io.BytesIO()
+    total = 0
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as z:
+        for carpeta in ARGS.entregable:
+            if not os.path.isdir(carpeta):
+                continue
+            base = os.path.basename(carpeta.rstrip("\\/"))
+            for raiz, dirs, archivos in os.walk(carpeta):
+                # mismas carpetas internas que ignora to_fbx.py
+                dirs[:] = [d for d in dirs if not d.startswith("_")]
+                for a in archivos:
+                    ruta = os.path.join(raiz, a)
+                    z.write(ruta, os.path.join(base, os.path.relpath(ruta, carpeta)))
+                    total += 1
+    return buf.getvalue(), total
 
 
 PAGINA = """<!doctype html><html lang="es"><head>
@@ -135,6 +167,7 @@ tr:last-child td{border-bottom:none}
 </style></head><body><div class="wrap">
 <h1>Kimodo — avance del lote</h1>
 <div class="sub" id="sub">cargando…</div>
+<div id="dl"></div>
 <div class="cards" id="cards"></div>
 <div class="bar" id="bar"></div>
 <div id="cats"></div>
@@ -159,6 +192,12 @@ function render(d){
     ['fallidas', d.fallo], ['pendientes', d.pendientes],
     ['por generación', ritmo], ['tiempo restante', eta],
   ].map(([l,n]) => `<div class="card"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+
+  document.getElementById('dl').innerHTML = d.hay_entregable
+    ? `<a class="card" style="display:inline-block;text-decoration:none;margin-bottom:16px"
+         href="/descargar"><div class="n" style="font-size:17px">⬇ Descargar animaciones</div>
+         <div class="l">${d.entregable_archivos} archivos · BVH + FBX en un zip</div></a>`
+    : '';
 
   document.getElementById('bar').innerHTML =
     `<i class="b-ok" style="width:${pct(d.ok,d.total)}%"></i>` +
@@ -190,6 +229,17 @@ tick();
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if self.path.startswith("/descargar"):
+            datos, n = construir_zip()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/zip")
+            self.send_header("Content-Disposition",
+                             'attachment; filename="kimodo_animations.zip"')
+            self.send_header("Content-Length", str(len(datos)))
+            self.end_headers()
+            self.wfile.write(datos)
+            print(f"descargado: {n} archivos, {len(datos) / 1024 / 1024:.1f} MB")
+            return
         if self.path.startswith("/api"):
             cuerpo = json.dumps(leer_estado()).encode("utf-8")
             tipo = "application/json"
@@ -218,6 +268,8 @@ def main():
     ap.add_argument("--host", default="127.0.0.1",
                     help="127.0.0.1 = solo esta maquina (default); "
                          "0.0.0.0 = accesible desde la red local")
+    ap.add_argument("--entregable", nargs="*", default=[],
+                    help="carpetas que empaqueta /descargar (kimodo_animations, fbx)")
     ARGS = ap.parse_args()
 
     print(f"panel en http://localhost:{ARGS.port}   (Ctrl+C para parar)")
