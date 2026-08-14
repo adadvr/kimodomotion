@@ -57,6 +57,27 @@ def get_skeleton(model):
     )
 
 
+def get_output_skeleton(model, skeleton):
+    """El esqueleto de la SALIDA, que NO es el mismo que el de entrada.
+
+    Kimodo genera internamente en `somaskel30`, pero antes de devolver convierte
+    la salida a `somaskel77` (kimodo_model.py:553). Hay dos esqueletos en juego:
+
+      * el de entrada (30) -> lo necesitan los constraints, que se consumen
+        dentro del modelo
+      * el de salida (77)  -> lo necesita save_motion_bvh
+
+    Si le pasas el de 30 al export, motion_to_bvh ve `name == "somaskel30"` e
+    intenta convertir por segunda vez algo que ya viene en 77:
+      "shape mismatch: value tensor of shape [T,77,3,3] cannot be broadcast
+       to indexing result of shape [T,30,3,3]"
+    """
+    out = getattr(model, "output_skeleton", None)
+    if out is not None:
+        return out
+    return getattr(skeleton, "somaskel77", skeleton)
+
+
 def load_constraints(path, skeleton, device=None):
     """Convierte el JSON de constraints al objeto que espera la API.
 
@@ -126,8 +147,11 @@ def main():
           f"(text encoder en {os.environ.get('TEXT_ENCODER_DEVICE', 'gpu')})...")
     t0 = time.time()
     model = load_model(modelname=a.model, device=a.device)
-    skeleton = get_skeleton(model)
-    print(f"modelo listo en {time.time() - t0:.0f}s. Esta carga NO se repite.\n")
+    skeleton = get_skeleton(model)              # entrada (somaskel30): constraints
+    out_skeleton = get_output_skeleton(model, skeleton)   # salida (somaskel77): BVH
+    print(f"modelo listo en {time.time() - t0:.0f}s. Esta carga NO se repite.")
+    print(f"esqueleto: entrada={getattr(skeleton, 'name', '?')} "
+          f"salida={getattr(out_skeleton, 'name', '?')}\n")
 
     total, done, t_start = len(clips) * n_cand, 0, time.time()
     for clip in clips:
@@ -151,7 +175,15 @@ def main():
                 torch.manual_seed(seed)
                 np.random.seed(seed % (2 ** 31))
                 out = model(
-                    prompts=clip["prompt"],
+                    # OJO: lista de 1, NO un string suelto. Con un string, Kimodo
+                    # entra por el `else` de kimodo_model.py:484 y activa
+                    # `tosqueeze`, que quita la dimension de batch en la 531...
+                    # pero dos lineas mas abajo su propio post_process_motion la
+                    # exige de vuelta (postprocess.py:214, assert dim()==5) y
+                    # revienta con "local_rot_mats should be 5D". Son dos rutas
+                    # del codigo de Kimodo que no encajan entre si.
+                    # Con una lista entra por la 478: num_samples=1 y sin squeeze.
+                    prompts=[clip["prompt"]],
                     num_frames=n_frames,
                     num_denoising_steps=d["diffusion_steps"],
                     constraint_lst=constraints,
@@ -165,13 +197,20 @@ def main():
                     return_numpy=False,
                 )
                 save_motion_bvh(stem + ".bvh", out["local_rot_mats"], out["root_positions"],
-                                skeleton=skeleton, fps=fps,
+                                skeleton=out_skeleton, fps=fps,
                                 standard_tpose=d.get("bvh_standard_tpose", True))
                 if not a.no_npz:
-                    np.savez_compressed(stem + ".npz",
-                                        **{kk: v.detach().cpu().numpy()
-                                           for kk, v in out.items()
-                                           if hasattr(v, "detach")})
+                    arrs = {}
+                    for kk, v in out.items():
+                        if not hasattr(v, "detach"):
+                            continue
+                        arr = v.detach().cpu().numpy()
+                        # quitamos el batch de 1 para que el npz quede [T,...]:
+                        # asi `foot_contacts` sale [T,4] como dice el README.
+                        if arr.ndim > 1 and arr.shape[0] == 1:
+                            arr = arr[0]
+                        arrs[kk] = arr
+                    np.savez_compressed(stem + ".npz", **arrs)
                 state[key] = {"ok": True, "seed": seed, "file": stem + ".bvh",
                               "prompt": clip["prompt"], "duration": clip["duration"],
                               "policy": clip.get("root_policy")}
