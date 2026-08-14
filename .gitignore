@@ -1,0 +1,23 @@
+# Intermedios de generacion: viven en C:\kimodo_work\, fuera de OneDrive y del repo.
+# Si alguien apunta --outdir aqui por error, que no acabe en git ni sincronizado.
+raw/
+_rejected/
+_constraints/
+state.json
+*.npz
+
+# Salida de Blender / trabajo local
+*.blend1
+fbx_tmp/
+
+# Credenciales: el token de HuggingFace NUNCA se commitea
+huttinface.md
+.env
+*.token
+hf_token*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
