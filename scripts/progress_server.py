@@ -215,10 +215,23 @@ def main():
     ap.add_argument("--candidates", type=int, default=None,
                     help="si no se pasa, usa num_samples del catalogo")
     ap.add_argument("--port", type=int, default=8765)
+    ap.add_argument("--host", default="127.0.0.1",
+                    help="127.0.0.1 = solo esta maquina (default); "
+                         "0.0.0.0 = accesible desde la red local")
     ARGS = ap.parse_args()
 
     print(f"panel en http://localhost:{ARGS.port}   (Ctrl+C para parar)")
-    HTTPServer(("127.0.0.1", ARGS.port), Handler).serve_forever()
+    if ARGS.host == "0.0.0.0":
+        import socket
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        try:
+            s.connect(("8.8.8.8", 80))          # no envia nada, solo resuelve la IP local
+            print(f"desde la red local:  http://{s.getsockname()[0]}:{ARGS.port}")
+        except OSError:
+            pass
+        finally:
+            s.close()
+    HTTPServer((ARGS.host, ARGS.port), Handler).serve_forever()
 
 
 if __name__ == "__main__":
