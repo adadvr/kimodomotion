@@ -16,7 +16,9 @@ es lo unico con marca temporal que deja el generador.
 from __future__ import annotations
 
 import argparse
+import base64
 import glob
+import hmac
 import io
 import json
 import os
@@ -25,6 +27,7 @@ import zipfile
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 ARGS = None
+USER = PASS = None
 
 
 def leer_estado():
@@ -96,6 +99,26 @@ def leer_estado():
         "por_cat": por_cat, "ultimo": ultimo, "n_cand": n_cand,
         "corriendo": bool(ultimo and ultimo["hace_s"] < 300),
     }
+
+
+def autorizado(cabecera):
+    """Basic auth opcional: activa solo si KIMODO_USER y KIMODO_PASS existen.
+
+    Sin credenciales el panel queda abierto, que es lo razonable en localhost.
+    En cuanto lo saques a internet (ngrok, tunel, --host 0.0.0.0) definelas:
+    de lo contrario cualquiera con la URL se descarga el catalogo entero.
+    """
+    if not USER or not PASS:
+        return True
+    if not cabecera or not cabecera.startswith("Basic "):
+        return False
+    try:
+        usuario, _, clave = base64.b64decode(cabecera[6:]).decode("utf-8").partition(":")
+    except (ValueError, UnicodeDecodeError):
+        return False
+    ok_u = hmac.compare_digest(usuario, USER)
+    ok_p = hmac.compare_digest(clave, PASS)     # los dos se evaluan siempre
+    return ok_u and ok_p
 
 
 def construir_zip():
@@ -229,6 +252,13 @@ tick();
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if not autorizado(self.headers.get("Authorization")):
+            time.sleep(0.5)                     # frena el barrido de contrasenas
+            self.send_response(401)
+            self.send_header("WWW-Authenticate", 'Basic realm="kimodo"')
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return
         if self.path.startswith("/descargar"):
             datos, n = construir_zip()
             self.send_response(200)
@@ -258,7 +288,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main():
-    global ARGS
+    global ARGS, USER, PASS
     ap = argparse.ArgumentParser()
     ap.add_argument("--raw", required=True, help="carpeta con state.json y los .bvh")
     ap.add_argument("--catalog", required=True)
@@ -271,6 +301,14 @@ def main():
     ap.add_argument("--entregable", nargs="*", default=[],
                     help="carpetas que empaqueta /descargar (kimodo_animations, fbx)")
     ARGS = ap.parse_args()
+
+    USER = os.environ.get("KIMODO_USER")
+    PASS = os.environ.get("KIMODO_PASS")
+    if USER and PASS:
+        print(f"autenticacion activada (usuario: {USER})")
+    else:
+        print("AVISO: sin autenticacion. Define KIMODO_USER y KIMODO_PASS "
+              "antes de exponerlo por ngrok o a la red.")
 
     print(f"panel en http://localhost:{ARGS.port}   (Ctrl+C para parar)")
     if ARGS.host == "0.0.0.0":
