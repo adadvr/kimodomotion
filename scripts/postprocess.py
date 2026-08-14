@@ -329,6 +329,19 @@ def _verdict(report: dict, clip_qc: dict) -> dict:
     checks["ground"] = c.get("ground_penetration_cm", 99) <= clip_qc.get("max_ground_penetration_cm", 2.0)
     if clip_qc.get("require_loop"):
         checks["loop"] = report.get("loop") is not None and "error" not in (report.get("loop") or {})
+
+    # El clip DEBE quedar quieto si su politica lo pide. Sin esta comprobacion,
+    # un bug que aplicase la politica al joint equivocado pasaba el QC entero:
+    # foot skate y penetracion salian perfectos porque se median bien, pero el
+    # personaje seguia avanzando. Es exactamente lo que paso.
+    if report.get("policy") in ("strip_xz", "pin_origin"):
+        checks["in_place"] = report.get("residual_xz_cm", 999) <= 1.0
+
+    # Velocidad de produccion: si es absurda, el controlador del personaje la
+    # usara mal y los pies patinaran en pantalla aunque el BVH este limpio.
+    v = report.get("root_speed_m_per_s")
+    if report.get("policy") == "strip_xz" and v is not None:
+        checks["root_speed"] = 0.2 <= v <= 8.0
     checks["all"] = all(v for k, v in checks.items() if k != "all")
     return checks
 
@@ -363,6 +376,10 @@ def process(path, outdir, policy="strip_xz", loop=None, freeze=False,
         report["frozen_leg_joints"] = freeze_legs(bvh)
         fix_ground(bvh, keys)
 
+    # Guardamos el clip COMPLETO, ya corregido, antes de recortarlo: de aqui
+    # sale la velocidad real del ciclo (ver mas abajo).
+    pre_loop = bvh.slice_frames(0, bvh.num_frames)
+
     # 4) recorte del loop (todavia en espacio global)
     loop_info = None
     if loop:
@@ -382,10 +399,25 @@ def process(path, outdir, policy="strip_xz", loop=None, freeze=False,
     report["clean"] = measure(bvh, keys, height_thr, speed_thr)
 
     # 6) politica de root
+    # La velocidad se mide ANTES de cortar el loop: un loop bien cerrado acaba
+    # casi donde empezo, asi que su desplazamiento neto no dice nada del ritmo
+    # real de la caminata. `pre_loop` es el clip completo ya corregido de
+    # contactos, que es donde vive la velocidad de produccion.
+    if policy != "keep":
+        v = apply_root_policy(pre_loop, policy, strip_yaw=False)
+        if v:
+            report["root_speed_m_per_s"] = round(v["mean_speed_m_per_s"], 4)
+
     curve = apply_root_policy(bvh, policy, strip_yaw=strip_yaw)
     report["root_curve"] = curve is not None
-    if curve:
+    if curve and "root_speed_m_per_s" not in report:
         report["root_speed_m_per_s"] = round(curve["mean_speed_m_per_s"], 4)
+
+    # residuo de traslacion tras aplicar la politica: si la politica funciono,
+    # el joint que lleva el movimiento tiene XZ constante
+    if bvh.has_translation(bvh.root):
+        _tr = bvh.translations(bvh.root)[:, [0, 2]]
+        report["residual_xz_cm"] = round(float(np.abs(_tr - _tr[0]).max()), 4)
     report["final_loop_pose_error_cm"] = measure(bvh, keys, height_thr, speed_thr)["loop_pose_error_cm"]
 
     report["passed"] = _verdict(report, clip_qc={})

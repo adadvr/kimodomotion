@@ -103,9 +103,50 @@ class BVH:
     def set_translations(self, jidx: int, values: np.ndarray):
         self.motion[:, self.pos_cols[jidx]] = values
 
+    # nombres tipicos del joint que lleva la traslacion, en orden de preferencia
+    _NOMBRES_ROOT = ("hips", "pelvis", "hip", "root_motion")
+
     @property
     def root(self) -> int:
-        return 0
+        """Joint que LLEVA el movimiento, que no siempre es el indice 0.
+
+        Los BVH de Kimodo envuelven el esqueleto en un joint `Root` clavado en
+        el origen (traslacion siempre 0) y ponen el movimiento real en `Hips`.
+        Devolver 0 a ciegas hacia que TODO el postproceso -- suelo, foot skate,
+        politica de root, curva de root -- operase sobre un joint inmovil:
+
+          * strip_xz no dejaba el clip in-place (las caderas seguian avanzando)
+          * fix_ground escribia el offset de suelo en el envoltorio, hundiendo
+            al personaje casi un metro
+          * rootSpeedMs salia ~0.03 m/s en vez de ~1.5
+
+        Y el QC no lo detectaba, porque solo mide foot skate y penetracion.
+
+        Preferimos por nombre; si no hay coincidencia, el primer joint cuya
+        traslacion realmente varie; y como ultimo recurso, el 0.
+        """
+        if getattr(self, "_root_cache", None) is not None:
+            return self._root_cache
+
+        por_nombre = {self.joints[i].name.lower(): i for i in self.pos_cols}
+        elegido = None
+        for cand in self._NOMBRES_ROOT:
+            for nombre, i in por_nombre.items():
+                if nombre == cand:
+                    elegido = i
+                    break
+            if elegido is not None:
+                break
+
+        if elegido is None:
+            for i in sorted(self.pos_cols):
+                tr = self.motion[:, self.pos_cols[i]]
+                if len(tr) > 1 and float(np.abs(tr - tr[0]).max()) > 1e-6:
+                    elegido = i
+                    break
+
+        self._root_cache = 0 if elegido is None else elegido
+        return self._root_cache
 
     def has_translation(self, jidx: int) -> bool:
         return jidx in self.pos_cols
