@@ -74,6 +74,130 @@ def detect_contacts(pos, keys, fps, ground, height_thr, speed_thr):
     return contacts
 
 
+def _debounce(mask: np.ndarray, min_run: int) -> np.ndarray:
+    """Elimina rachas mas cortas que min_run (parpadeos del detector de contacto).
+
+    Sin esto contar despegues no sirve de nada: un solo frame en el que el
+    detector duda parte un contacto en dos y suma un ciclo fantasma.
+    """
+    if min_run <= 1 or len(mask) == 0:
+        return mask.copy()
+    out = mask.copy()
+    n, i = len(out), 0
+    while i < n:
+        j = i
+        while j < n and out[j] == out[i]:
+            j += 1
+        if (j - i) < min_run and i > 0:       # la primera racha no tiene vecino previo
+            out[i:j] = out[i - 1]
+        i = j
+    return out
+
+
+def gait_cycles(contacts: dict, fps: float, min_run_s: float = 0.12) -> dict:
+    """Cuenta despegues (contacto -> aire) por pie, con antirrebote.
+
+    Un ciclo de marcha completo es un despegue por pie. Una caminata real de
+    varios segundos da 3-5; un clip que da UN paso y se congela da 0 o 1, y ahi
+    no hay ciclo que loopear por mucho que el detector de loop devuelva un
+    periodo. `cycles` es el minimo de los dos pies: si solo oscila una pierna,
+    tampoco es marcha.
+
+    min_run_s = 0.12 esta calibrado, no elegido a ojo: contra el BVH sintetico de
+    `make_test_bvh.py` (periodo 1.1 s en 5 s = 4.5 zancadas) 0.08 s cuenta 8-10
+    despegues por pie —el doble— porque el detector de contacto parpadea, y 0.16 s
+    ya se come fases de vuelo reales y devuelve 0. A 0.12 s salen 4-5, que es la
+    verdad. Si cambias el fps o el detector de contacto, revisa esto.
+    """
+    min_run = max(2, int(round(min_run_s * fps)))
+    per_side = {}
+    for side, mask in contacts.items():
+        m = _debounce(np.asarray(mask, dtype=bool), min_run)
+        per_side[side] = int(np.sum(m[:-1] & ~m[1:])) if len(m) > 1 else 0
+    return {
+        "cycles": int(min(per_side.values())) if per_side else 0,
+        "per_side": per_side,
+        "debounce_frames": min_run,
+    }
+
+
+def frozen_tail(bvh: BVH, rel_thr: float = 0.10, abs_thr: float = 0.05):
+    """Primer frame de la cola congelada. Devuelve (frame, fraccion_congelada).
+
+    Se mide RELATIVO AL ROOT: en espacio global un clip que avanza con el cuerpo
+    rigido tiene velocidad alta y parece vivo, que es justo el caso que hay que
+    cazar. Si no hay cola congelada devuelve num_frames (o sea: "congelado desde
+    el final", que es lo mismo que no estarlo).
+
+    El umbral sale del percentil 90 de la energia, no de la mediana: si el 70%
+    del clip esta congelado la mediana ya vive dentro de la parte congelada y el
+    detector no detectaria nada.
+    """
+    feat = _pose_features(bvh)                # ya viene local al root
+    T = len(feat)
+    if T < 4:
+        return T, 0.0
+    njoints = max(1, feat.shape[1] // 3)
+    e = np.zeros(T)
+    e[1:] = np.linalg.norm(np.diff(feat, axis=0), axis=1) / np.sqrt(njoints)
+    thr = max(abs_thr, rel_thr * float(np.percentile(e[1:], 90)))
+    start = T
+    for t in range(T - 1, 0, -1):
+        if e[t] > thr:
+            break
+        start = t
+    return int(start), round(float((T - start) / T), 4)
+
+
+def leg_motion_deg(bvh: BVH) -> float:
+    """Maxima desviacion angular de las piernas respecto al frame 0, en grados.
+
+    Es la comprobacion de que `freeze_legs` hizo su trabajo en los clips de
+    upper body enmascarados.
+    """
+    idxs = [i for i in leg_joint_indices(bvh) if i in bvh.rot_cols]
+    if not idxs or bvh.num_frames < 2:
+        return 0.0
+    worst = 0.0
+    for i in idxs:
+        order = bvh.rot_order(i)
+        rots = R.from_euler(order, bvh.rotations(i), degrees=True)
+        worst = max(worst, float(np.degrees((rots[0].inv() * rots).magnitude()).max()))
+    return round(worst, 3)
+
+
+def heading_delta_deg(bvh: BVH) -> float:
+    """Giro neto del root en grados (con signo, segun la convencion de _yaw_of)."""
+    if bvh.num_frames < 2:
+        return 0.0
+    _, rot = bvh.forward_kinematics()
+    yaw = np.unwrap(_yaw_of(rot[:, bvh.root]))
+    return round(float(np.degrees(yaw[-1] - yaw[0])), 3)
+
+
+def peak_frames(bvh: BVH, n: int = 3, min_sep_ratio: float = 0.12) -> list[int]:
+    """Frames de maxima desviacion respecto a la pose media, separados entre si.
+
+    Muestrear al 25/50/75% se pierde los gestos cortos: un punetazo al aire dura
+    ~8 frames y cae entre dos muestras con facilidad. La pose clave vive en el
+    pico de desviacion, no en un porcentaje fijo del clip. La separacion minima
+    evita devolver tres frames del mismo instante.
+    """
+    feat = _pose_features(bvh)
+    T = len(feat)
+    if T == 0:
+        return []
+    d = np.linalg.norm(feat - feat.mean(axis=0), axis=1)
+    sep = max(2, int(round(min_sep_ratio * T)))
+    picked = []
+    for t in np.argsort(-d):
+        if len(picked) >= n:
+            break
+        if all(abs(int(t) - p) >= sep for p in picked):
+            picked.append(int(t))
+    return sorted(picked)
+
+
 def auto_thresholds(pos, keys, fps):
     """Umbrales de contacto adaptados al clip (evita el 0% o el 100% de contacto)."""
     heights, speeds = [], []
@@ -315,6 +439,9 @@ def measure(bvh: BVH, keys: dict, height_thr=None, speed_thr=None) -> dict:
         "jitter_cm": round(jitter, 4),
         "loop_pose_error_cm": round(loop_err, 4),
         "contact_ratio": contact_ratio,
+        "gait": gait_cycles(contacts, fps),
+        "leg_motion_deg": leg_motion_deg(bvh),
+        "peak_frames": peak_frames(bvh),
         "thresholds": {"height_cm": round(height_thr, 3), "speed_cm_s": round(speed_thr, 2)},
         "detected_joints": {k: bvh.joints[v].name for k, v in sorted(keys.items())},
     }
@@ -330,6 +457,39 @@ def _verdict(report: dict, clip_qc: dict) -> dict:
     if clip_qc.get("require_loop"):
         checks["loop"] = report.get("loop") is not None and "error" not in (report.get("loop") or {})
 
+    # Ciclo de marcha. El check `loop` de arriba solo dice "encontre UN periodo",
+    # y el detector siempre encuentra alguno: ante un clip sin periodicidad se
+    # queda con la ventana mas corta permitida. Por eso los walks de un solo paso
+    # pasaban el QC entero con 50/50. Esto se mide sobre el clip COMPLETO, no
+    # sobre el loop ya recortado (un loop correcto dura un ciclo, no dos).
+    if report.get("loop_kind") == "gait":
+        checks["gait_cycles"] = (report.get("gait", {}).get("cycles", 0)
+                                 >= clip_qc.get("min_gait_cycles", 2))
+
+    # Cola congelada, tambien sobre el clip completo: el recorte del loop se la
+    # lleva por delante y deja un clip *valido* que sigue sin tener movimiento.
+    # Por defecto solo se exige a los loops; en un one-shot como
+    # `react_collapse_knees` acabar quieto en el suelo es correcto. Cualquier
+    # clip puede pedirlo con `max_frozen_tail_ratio` en su qc.
+    ftr = report.get("frozen_tail_ratio")
+    max_ftr = clip_qc.get("max_frozen_tail_ratio",
+                          0.25 if clip_qc.get("require_loop") else None)
+    if ftr is not None and max_ftr is not None:
+        checks["frozen_tail"] = ftr <= max_ftr
+
+    # --- umbrales del catalogo que hasta ahora no leia nadie ---
+    if "max_leg_motion_deg" in clip_qc:
+        checks["leg_motion"] = c.get("leg_motion_deg", 999) <= clip_qc["max_leg_motion_deg"]
+    if "max_root_drift_cm" in clip_qc:
+        checks["root_drift"] = report.get("root_drift_cm", 999) <= clip_qc["max_root_drift_cm"]
+    if "expect_heading_delta_deg" in clip_qc:
+        # Se compara la MAGNITUD: el signo depende de la convencion de ejes del
+        # rig y un rig espejado invertiria el criterio sin que el clip este mal.
+        # El signo real queda en `heading_delta_deg` del reporte para revisarlo.
+        exp = abs(float(clip_qc["expect_heading_delta_deg"]))
+        act = abs(float(report.get("heading_delta_deg", 0.0)))
+        checks["heading"] = abs(act - exp) <= clip_qc.get("heading_tolerance_deg", 40.0)
+
     # El clip DEBE quedar quieto si su politica lo pide. Sin esta comprobacion,
     # un bug que aplicase la politica al joint equivocado pasaba el QC entero:
     # foot skate y penetracion salian perfectos porque se median bien, pero el
@@ -342,6 +502,14 @@ def _verdict(report: dict, clip_qc: dict) -> dict:
     v = report.get("root_speed_m_per_s")
     if report.get("policy") == "strip_xz" and v is not None:
         checks["root_speed"] = 0.2 <= v <= 8.0
+
+    # Desviacion contra la velocidad esperada del catalogo. Tolerancia ancha (x2)
+    # a proposito: la medida manda, esto solo caza el caso en que el clip no es
+    # el movimiento que se pidio (un "sprint" que camina).
+    exp_v = clip_qc.get("expected_speed_m_s")
+    if exp_v and v is not None:
+        checks["expected_speed"] = (exp_v / 2.0) <= v <= (exp_v * 2.0)
+
     checks["all"] = all(v for k, v in checks.items() if k != "all")
     return checks
 
@@ -379,6 +547,23 @@ def process(path, outdir, policy="strip_xz", loop=None, freeze=False,
     # Guardamos el clip COMPLETO, ya corregido, antes de recortarlo: de aqui
     # sale la velocidad real del ciclo (ver mas abajo).
     pre_loop = bvh.slice_frames(0, bvh.num_frames)
+
+    # 3b) metricas de la FUENTE COMPLETA. Van aqui y no en `clean` porque el
+    # recorte del loop esconde justo los dos fallos que mas importan: se lleva la
+    # cola congelada, y deja un periodo de un solo paso que parece un ciclo.
+    _sp, _ = pre_loop.forward_kinematics()
+    _ah, _asp, _ag = auto_thresholds(_sp, keys, pre_loop.fps)
+    _sc = detect_contacts(_sp, keys, pre_loop.fps, _ag,
+                          _ah if height_thr is None else height_thr,
+                          _asp if speed_thr is None else speed_thr)
+    report["loop_kind"] = loop
+    report["source_frames"] = int(pre_loop.num_frames)
+    report["gait"] = gait_cycles(_sc, pre_loop.fps)
+    report["frozen_tail_from_frame"], report["frozen_tail_ratio"] = frozen_tail(pre_loop)
+    report["heading_delta_deg"] = heading_delta_deg(pre_loop)
+    if pre_loop.has_translation(pre_loop.root):
+        _d = pre_loop.translations(pre_loop.root)[:, [0, 2]]
+        report["root_drift_cm"] = round(float(np.abs(_d - _d[0]).max()), 4)
 
     # 4) recorte del loop (todavia en espacio global)
     loop_info = None

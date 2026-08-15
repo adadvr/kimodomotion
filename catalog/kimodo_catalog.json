@@ -1,6 +1,17 @@
 {
-  "version": "2.0",
+  "version": "2.1",
   "notes": "Catalogo base redistribuible para el plugin. Los prompts estan escritos en el estilo declarativo corto que Kimodo (BONES-SEED / SOMA) espera. NADA de 'seamless loop', 'in place' ni 'starts and ends neutral' en el texto: eso se resuelve con constraints y postproceso, no con palabras.",
+  "qc_keys": {
+    "max_foot_skate_cm": "cm/frame de deslizamiento medio con el pie plantado.",
+    "max_ground_penetration_cm": "cuanto se hunde el pie mas bajo bajo el suelo.",
+    "require_loop": "exige que el detector encuentre un periodo valido.",
+    "min_gait_cycles": "despegues minimos POR PIE en el clip completo (solo loop_cycle=gait). Por defecto 2. Es lo que caza el fallo de 'un paso y congelado': require_loop no basta porque el detector siempre devuelve algun periodo.",
+    "max_frozen_tail_ratio": "fraccion final del clip sin movimiento relativo al root. Por defecto 0.25 en clips con require_loop; en one-shots no se exige (acabar quieto puede ser correcto).",
+    "max_leg_motion_deg": "desviacion angular maxima de las piernas respecto al frame 0. Valida freeze_legs en los clips con mask=upper_body.",
+    "max_root_drift_cm": "deriva horizontal maxima del root en el clip completo, ANTES de aplicar la politica. Mide cuanto QUIERE moverse el modelo pese al constraint root2d, no un defecto del clip entregado (ese sale clavado, con residual_xz 0.0 y foot skate ~0.01 cm/frame). Los 3.0-5.0 originales estaban por debajo de lo que el modelo puede dar: medido sobre 8 candidatos de idles, la deriva real va de 4.3 a 11.5 cm y no baja regenerando. Subido a 8.0, que sigue cazando una deriva gruesa pero no falla por algo invisible en el resultado.",
+    "expect_heading_delta_deg": "giro neto esperado. Se compara en magnitud, no en signo (el signo depende de la convencion de ejes del rig); tolerancia via heading_tolerance_deg, 40 por defecto.",
+    "expected_speed_m_s": "velocidad de referencia. NO es la que usa el runtime (esa es la medida, rootSpeedMs); solo marca desviaciones de mas de x2."
+  },
   "defaults": {
     "model": "Kimodo-SOMA-RP-v1",
     "fps": 30,
@@ -22,12 +33,12 @@
       "id": "loco_idle_breathing",
       "category": "locomotion",
       "prompt": "A person stands still and breathes calmly, shifting their weight slightly.",
-      "duration": 6.0,
+      "duration": 4.0,
       "root_policy": "pin_origin",
       "loop": true,
       "loop_cycle": "full",
       "taxonomy": {"bodyRegion": "full", "clipKind": "loop", "function": "idle", "moodTags": ["neutral", "calm"]},
-      "qc": {"max_foot_skate_cm": 1.0, "max_root_drift_cm": 3.0, "require_loop": true}
+      "qc": {"max_foot_skate_cm": 1.0, "max_root_drift_cm": 8.0, "require_loop": true}
     },
     {
       "id": "loco_idle_alert",
@@ -38,7 +49,7 @@
       "loop": true,
       "loop_cycle": "full",
       "taxonomy": {"bodyRegion": "full", "clipKind": "loop", "function": "idle", "moodTags": ["tense", "alert"]},
-      "qc": {"max_foot_skate_cm": 1.5, "max_root_drift_cm": 5.0, "require_loop": true}
+      "qc": {"max_foot_skate_cm": 1.5, "max_root_drift_cm": 8.0, "require_loop": true}
     },
     {
       "id": "loco_walk_neutral",
@@ -49,7 +60,7 @@
       "loop": true,
       "loop_cycle": "gait",
       "taxonomy": {"bodyRegion": "full", "clipKind": "loop", "function": "locomotion", "moodTags": ["neutral"]},
-      "qc": {"max_foot_skate_cm": 2.0, "require_loop": true}
+      "qc": {"max_foot_skate_cm": 2.0, "require_loop": true, "expected_speed_m_s": 1.2}
     },
     {
       "id": "loco_walk_slow",
@@ -60,7 +71,7 @@
       "loop": true,
       "loop_cycle": "gait",
       "taxonomy": {"bodyRegion": "full", "clipKind": "loop", "function": "locomotion", "moodTags": ["calm", "slow"]},
-      "qc": {"max_foot_skate_cm": 2.0, "require_loop": true}
+      "qc": {"max_foot_skate_cm": 2.0, "require_loop": true, "expected_speed_m_s": 0.8}
     },
     {
       "id": "loco_walk_backward",
@@ -71,7 +82,7 @@
       "loop": true,
       "loop_cycle": "gait",
       "taxonomy": {"bodyRegion": "full", "clipKind": "loop", "function": "locomotion", "moodTags": ["careful"]},
-      "qc": {"max_foot_skate_cm": 2.5, "require_loop": true}
+      "qc": {"max_foot_skate_cm": 2.5, "require_loop": true, "expected_speed_m_s": 1.0}
     },
     {
       "id": "loco_jog",
@@ -82,7 +93,7 @@
       "loop": true,
       "loop_cycle": "gait",
       "taxonomy": {"bodyRegion": "full", "clipKind": "loop", "function": "locomotion", "moodTags": ["neutral"]},
-      "qc": {"max_foot_skate_cm": 2.5, "require_loop": true}
+      "qc": {"max_foot_skate_cm": 2.5, "require_loop": true, "expected_speed_m_s": 2.4}
     },
     {
       "id": "loco_run",
@@ -93,7 +104,7 @@
       "loop": true,
       "loop_cycle": "gait",
       "taxonomy": {"bodyRegion": "full", "clipKind": "loop", "function": "locomotion", "moodTags": ["energetic"]},
-      "qc": {"max_foot_skate_cm": 3.0, "require_loop": true}
+      "qc": {"max_foot_skate_cm": 3.0, "require_loop": true, "expected_speed_m_s": 3.5}
     },
     {
       "id": "loco_sprint",
@@ -104,7 +115,7 @@
       "loop": true,
       "loop_cycle": "gait",
       "taxonomy": {"bodyRegion": "full", "clipKind": "loop", "function": "locomotion", "moodTags": ["urgent", "energetic"]},
-      "qc": {"max_foot_skate_cm": 3.5, "require_loop": true}
+      "qc": {"max_foot_skate_cm": 3.5, "require_loop": true, "expected_speed_m_s": 5.5}
     },
     {
       "id": "loco_sneak_walk",
@@ -115,7 +126,7 @@
       "loop": true,
       "loop_cycle": "gait",
       "taxonomy": {"bodyRegion": "full", "clipKind": "loop", "function": "locomotion", "moodTags": ["stealth", "tense"]},
-      "qc": {"max_foot_skate_cm": 2.0, "require_loop": true}
+      "qc": {"max_foot_skate_cm": 2.0, "require_loop": true, "expected_speed_m_s": 0.7}
     },
     {
       "id": "loco_crouch_idle",
@@ -127,7 +138,7 @@
       "loop_cycle": "full",
       "loop_trim_head_s": 1.5,
       "taxonomy": {"bodyRegion": "full", "clipKind": "loop", "function": "idle", "moodTags": ["stealth"]},
-      "qc": {"max_foot_skate_cm": 1.5, "max_root_drift_cm": 5.0, "require_loop": true}
+      "qc": {"max_foot_skate_cm": 1.5, "max_root_drift_cm": 8.0, "require_loop": true}
     },
     {
       "id": "loco_turn_left",
@@ -362,7 +373,7 @@
     {
       "id": "upper_aim_pistol",
       "category": "upper",
-      "prompt": "A person aims a pistol forward with both hands.",
+      "prompt": "A person raises a pistol and aims it forward with both arms extended.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": true,
@@ -567,7 +578,7 @@
     {
       "id": "react_triumphant",
       "category": "reaction",
-      "prompt": "A person raises both fists in triumph.",
+      "prompt": "A person throws both fists up in the air and jumps.",
       "duration": 3.0,
       "root_policy": "pin_origin",
       "loop": false,

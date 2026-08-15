@@ -1,5 +1,15 @@
-"""Genera un BVH sintetico de caminata (con foot skate a proposito) para probar el pipeline."""
-import numpy as np, sys
+"""Genera un BVH sintetico de caminata (con foot skate a proposito) para probar el pipeline.
+
+  python make_test_bvh.py test_walk.bvh                     -> caminata sana, ~4.5 ciclos
+  python make_test_bvh.py sick.bvh --freeze-after 1.5       -> un paso y congelado
+
+`--freeze-after` reproduce el fallo real de los `loco_*`: las piernas se quedan
+en la pose del instante indicado mientras el root SIGUE avanzando. Es el caso
+que las metricas globales no ven (hay velocidad, luego "se mueve") y que solo
+se caza midiendo relativo al root.
+"""
+import argparse
+import numpy as np
 
 FPS = 30
 DUR = 5.0
@@ -77,17 +87,20 @@ ROOT Hips
 MOTION
 """
 
-def main(out="test_walk.bvh"):
+def main(out="test_walk.bvh", freeze_after=None, stop_root=False):
     t = np.arange(T) / FPS
     period = 1.1
     ph = 2 * np.pi * t / period
+    # A partir de aqui la pose se congela: el indice de fase deja de avanzar.
+    hold = int(freeze_after * FPS) if freeze_after else None
     rows = []
     for i in range(T):
-        hip_y = 92.0 + 1.6 * np.sin(2 * ph[i])
-        hip_z = SPEED * t[i]
+        i_pose = i if hold is None else min(i, hold)
+        hip_y = 92.0 + 1.6 * np.sin(2 * ph[i_pose])
+        hip_z = SPEED * (t[i_pose] if (hold is not None and stop_root) else t[i])
         row = [0.0, hip_y, hip_z, 0.0, 0.0, 0.0]
         for sign, off in ((1, 0.0), (-1, np.pi)):
-            a = ph[i] + off
+            a = ph[i_pose] + off
             thigh = 24.0 * np.sin(a)
             knee = -max(0.0, 38.0 * np.sin(a + 1.1))
             ankle = -0.5 * thigh - 0.4 * knee
@@ -95,8 +108,8 @@ def main(out="test_walk.bvh"):
             row += [0.0, -knee, 0.0]      # Leg
             row += [0.0, ankle, 0.0]      # Foot
             row += [0.0, 0.0, 0.0]        # ToeBase
-        row += [0.0, 2.0 * np.sin(ph[i]), 0.0]   # Spine
-        row += [0.0, 0.0, 3.0 * np.sin(ph[i])]   # Head
+        row += [0.0, 2.0 * np.sin(ph[i_pose]), 0.0]   # Spine
+        row += [0.0, 0.0, 3.0 * np.sin(ph[i_pose])]   # Head
         rows.append(row)
 
     with open(out, "w") as f:
@@ -108,4 +121,11 @@ def main(out="test_walk.bvh"):
     print("escrito", out, T, "frames")
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "test_walk.bvh")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("out", nargs="?", default="test_walk.bvh")
+    ap.add_argument("--freeze-after", type=float, default=None,
+                    help="segundos tras los cuales la pose se congela")
+    ap.add_argument("--stop-root", action="store_true",
+                    help="congela tambien el avance del root")
+    a = ap.parse_args()
+    main(a.out, a.freeze_after, a.stop_root)

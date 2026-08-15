@@ -3,6 +3,7 @@
 raw/
 _rejected/
 _constraints/
+_work/
 state.json
 *.npz
 

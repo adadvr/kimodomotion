@@ -50,8 +50,9 @@ def candidates_for(raw_dir: str, clip_id: str) -> list[str]:
     return sorted(set(files), key=suffix_rank, reverse=True)
 
 
-def score(report: dict) -> float:
-    """Menor es mejor. Penaliza skate, penetracion, jitter y mal loop."""
+def score(report: dict, clip_qc: dict | None = None) -> float:
+    """Menor es mejor. Penaliza skate, penetracion, jitter, mal loop y falta de ciclo."""
+    clip_qc = clip_qc or {}
     c = report.get("clean", {})
     s = c.get("foot_skate_mean_cm_per_frame", 99) * 10
     s += c.get("ground_penetration_cm", 99) * 5
@@ -61,6 +62,47 @@ def score(report: dict) -> float:
         s += lp.get("match_score", 0) * 0.5
     elif lp:
         s += 50
+
+    # Entre dos candidatos igual de limpios gana el que tenga marcha de verdad.
+    # Sin esto el desempate premia al clip congelado: sin zancadas no hay skate,
+    # asi que sus metricas de limpieza salen inmejorables.
+    #
+    # El premio por ciclos NO se satura en el umbral de QC. Con `>= 2` a secas,
+    # en loco_run ganaba un candidato de 2 ciclos a 2.10 m/s frente a otro de 5
+    # ciclos a 2.68 m/s: los dos pasaban, y el resto del score lo decidia el foot
+    # skate. Mas ciclos es mas material del que recortar el loop, y por tanto
+    # mejor clip de produccion.
+    if report.get("loop_kind") == "gait":
+        cyc = report.get("gait", {}).get("cycles", 0)
+        s += max(0, 2 - cyc) * 25
+        s -= min(cyc, 6) * 5
+
+    # Solo penaliza la cola congelada en clips que LOOPEAN, igual que el veredicto
+    # de QC. Aplicandolo a todos, un one-shot como trans_stand_to_sit_chair
+    # prefiere el candidato que se sigue moviendo despues de sentarse; acabar
+    # quieto ahi es lo correcto, no un defecto. Cambiaba 10 ganadores por esto.
+    if report.get("loop_kind"):
+        s += report.get("frozen_tail_ratio", 0.0) * 40
+
+    # Deriva: entre dos candidatos igual de limpios gana el que menos derive.
+    # Sin esto el desempate la ignoraba y en loco_crouch_idle ganaba un candidato
+    # de 10.5 cm frente a otro de 7.3.
+    #
+    # Se aplica SOLO a los clips que declaran `max_root_drift_cm`, no a todos los
+    # pin_origin. Probado sobre los 23 pin_origin: como la deriva no correlaciona
+    # con la calidad del clip clavado, el foot skate medio de los 7 que cambiaban
+    # de ganador subia de 0.083 a 0.102 cm/frame y el error de loop empeoraba en 4
+    # de 7. El desempate solo debe optimizar lo que el catalogo declara que le
+    # importa a ese clip.
+    if clip_qc.get("max_root_drift_cm"):
+        s += report.get("root_drift_cm", 0.0) * 2
+
+    # NO se desempata por cercania a `expected_speed_m_s`, aunque sea tentador.
+    # El runtime consume la velocidad MEDIDA (`rootSpeedMs`), no la asignada a
+    # mano en el catalogo, asi que acercarse a la asignada no aporta nada. Y
+    # cuesta: probado con peso 20, elegia un loco_sneak_walk con 0.59 cm/frame de
+    # foot skate en vez de uno con 0.13 solo por quedar 0.12 m/s mas cerca. El
+    # skate se ve en pantalla; esos 0.12 m/s no los ve nadie.
     return s
 
 
@@ -107,7 +149,7 @@ def main():
                 continue
             rep["source"] = src
             rep["passed"] = _verdict(rep, clip.get("qc", {}))
-            rep["score"] = round(score(rep), 4)
+            rep["score"] = round(score(rep, clip.get("qc", {})), 4)
             results.append((rep, work))
 
         if not results:
@@ -143,14 +185,24 @@ def main():
             "rootSpeedMs": best.get("root_speed_m_per_s"),
             "footSkateCm": best["clean"]["foot_skate_mean_cm_per_frame"],
             "loopErrorCm": best.get("final_loop_pose_error_cm"),
+            "gaitCycles": best.get("gait", {}).get("cycles"),
+            "frozenTailRatio": best.get("frozen_tail_ratio"),
+            "headingDeltaDeg": best.get("heading_delta_deg"),
+            "rootDriftCm": best.get("root_drift_cm"),
+            "legMotionDeg": best["clean"].get("leg_motion_deg"),
+            "peakFrames": best["clean"].get("peak_frames"),
+            "expectedSpeedMs": clip.get("qc", {}).get("expected_speed_m_s"),
             "qcPassed": best["passed"]["all"],
+            "qcFailed": [k for k, v in best["passed"].items() if k != "all" and not v],
             **clip.get("taxonomy", {}),
         }
         manifest.append(entry)
         qc_all[cid] = {"winner": best["source"], "candidates": [r[0] for r in results]}
         flag = "OK " if best["passed"]["all"] else "REV"
+        gait = f", gait={entry['gaitCycles']}" if entry["gaitCycles"] is not None else ""
+        why = f"  <- {', '.join(entry['qcFailed'])}" if entry["qcFailed"] else ""
         print(f"{flag} {cid}: {len(results)} cand, score={best['score']}, "
-              f"skate={entry['footSkateCm']}cm/f, speed={entry['rootSpeedMs']}")
+              f"skate={entry['footSkateCm']}cm/f, speed={entry['rootSpeedMs']}{gait}{why}")
 
     with open(os.path.join(a.out, "manifest.json"), "w") as f:
         json.dump({"version": cat["version"], "clips": manifest, "missing": missing}, f, indent=2)
@@ -161,6 +213,16 @@ def main():
     print(f"\n{ok}/{len(manifest)} clips pasaron QC. Faltan por generar: {len(missing)}")
     if missing:
         print("  " + ", ".join(missing))
+
+    by_check = {}
+    for m in manifest:
+        for k in m["qcFailed"]:
+            by_check.setdefault(k, []).append(m["id"])
+    if by_check:
+        print("\nFallos por comprobacion:")
+        for k, ids in sorted(by_check.items(), key=lambda kv: -len(kv[1])):
+            print(f"  {k:<15} {len(ids):>3}  {', '.join(ids[:6])}"
+                  + (" ..." if len(ids) > 6 else ""))
 
 
 if __name__ == "__main__":
