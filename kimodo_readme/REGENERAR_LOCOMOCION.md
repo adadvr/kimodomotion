@@ -1,5 +1,23 @@
 # Kimodo — Regenerar los 14 clips de locomoción (v3)
 
+> **⚠️ Desactualizado — lee [kimodo_limitations.md](kimodo_limitations.md) primero.**
+>
+> Este plan se escribió antes de tener mediciones. Contrastado el 2026-08-15 contra
+> los 50 clips del catálogo 2.1:
+>
+> - **No fallan los 14, fallaban 3.** Las caminatas que aquí se dan por rotas tienen
+>   3–4 ciclos de marcha y 0 % de cola congelada (`walk_neutral` 4, `jog` 4,
+>   `walk_slow` 4, `sneak_walk` 4).
+> - **El sufijo `in place` reforzado que se propone abajo reintroduce el problema.**
+>   Mantiene la contradicción "camina sin avanzar" y le suma una cadencia imposible.
+>   El catálogo 2.0 ya quitó esos prompts, y por eso las caminatas salen sanas.
+> - **Ya está arreglado por pipeline**, no a mano: 50/50 pasan QC. `loco_sprint` pasó
+>   de 1 ciclo a 2, y `loco_idle_breathing` de 74 % congelado a 0 %.
+>
+> Lo que sigue siendo válido de este documento: los nombres de archivo, que el FBX
+> va plano en `Assets/eea_base_motion/`, y el criterio visual del §"Cómo saber si
+> salió bien". El diagnóstico y los prompts, no.
+
 ## ¿Por qué regenerar?
 
 Los clips de caminar/correr de las tandas v1 y v2 salieron con **UN solo paso y
