@@ -1,0 +1,163 @@
+{
+  "version": "3.0-pass1",
+  "notes": "PASS 1 — VALIDACION (6 clips). No es contenido final: existe para probar las convenciones NUEVAS de la ronda de libreria de acciones antes de lanzar el pass grande de ~190 clips. Lo que se valida: (1) pares give/receive de dos personajes — dos clips que el plugin empareja y sincroniza por el instante del contacto; (2) la categoria talk como loop de upper body; (3) un reach direccional para el sistema de grips de props. Mismo estilo de prompt declarativo corto del catalogo 2.1: NADA de 'seamless loop', 'in place' ni 'starts and ends neutral' en el texto — eso lo resuelven root_policy, loop, bookends, mask y QC.",
+  "pair_convention": {
+    "naming": "Las acciones de DOS personajes se generan en dos mitades con el mismo nombre base: '<base>_give' (quien inicia la accion) y '<base>_receive' (quien la recibe). El plugin las empareja por ese sufijo.",
+    "taxonomy.pairId": "Nombre base compartido por las dos mitades.",
+    "taxonomy.pairRole": "give | receive.",
+    "taxonomy.contactAt": "Fraccion 0-1 de la duracion donde ocurre el CONTACTO (el puno que conecta, las manos que se juntan). El plugin la convierte a frame y desplaza el clip 'receive' para que ambos instantes coincidan. Sin este dato el par se alinea por el arranque y el golpe no conecta.",
+    "note": "run_catalog.py ya copia todo el bloque 'taxonomy' al manifest de salida, asi que estos campos llegan al plugin sin tocar los scripts."
+  },
+  "defaults": {
+    "model": "Kimodo-SOMA-RP-v1",
+    "fps": 30,
+    "diffusion_steps": 100,
+    "cfg_type": "separated",
+    "cfg_weight": [2.5, 1.5],
+    "num_samples": 4,
+    "base_seed": 20260821,
+    "bvh": true,
+    "bvh_standard_tpose": true
+  },
+  "root_policies": {
+    "strip_xz": "Generar con desplazamiento libre y separar despues: BVH in-place + curva de root en JSON. Para loops de locomocion.",
+    "pin_origin": "Constraint root2d clavado en (0,0) para que el modelo NO camine. Para idles, upper actions y reacciones.",
+    "keep": "Mantener el desplazamiento horneado. Para one-shots donde el desplazamiento ES la accion (un traspie hacia atras)."
+  },
+  "clips": [
+    {
+      "id": "contact_handshake_give",
+      "category": "contact",
+      "prompt": "A person extends their right hand forward, shakes it twice, and lowers it.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": ["neutral", "warm"],
+        "pairId": "contact_handshake",
+        "pairRole": "give",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      },
+      "note": "Mitad que ofrece la mano. El contacto (las dos manos juntas) debe caer cerca del 45% del clip."
+    },
+    {
+      "id": "contact_handshake_receive",
+      "category": "contact",
+      "prompt": "A person reaches forward with their right hand, shakes it twice, and lowers it.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": ["neutral", "warm"],
+        "pairId": "contact_handshake",
+        "pairRole": "receive",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      },
+      "note": "Mitad que toma la mano ofrecida. Misma duracion que el give para que el apreton lea parejo."
+    },
+    {
+      "id": "fight_jab_give",
+      "category": "combat",
+      "prompt": "A person throws a fast straight punch with their left hand and pulls it back into a boxing guard.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": ["aggressive", "tense"],
+        "pairId": "fight_jab",
+        "pairRole": "give",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 2.0,
+        "max_root_drift_cm": 12.0
+      },
+      "note": "El impacto es la maxima extension del brazo, cerca del 40% del clip."
+    },
+    {
+      "id": "fight_jab_receive",
+      "category": "combat",
+      "prompt": "A person's head snaps back from a punch to the face and they stagger half a step backward.",
+      "duration": 2.5,
+      "root_policy": "keep",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": ["pain", "tense"],
+        "pairId": "fight_jab",
+        "pairRole": "receive",
+        "contactAt": 0.25
+      },
+      "qc": {
+        "max_foot_skate_cm": 3.5
+      },
+      "note": "root_policy keep: el traspie hacia atras ES la reaccion, no debe fijarse. El impacto ocurre pronto (25%) porque el resto del clip es la recuperacion."
+    },
+    {
+      "id": "talk_explain_measured",
+      "category": "talk",
+      "prompt": "A person talks and gestures calmly with both hands at chest height.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "talk",
+        "moodTags": ["calm", "neutral"]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      },
+      "note": "Categoria talk (hoy vacia en el plugin). Loop de upper body: se monta sobre cualquier base — de pie, sentado o caminando — sin tocar las piernas."
+    },
+    {
+      "id": "upper_reach_mid_right",
+      "category": "upper",
+      "prompt": "A person reaches forward at chest height with their right hand and closes it around an object.",
+      "duration": 3.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": ["neutral"]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      },
+      "note": "Reach direccional para el sistema de grips por prefab: el plugin remata la mano con IK sobre el objeto real, este clip aporta el gesto del brazo y el cuerpo."
+    }
+  ]
+}
