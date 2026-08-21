@@ -1,6 +1,6 @@
 {
   "version": "3.0-pass2",
-  "notes": "PASS 2 — LIBRERIA DE ACCIONES COMPLETA (generar SOLO despues de validar pass1_validation.json). Una sola tanda: conversacion a dos, peleas con pares golpe/reaccion, vida cotidiana, deporte y juego, baile y emotes, contacto social, contenedores del hogar, armas blancas, muerte, amenaza y rendicion, forcejeo y sigilo, mas el barrido por dominios de una escena real: vestirse y aseo, vehiculos, oficios y servicios (barberia, cocina, taller, clinica, caja), oficina, calle y compras, deporte, estados corporales (borracho, mareado, con frio, con prisa) y cuidado de ninos y animales. Prompts en el estilo declarativo corto del catalogo 2.1: los constraints van en root_policy / loop / bookends / mask / qc, NUNCA en el texto.",
+  "notes": "PASS 2 — LIBRERIA DE ACCIONES COMPLETA (generar SOLO despues de validar pass1_validation.json). Una sola tanda con todo lo que ocupa los planos de una cinematica: conversacion a dos; peleas con pares golpe/reaccion, armas blancas, muerte, forcejeo y sigilo; vida cotidiana y hogar; vestirse y aseo; vehiculos; oficios y servicios (barberia, cocina, taller, clinica, caja); oficina; calle y compras; deporte; estados corporales; cuidado de ninos y animales; supervivencia y peligro; fiesta y borrachera; ritual, culto y horror; crimen, poder y acecho; instrumentos y canto; danza (ballet, folklor, contemporanea) y escena teatral. Prompts en el estilo declarativo corto del catalogo 2.1: los constraints van en root_policy / loop / bookends / mask / qc, NUNCA en el texto.",
   "pair_convention": {
     "naming": "Acciones de DOS personajes en dos mitades: '<base>_give' (inicia) y '<base>_receive' (recibe).",
     "taxonomy.pairId": "Nombre base compartido por las dos mitades.",
@@ -7963,6 +7963,4228 @@
           "tense"
         ],
         "pairId": "contact_toast_glasses",
+        "pairRole": "receive",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_fire_strike_loop",
+      "category": "upper",
+      "prompt": "A person strikes two objects together over the ground in repeated sharp motions.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_fire_blow_kneel",
+      "category": "transition",
+      "prompt": "A person kneels down, leans low over the ground and blows steadily.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_fire_feed_loop",
+      "category": "upper",
+      "prompt": "A person feeds small sticks forward onto the ground one at a time and pulls the hand back.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_drink_from_stream",
+      "category": "transition",
+      "prompt": "A person kneels at the ground, scoops water in both hands and drinks.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_fill_bottle_ground",
+      "category": "transition",
+      "prompt": "A person crouches, holds a bottle down at the ground and lifts it up capped.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_climb_rock_up",
+      "category": "transition",
+      "prompt": "A person reaches high with one hand, pulls the body up and swings a knee over the top.",
+      "duration": 5.0,
+      "root_policy": "keep",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 3.5
+      }
+    },
+    {
+      "id": "trans_fence_climb_over",
+      "category": "transition",
+      "prompt": "A person jumps up, hooks both hands over the top of something at head height and swings the legs over.",
+      "duration": 5.0,
+      "root_policy": "keep",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 3.5
+      }
+    },
+    {
+      "id": "trans_jump_gap",
+      "category": "transition",
+      "prompt": "A person runs two steps, leaps forward and lands rolling onto one shoulder.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "loco_balance_beam_walk",
+      "category": "locomotion",
+      "prompt": "A person walks forward slowly with both arms out to the sides for balance.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "trans_duck_under",
+      "category": "transition",
+      "prompt": "A person bends deep at the knees and moves forward under something low.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_wrap_blanket",
+      "category": "transition",
+      "prompt": "A person pulls a blanket around the shoulders with both hands and grips it closed at the chest.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "seated_huddle_cold",
+      "category": "locomotion",
+      "prompt": "A person sits hugging the knees to the chest, head down, trembling.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_bandage_self_arm",
+      "category": "transition",
+      "prompt": "A person wraps a bandage around their own forearm and pulls the end tight with the teeth.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_tourniquet_leg",
+      "category": "transition",
+      "prompt": "A person sits, loops something around the thigh and twists it tight with both hands.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "loco_limp_wounded_loop",
+      "category": "locomotion",
+      "prompt": "A person walks forward heavily favouring one leg, one hand pressed to the side.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "fear",
+          "tense"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_scan_horizon",
+      "category": "upper",
+      "prompt": "A person shades the eyes with one hand and turns the head slowly across the front.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "react_listen_alert",
+      "category": "reaction",
+      "prompt": "A person goes still, turns the head sharply to one side and holds.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "conversation"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_signal_danger",
+      "category": "upper",
+      "prompt": "A person points sharply forward with one hand and raises the other flat to stop.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_carry_firewood",
+      "category": "transition",
+      "prompt": "A person gathers an armful from the ground and stands with it against the chest.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_dig_shovel_loop",
+      "category": "upper",
+      "prompt": "A person drives a shovel down into the ground, lifts and throws to the side.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_tie_rope_post",
+      "category": "transition",
+      "prompt": "A person wraps a rope around something at waist height twice and pulls a knot tight.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_shout_cupped_hands",
+      "category": "upper",
+      "prompt": "A person cups both hands around the mouth, leans forward and shouts.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_wave_rescue_loop",
+      "category": "upper",
+      "prompt": "A person waves both arms overhead in wide crossing arcs.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_run_look_back",
+      "category": "locomotion",
+      "prompt": "A person runs forward while twisting to look back over one shoulder.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "trans_trip_recover_run",
+      "category": "transition",
+      "prompt": "A person stumbles forward onto both hands, scrambles up and runs on.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_crawl_under_low",
+      "category": "transition",
+      "prompt": "A person drops flat and pulls forward on the elbows under something low.",
+      "duration": 5.0,
+      "root_policy": "keep",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 3.5
+      }
+    },
+    {
+      "id": "upper_beer_cup_drink",
+      "category": "upper",
+      "prompt": "A person raises a cup to the mouth, drinks and lowers it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_beer_bottle_drink",
+      "category": "upper",
+      "prompt": "A person raises a bottle by the neck, tips it back and lowers it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_can_open_drink",
+      "category": "upper",
+      "prompt": "A person pulls a tab on a can with one finger and drinks.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_pour_from_keg",
+      "category": "upper",
+      "prompt": "A person holds a cup low under something in front and tilts it while it fills.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_pour_round_cups",
+      "category": "transition",
+      "prompt": "A person pours from a bottle into several cups lined up on a table.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_pass_drink_side",
+      "category": "upper",
+      "prompt": "A person picks up a cup and holds it out to the side, then lets go.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_chug_cup",
+      "category": "upper",
+      "prompt": "A person tips a cup straight up over the mouth, drains it and slams it down.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_cheers_raise_high",
+      "category": "upper",
+      "prompt": "A person thrusts a cup up overhead and shakes it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "loco_dance_party_jump_loop",
+      "category": "locomotion",
+      "prompt": "A person jumps on the beat with both arms pumping overhead.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "dance",
+          "energetic"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_dance_crowd_bounce_loop",
+      "category": "locomotion",
+      "prompt": "A person bounces on the spot with one arm raised, head nodding.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "dance",
+          "energetic"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_sing_along_loop",
+      "category": "upper",
+      "prompt": "A person holds one fist near the mouth and sways, the other arm swinging.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_hype_crowd",
+      "category": "upper",
+      "prompt": "A person swings both arms upward twice, urging something on.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_group_photo_lean",
+      "category": "transition",
+      "prompt": "A person leans in to one side, throws an arm out and holds still.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "loco_stagger_wall_lean",
+      "category": "locomotion",
+      "prompt": "A person stumbles forward and catches themselves against a wall with one hand.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_drunk_slide_wall",
+      "category": "transition",
+      "prompt": "A person leans back against a wall and slides down it to sit on the ground.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_drunk_vomit",
+      "category": "transition",
+      "prompt": "A person doubles over with both hands on the knees and heaves.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "seated_drunk_doze_loop",
+      "category": "locomotion",
+      "prompt": "A person sits slumped with the head lolling, jerking upright and drooping again.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_drunk_fall_back",
+      "category": "transition",
+      "prompt": "A person sways backward, overbalances and drops onto the backside.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_throw_cup_ground",
+      "category": "upper",
+      "prompt": "A person hurls something down at the ground and flings the arm out.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_sweep_table_arm",
+      "category": "upper",
+      "prompt": "A person swings one arm hard across a table in front, clearing it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_kick_chair_over",
+      "category": "transition",
+      "prompt": "A person kicks something at knee height and shoves it away.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_bottle_break_edge",
+      "category": "upper",
+      "prompt": "A person swings a bottle down against an edge in front and holds up what is left.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_broken_bottle_threat",
+      "category": "upper",
+      "prompt": "A person holds a broken bottle out at arm's length, jabbing it forward.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_throw_chair",
+      "category": "transition",
+      "prompt": "A person grabs something at knee height with both hands, lifts it overhead and hurls it forward.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_kneel_pray",
+      "category": "transition",
+      "prompt": "A person lowers onto both knees, clasps the hands together and bows the head.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_pray_clasped_loop",
+      "category": "upper",
+      "prompt": "A person holds both hands clasped at the chest, head bowed, rocking slightly.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_pray_open_palms_loop",
+      "category": "upper",
+      "prompt": "A person holds both arms out and up with the palms open, head tilted back.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_cross_self",
+      "category": "upper",
+      "prompt": "A person touches the forehead, the chest and each shoulder in turn.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_prostrate_full",
+      "category": "transition",
+      "prompt": "A person kneels then lowers the forehead all the way to the ground with the arms stretched forward.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_bow_repeated_loop",
+      "category": "transition",
+      "prompt": "A person bows deeply from the waist and straightens, over and over.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_light_candle",
+      "category": "upper",
+      "prompt": "A person leans forward and holds a small flame to something low in front.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_place_offering",
+      "category": "transition",
+      "prompt": "A person kneels, sets something down carefully in front and backs away on the knees.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_swing_censer_loop",
+      "category": "upper",
+      "prompt": "A person swings something hanging from one hand in slow arcs in front.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_read_lectern_loop",
+      "category": "upper",
+      "prompt": "A person stands over a stand at chest height, one hand on the page, and chants.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_hold_book_recite_loop",
+      "category": "upper",
+      "prompt": "A person holds a heavy open book on one forearm and gestures over it with the other hand.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_raise_arms_chant_loop",
+      "category": "upper",
+      "prompt": "A person raises both arms high and wide and holds them, swaying.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_circle_slow_walk",
+      "category": "locomotion",
+      "prompt": "A person walks forward slowly and deliberately with the head bowed.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "trans_draw_symbol_ground",
+      "category": "transition",
+      "prompt": "A person crouches and traces a shape on the ground with one finger, then stands.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_scatter_circle_loop",
+      "category": "upper",
+      "prompt": "A person reaches into a bag at the hip and scatters handfuls low in a sweep.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_ritual_blade_raise",
+      "category": "upper",
+      "prompt": "A person raises a blade overhead in both hands and holds it there trembling.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_ritual_blade_lower",
+      "category": "upper",
+      "prompt": "A person brings a blade down in both hands from overhead and stops short.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "seated_congregation_sway_loop",
+      "category": "locomotion",
+      "prompt": "A person sits with the head bowed, swaying slowly side to side.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "react_possession_arch",
+      "category": "reaction",
+      "prompt": "A person snaps the head back, arches the spine hard and shudders.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "loco_possessed_walk_loop",
+      "category": "locomotion",
+      "prompt": "A person walks forward with the head lolled to one side and the arms hanging limp.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "trans_crawl_backward_unnatural",
+      "category": "transition",
+      "prompt": "A person crawls backward on the hands and feet with the belly facing up.",
+      "duration": 5.0,
+      "root_policy": "keep",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 3.5
+      }
+    },
+    {
+      "id": "react_head_tilt_stare",
+      "category": "reaction",
+      "prompt": "A person tilts the head far to one side and holds it, unblinking.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_convulse_ground",
+      "category": "reaction",
+      "prompt": "A person lies on the ground and jerks in violent spasms, then goes limp.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_rise_unnatural",
+      "category": "transition",
+      "prompt": "A person lifts from lying flat to standing without using the hands, feet dragging.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "seated_boss_lean_back_loop",
+      "category": "locomotion",
+      "prompt": "A person sits leaning far back with the legs wide and both arms spread along the back of the seat.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_order_point_away",
+      "category": "upper",
+      "prompt": "A person flicks one hand outward toward the side and turns the face away.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_finger_snap_call",
+      "category": "upper",
+      "prompt": "A person snaps the fingers of one hand sharply and holds the hand out.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_beckon_two_fingers",
+      "category": "upper",
+      "prompt": "A person curls two fingers toward themselves twice, the arm still.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_throat_cut_gesture",
+      "category": "upper",
+      "prompt": "A person draws a flat hand across the front of the throat.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_dismiss_turn_away",
+      "category": "upper",
+      "prompt": "A person waves the back of one hand outward and turns the shoulders away.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_slam_table",
+      "category": "upper",
+      "prompt": "A person brings one open palm down hard on a surface in front and leans over it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_point_in_face",
+      "category": "upper",
+      "prompt": "A person jabs an index finger forward at head height, twice.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_straighten_suit",
+      "category": "upper",
+      "prompt": "A person tugs both lapels straight and squares the shoulders.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_drop_money_stack",
+      "category": "upper",
+      "prompt": "A person holds something out flat in one hand and lets it fall.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_light_cigar",
+      "category": "upper",
+      "prompt": "A person holds something to the mouth with one hand and a flame to it with the other, and puffs.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_pour_whiskey",
+      "category": "upper",
+      "prompt": "A person pours from a bottle into a low glass and sets the bottle down.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "loco_circle_prowl_loop",
+      "category": "locomotion",
+      "prompt": "A person walks slowly in a straight line with the head turned to keep looking to one side.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_stalk_slow_loop",
+      "category": "locomotion",
+      "prompt": "A person walks forward very slowly, rolling each foot down heel to toe, arms still.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "conversation"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_follow_behind_loop",
+      "category": "locomotion",
+      "prompt": "A person walks forward at a measured pace with the head lowered and the eyes up.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_clean_blade_loop",
+      "category": "upper",
+      "prompt": "A person draws a cloth slowly along a blade held in the other hand.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_sharpen_blade_loop",
+      "category": "upper",
+      "prompt": "A person draws a blade along a stone in repeated strokes.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_admire_weapon",
+      "category": "upper",
+      "prompt": "A person turns something over in both hands close to the face.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "react_smile_still_stare",
+      "category": "reaction",
+      "prompt": "A person goes completely still and slowly turns the head to face front.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_step_out_shadow",
+      "category": "transition",
+      "prompt": "A person walks forward two slow steps and stops with the arms hanging.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_approach_from_behind",
+      "category": "transition",
+      "prompt": "A person walks forward on the toes and stops with one hand raised.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_wash_hands_scrub_loop",
+      "category": "upper",
+      "prompt": "A person scrubs both hands together hard under running water.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_stare_at_hands",
+      "category": "upper",
+      "prompt": "A person raises both open hands in front of the face and turns them over slowly.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_wrap_bundle_ground",
+      "category": "transition",
+      "prompt": "A person kneels beside something on the ground and folds material over it with both hands.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_dig_night_loop",
+      "category": "upper",
+      "prompt": "A person drives a shovel into the ground and throws to the side, glancing up between strokes.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_hide_under_low",
+      "category": "transition",
+      "prompt": "A person drops flat and pulls under something low, then goes still.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "sneaky",
+          "tense"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_peek_around_corner",
+      "category": "reaction",
+      "prompt": "A person leans the head slowly past an edge and pulls it back sharply.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_lock_door_check",
+      "category": "upper",
+      "prompt": "A person turns something at chest height and pulls twice to test it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "contact_drunk_shove_give",
+      "category": "contact",
+      "prompt": "A person shoves someone in the chest with both hands and spreads the arms wide.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_drunk_shove",
+        "pairRole": "give",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_drunk_shove_receive",
+      "category": "contact",
+      "prompt": "A person is shoved backward, arms flailing, and catches their balance.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_drunk_shove",
+        "pairRole": "receive",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_shirt_grab_give",
+      "category": "contact",
+      "prompt": "A person grabs a fistful of someone's shirt at the chest and pulls them close.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_shirt_grab",
+        "pairRole": "give",
+        "contactAt": 0.35
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_shirt_grab_receive",
+      "category": "contact",
+      "prompt": "A person is yanked forward by the chest and grabs the other's wrists.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_shirt_grab",
+        "pairRole": "receive",
+        "contactAt": 0.35
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_break_up_fight_give",
+      "category": "contact",
+      "prompt": "A person steps between two people and pushes outward with both arms.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "aggressive",
+          "tense"
+        ],
+        "pairId": "contact_break_up_fight",
+        "pairRole": "give",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_break_up_fight_receive",
+      "category": "contact",
+      "prompt": "A person is pushed back by an arm across the chest and strains forward against it.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "aggressive",
+          "tense",
+          "pain"
+        ],
+        "pairId": "contact_break_up_fight",
+        "pairRole": "receive",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_help_drunk_walk_give",
+      "category": "contact",
+      "prompt": "A person pulls someone's arm over their shoulders and walks forward supporting them.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_help_drunk_walk",
+        "pairRole": "give",
+        "contactAt": 0.3
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_help_drunk_walk_receive",
+      "category": "contact",
+      "prompt": "A person hangs off someone's shoulder, legs dragging, head lolling.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_help_drunk_walk",
+        "pairRole": "receive",
+        "contactAt": 0.3
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_blessing_hands_give",
+      "category": "contact",
+      "prompt": "A person reaches out and lays both hands on the bowed head of someone kneeling.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_blessing_hands",
+        "pairRole": "give",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_blessing_hands_receive",
+      "category": "contact",
+      "prompt": "A person kneels with the head bowed, then jerks upright at the touch.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_blessing_hands",
+        "pairRole": "receive",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_hold_down_ritual_give",
+      "category": "contact",
+      "prompt": "A person pins someone's shoulders to the ground with both hands, leaning their weight in.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_hold_down_ritual",
+        "pairRole": "give",
+        "contactAt": 0.3
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_hold_down_ritual_receive",
+      "category": "contact",
+      "prompt": "A person lies on their back thrashing against hands pinning the shoulders.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_hold_down_ritual",
+        "pairRole": "receive",
+        "contactAt": 0.3
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_ritual_strike_give",
+      "category": "contact",
+      "prompt": "A person brings both hands down together over someone lying in front.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_ritual_strike",
+        "pairRole": "give",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_ritual_strike_receive",
+      "category": "contact",
+      "prompt": "A person arches off the ground and then falls back limp.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_ritual_strike",
+        "pairRole": "receive",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_lead_by_hand_slow_give",
+      "category": "contact",
+      "prompt": "A person takes someone's wrist and walks forward pulling them along.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_lead_by_hand_slow",
+        "pairRole": "give",
+        "contactAt": 0.25
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_lead_by_hand_slow_receive",
+      "category": "contact",
+      "prompt": "A person is pulled forward by the wrist, feet dragging, head turned back.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_lead_by_hand_slow",
+        "pairRole": "receive",
+        "contactAt": 0.25
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_hand_over_mouth_give",
+      "category": "contact",
+      "prompt": "A person steps in from behind and clamps one hand over someone's mouth, pulling them back.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_hand_over_mouth",
+        "pairRole": "give",
+        "contactAt": 0.3
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_hand_over_mouth_receive",
+      "category": "contact",
+      "prompt": "A person is pulled backward with a hand over the mouth, hands clawing at it.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_hand_over_mouth",
+        "pairRole": "receive",
+        "contactAt": 0.3
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_lift_chin_give",
+      "category": "contact",
+      "prompt": "A person hooks a finger under someone's chin and lifts their face up.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_lift_chin",
+        "pairRole": "give",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_lift_chin_receive",
+      "category": "contact",
+      "prompt": "A person has their face lifted by the chin and holds the stare.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_lift_chin",
+        "pairRole": "receive",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_frisk_search_give",
+      "category": "contact",
+      "prompt": "A person pats down someone's arms and sides with both hands.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "sneaky",
+          "tense"
+        ],
+        "pairId": "contact_frisk_search",
+        "pairRole": "give",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_frisk_search_receive",
+      "category": "contact",
+      "prompt": "A person stands with both arms out to the sides while being patted down.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense",
+          "sneaky"
+        ],
+        "pairId": "contact_frisk_search",
+        "pairRole": "receive",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_drag_by_collar_give",
+      "category": "contact",
+      "prompt": "A person grabs the back of someone's collar and drags them forward.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_drag_by_collar",
+        "pairRole": "give",
+        "contactAt": 0.25
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_drag_by_collar_receive",
+      "category": "contact",
+      "prompt": "A person is dragged forward by the collar, stumbling and clutching at the neck.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_drag_by_collar",
+        "pairRole": "receive",
+        "contactAt": 0.25
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_push_to_knees_give",
+      "category": "contact",
+      "prompt": "A person pushes down on someone's shoulders until they drop to their knees.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_push_to_knees",
+        "pairRole": "give",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_push_to_knees_receive",
+      "category": "contact",
+      "prompt": "A person is forced down onto both knees by weight on the shoulders.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_push_to_knees",
+        "pairRole": "receive",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_gun_execute_give",
+      "category": "contact",
+      "prompt": "A person extends one arm forward and down at head height, holds, and lowers it.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_gun_execute",
+        "pairRole": "give",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_gun_execute_receive",
+      "category": "contact",
+      "prompt": "A person kneels with the head bowed and hands behind the back, then falls forward.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_gun_execute",
+        "pairRole": "receive",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_guitar_strum_loop",
+      "category": "upper",
+      "prompt": "A person holds a guitar against the body, pressing the neck with one hand and sweeping the other over the strings.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_guitar_pick_loop",
+      "category": "upper",
+      "prompt": "A person picks at strings with small fast movements of one hand while the other slides along a neck.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_guitar_solo_loop",
+      "category": "upper",
+      "prompt": "A person leans back with a guitar raised, one hand shaking rapidly high on the neck.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_guitar_strap_on",
+      "category": "transition",
+      "prompt": "A person lifts a strap over the head with both hands and settles a guitar against the hip.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_guitar_tune_loop",
+      "category": "upper",
+      "prompt": "A person leans over the top of a guitar neck, turning small pegs with one hand.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_bass_play_loop",
+      "category": "upper",
+      "prompt": "A person holds a long-necked instrument low against the body, plucking with one hand.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "seated_drums_play_loop",
+      "category": "locomotion",
+      "prompt": "A person sits striking downward alternately with both hands while one foot taps.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_drum_cymbal_hit",
+      "category": "upper",
+      "prompt": "A person swings one arm out and up in a wide strike, then pulls it back.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_drumstick_spin",
+      "category": "upper",
+      "prompt": "A person spins something small between the fingers of one hand and catches it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "seated_piano_play_loop",
+      "category": "locomotion",
+      "prompt": "A person sits leaning slightly forward with both hands moving over a surface at waist height.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_piano_bench_sit",
+      "category": "transition",
+      "prompt": "A person steps up to a low bench, sits and settles both hands out in front.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_violin_play_loop",
+      "category": "upper",
+      "prompt": "A person holds an instrument between the chin and one shoulder and draws the other arm back and forth.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_violin_raise",
+      "category": "transition",
+      "prompt": "A person lifts an instrument up to the chin and tucks it against the shoulder.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "seated_harp_play_loop",
+      "category": "locomotion",
+      "prompt": "A person sits with a tall frame leaned against one shoulder, both hands plucking near the chest.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_flute_play_loop",
+      "category": "upper",
+      "prompt": "A person holds something sideways at the lips with both hands, fingers moving.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_sax_play_loop",
+      "category": "upper",
+      "prompt": "A person holds an instrument at the mouth with both hands, rocking with the phrasing.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_trumpet_play_loop",
+      "category": "upper",
+      "prompt": "A person holds something to the lips with both hands and leans back on the high notes.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_accordion_play_loop",
+      "category": "upper",
+      "prompt": "A person holds a box against the chest and pulls it open and closed with both hands.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_conduct_loop",
+      "category": "upper",
+      "prompt": "A person beats time with one raised hand and shapes the other palm-up.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_sing_mic_stand_loop",
+      "category": "upper",
+      "prompt": "A person grips a stand at chest height with both hands and leans into it, head tilted up.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_sing_mic_hand_loop",
+      "category": "upper",
+      "prompt": "A person holds something to the mouth with one hand and reaches out with the other.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_mic_lift_from_stand",
+      "category": "transition",
+      "prompt": "A person pulls something free from a stand at chest height and steps back with it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_sing_arm_raised",
+      "category": "upper",
+      "prompt": "A person throws one arm straight up and holds it, head back.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_clap_audience_loop",
+      "category": "upper",
+      "prompt": "A person claps steadily at chest height while looking out ahead.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_ballet_plie_releve",
+      "category": "transition",
+      "prompt": "A person bends both knees outward with the heels together, then rises onto the toes with the arms rounded.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "sport"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_ballet_pirouette",
+      "category": "transition",
+      "prompt": "A person rises onto one toe and spins a full turn with the arms drawn in, then lands.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "sport"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_ballet_arabesque",
+      "category": "transition",
+      "prompt": "A person extends one leg straight back and reaches the opposite arm forward, holding the line.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "sport"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_ballet_port_de_bras_loop",
+      "category": "upper",
+      "prompt": "A person sweeps both arms slowly from low to high and out to the sides.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "sport"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_ballet_jete",
+      "category": "transition",
+      "prompt": "A person runs two light steps and leaps forward with both legs split in the air.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "sport"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "loco_ballet_bourree_loop",
+      "category": "locomotion",
+      "prompt": "A person travels sideways on the toes in tiny rapid steps with the arms held out.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "sport"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_folk_stomp_loop",
+      "category": "locomotion",
+      "prompt": "A person stamps alternately with the heels in a steady rhythm, arms held out and down.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_folk_skirt_turn_loop",
+      "category": "locomotion",
+      "prompt": "A person turns on the spot with both hands out at hip height as if holding fabric wide.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_folk_clap_step_loop",
+      "category": "locomotion",
+      "prompt": "A person steps side to side clapping on the offbeat.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_folk_circle_arms_loop",
+      "category": "locomotion",
+      "prompt": "A person steps sideways in a ring with both arms raised and linked out to the sides.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_folk_partner_turn_loop",
+      "category": "locomotion",
+      "prompt": "A person turns around a fixed point with one arm raised and hooked out.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_contemporary_floor_roll",
+      "category": "transition",
+      "prompt": "A person lowers to the floor through one hip, rolls across the back and rises to a knee.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_contemporary_fall_catch",
+      "category": "transition",
+      "prompt": "A person collapses sideways and catches the weight on one hand, then unfolds upright.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_contemporary_contract_loop",
+      "category": "upper",
+      "prompt": "A person curls the chest inward over the ribs and releases open, over and over.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_contemporary_extend_reach",
+      "category": "transition",
+      "prompt": "A person reaches one arm high and lets the whole body stretch after it, then folds down.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "loco_dance_tap_loop",
+      "category": "locomotion",
+      "prompt": "A person taps the toes and heels rapidly with the arms loose at the sides.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "dance",
+          "energetic"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_dance_waltz_box_loop",
+      "category": "locomotion",
+      "prompt": "A person steps a slow square with the arms held up and rounded in front.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "dance",
+          "energetic"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_dance_flamenco_arms_loop",
+      "category": "locomotion",
+      "prompt": "A person stamps sharply while curling both wrists slowly overhead.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "dance",
+          "energetic"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_act_declaim",
+      "category": "upper",
+      "prompt": "A person steps forward, throws one arm out to the front and holds the pose.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_act_aside_hand",
+      "category": "upper",
+      "prompt": "A person turns the head to the side and raises one hand beside the mouth.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_act_monologue_loop",
+      "category": "upper",
+      "prompt": "A person gestures slowly and widely with both hands while turning the upper body side to side.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_act_death_stage",
+      "category": "transition",
+      "prompt": "A person clutches the chest, staggers two steps and sinks slowly to the ground.",
+      "duration": 5.0,
+      "root_policy": "keep",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "fear",
+          "tense"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 3.5
+      }
+    },
+    {
+      "id": "trans_stage_bow_deep",
+      "category": "transition",
+      "prompt": "A person steps forward, sweeps one arm across the waist and bows deeply, then rises.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_stage_bow_line",
+      "category": "transition",
+      "prompt": "A person reaches both hands out to the sides, raises them together and bows.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_stage_enter_present",
+      "category": "transition",
+      "prompt": "A person walks forward, stops and opens both arms wide to the front.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_curtain_pull",
+      "category": "upper",
+      "prompt": "A person grips high with one hand and pulls down and across the body.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "contact_dance_lift_give",
+      "category": "contact",
+      "prompt": "A person steps in, grips someone's waist with both hands and lifts them straight overhead.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "dance",
+          "energetic"
+        ],
+        "pairId": "contact_dance_lift",
+        "pairRole": "give",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_dance_lift_receive",
+      "category": "contact",
+      "prompt": "A person is lifted by the waist, arching up with both arms opening wide.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense",
+          "dance",
+          "energetic"
+        ],
+        "pairId": "contact_dance_lift",
+        "pairRole": "receive",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_dance_dip_give",
+      "category": "contact",
+      "prompt": "A person supports someone's back with one arm and lowers them backward, then pulls them upright.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "dance",
+          "energetic"
+        ],
+        "pairId": "contact_dance_dip",
+        "pairRole": "give",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_dance_dip_receive",
+      "category": "contact",
+      "prompt": "A person leans back over a supporting arm, one arm trailing to the floor, then rises.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense",
+          "dance",
+          "energetic"
+        ],
+        "pairId": "contact_dance_dip",
+        "pairRole": "receive",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_dance_spin_partner_give",
+      "category": "contact",
+      "prompt": "A person raises one hand and turns someone under it, then catches their hand.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "dance",
+          "energetic"
+        ],
+        "pairId": "contact_dance_spin_partner",
+        "pairRole": "give",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_dance_spin_partner_receive",
+      "category": "contact",
+      "prompt": "A person turns under a raised hand and comes out of the spin facing front.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense",
+          "dance",
+          "energetic"
+        ],
+        "pairId": "contact_dance_spin_partner",
+        "pairRole": "receive",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_teach_instrument_give",
+      "category": "contact",
+      "prompt": "A person reaches over and adjusts the position of someone's hands on an instrument.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "neutral"
+        ],
+        "pairId": "contact_teach_instrument",
+        "pairRole": "give",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "contact_teach_instrument_receive",
+      "category": "contact",
+      "prompt": "A person holds an instrument still while their hands are repositioned, then plays on.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
+        "pairId": "contact_teach_instrument",
         "pairRole": "receive",
         "contactAt": 0.45
       },

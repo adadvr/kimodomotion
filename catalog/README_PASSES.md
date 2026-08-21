@@ -21,26 +21,30 @@ Unity y se corre `kimodo_ingest`. **Qué debe verse**: el apretón y el golpe
 emparejados, con el puño conectando en la reacción y los personajes a la
 distancia correcta.
 
-### 2. `pass2_action_library.json` — 352 clips · SOLO tras validar
+### 2. `pass2_action_library.json` — 540 clips · SOLO tras validar
 
-Una sola tanda, para no volver a generar en trozos. Cubre:
+Una sola tanda, para no volver a generar en trozos.
 
 | bloque | contenido |
 |---|---|
 | Acción y conflicto | peleas con pares golpe/reacción, armas blancas, forcejeo, estrangulamiento, amenaza y rendición, muerte y consecuencias |
-| Conversación | 11 loops de habla + reacciones de escucha, interrupción, desacuerdo |
-| Vida cotidiana | comer, beber, dormir, despertar, teclear, leer, asearse |
-| Hogar | refrigerador, alacena, cajones, servir, fregar, microondas, basura |
-| Vestirse y aseo | audífonos, gorra, gafas, chaqueta, zapatos, mochila, bufanda, guantes, reloj, cinturón, peinarse, maquillarse, afeitarse |
+| Conversación | loops de habla + reacciones de escucha, interrupción, desacuerdo |
+| Vida cotidiana y hogar | comer, beber, dormir, teclear, leer, asearse, refrigerador, alacena, cajones, fregar, microondas |
+| Vestirse y aseo | audífonos, gorra, gafas, chaqueta, cordones, mochila, guantes, reloj, peinarse, maquillarse, afeitarse |
 | Vehículos | abrir puerta y entrar, cinturón, conducir, retrovisor, maletero, moto, bicicleta, autobús, taxi |
-| Oficios | barbería (tijeras, secador, capa), cocina (picar, remover, sartén, amasar), taller (llave, capó, martillo, taladro), clínica (estetoscopio, vendaje, inyección), caja, limpieza, pintura |
-| Oficina | escribir, firmar, sellar, pasar páginas, presentar, videollamada, archivar |
-| Calle y compras | carrito, estantes, pagar con tarjeta, cola, paraguas, escaleras mecánicas, cruzar, selfie, fumar |
-| Deporte | pesas, flexiones, abdominales, cinta, saco, estiramientos, yoga, escalada, remo, arco, golf, tenis |
-| Estados | borracho, mareado, con frío, con calor, nervioso, impaciente, llorando, riendo, estornudo, tos, bostezo, alivio |
+| Oficios | barbería (tijeras, secador, capa), cocina, taller, clínica, caja, limpieza, pintura |
+| Oficina | escribir, firmar, sellar, presentar, videollamada, archivar |
+| Calle y compras | carrito, estantes, tarjeta, cola, paraguas, escaleras mecánicas, selfie, fumar |
+| Deporte | pesas, flexiones, cinta, saco, yoga, escalada, remo, arco, golf, tenis |
+| Estados corporales | borracho, mareado, con frío, con prisa, nervioso, llorando, estornudo, bostezo |
 | Cuidado | acariciar un perro, cargar un bebé, alzar a un niño, dar de comer, regar |
-| Baile y emotes | 10 loops de baile + 14 emotes |
-| Pares 2 personajes | 43 pares: apretón, abrazo, choque de manos, entrega, corte de pelo, afeitado, examen médico, vendaje, inyección, baile en pareja, cargar entre dos, susurro, consuelo, choque casual, esposar, foto, ir de la mano, corregir postura, brindis |
+| Supervivencia | encender fuego, beber de un río, escalar, saltar un hueco, manta, torniquete, otear, pedir auxilio, huir mirando atrás |
+| Fiesta y borrachera | cerveza en vaso, botella y lata, brindis, fondo blanco, bailar y saltar, cantar, vomitar, romper una botella, aventar vasos y sillas |
+| Ritual y horror | arrodillarse a rezar, persignarse, postrarse, velas, ofrenda, incensario, salmodia, procesión, símbolo en el suelo, poseído (arqueo, convulsión, caminar antinatural, gatear al revés) |
+| Crimen y acecho | jefe dando órdenes, chasquear los dedos, gesto de degüello, golpear la mesa, contar dinero, puro y whisky; acechar, limpiar la hoja, afilarla, lavarse las manos, cavar de noche |
+| Música | guitarra (rasgueo, punteo, solo), batería, bajo, piano, violín, arpa, flauta, saxo, trompeta, acordeón, dirigir, cantar con micro |
+| Danza y escena | ballet (plié, pirueta, arabesque, jeté, bourrée), folklor (zapateado, faldas, palmas, círculo), contemporánea (rodar, caída, contracción), claqué, vals, flamenco, declamar, monólogo, muerte teatral, reverencia |
+| Pares 2 personajes | 61 pares: apretón, abrazo, entrega, corte de pelo, afeitado, examen médico, vendaje, inyección, baile en pareja (giro, dip, alzada), cargar entre dos, susurro, consuelo, esposar, foto, brindis, empujón de borracho, separar una pelea, bendición, sujetar en un ritual, mano en la boca, registro, arrastrar del cuello |
 
 ## Convención de pares
 
