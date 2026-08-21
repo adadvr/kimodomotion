@@ -1,11 +1,12 @@
 {
   "version": "3.1-pass1v2",
-  "notes": "PASS 1 v2 — VALIDACION, segunda vuelta (4 clips). La primera tanda valido toda la cadena (ingest, taxonomia, emparejamiento, distancia 1.10 m exacta, sincronia de impactos) pero los DOS clips de combate resultaron inservibles para un golpe conectado, por dos motivos MEDIDOS en Unity: (1) el jab solo extiende el brazo 15 cm sobre la guardia — el prompt no pedia extension y el modelo entrego una finta; (2) la reaccion RETROCEDE 1 metro dentro del propio clip (la pelvis viaja de 1.12 a 2.13 mientras el root no se mueve), asi que en el instante del impacto quedan 152 cm entre puno y cara. Ningun IK salva eso: el brazo mide 60 cm. Estos 4 clips corrigen ambas cosas. Los otros 2 del pass1 (talk_explain_measured y upper_reach_mid_right) salieron bien y NO hay que regenerarlos.",
+  "notes": "PASS 1 v2 — VALIDACION, segunda vuelta (4 clips). La primera tanda valido toda la cadena (ingest, taxonomia, emparejamiento, distancia 1.10 m exacta, sincronia de impactos) pero los DOS clips de combate resultaron inservibles para un golpe conectado, por dos motivos MEDIDOS en Unity: (1) el jab solo extiende el brazo 15 cm sobre la guardia — el prompt no pedia extension y el modelo entrego una finta; (2) la reaccion RETROCEDE 1 metro dentro del propio clip (la pelvis viaja de 1.12 a 2.13 mientras el root no se mueve), asi que en el instante del impacto quedan 152 cm entre puno y cara. Ningun IK salva eso: el brazo mide 60 cm. Estos 4 clips corrigen ambas cosas. Los otros 2 del pass1 (talk_explain_measured y upper_reach_mid_right) salieron bien y NO hay que regenerarlos. Se anaden 3 caminatas de TEST DE GENERO (person / man / woman con el mismo prompt): sirven para medir si el generador responde al sujeto antes de decidir si el catalogo necesita variantes masculina y femenina. Son baratas y la respuesta cambia el tamano del pass 2 entero.",
   "lessons": {
     "extension_explicita": "Un golpe hay que pedirlo con la extension dentro del prompt ('fully extending the arm forward at head height'). Sin eso el modelo entrega el gesto minimo que satisface la frase.",
     "reacciones_no_viajan": "Toda reaccion a un contacto lleva 'without stepping away' o 'feet planted': el desplazamiento del retroceso se hornea en los HUESOS (no en el root), asi que el plugin no puede descontarlo y el personaje se sale del alcance.",
     "duracion_real": "El generador entrega ~35 % mas de lo pedido (2.5 s -> 3.37 s). Las duraciones de abajo ya vienen recortadas para compensar.",
-    "cola_congelada": "Los one-shots traen ~38 % de cola sin movimiento al final. No es un defecto que rechace el ingest (un one-shot puede acabar parado), pero acorta el clip util: por eso los tiempos son cortos."
+    "cola_congelada": "Los one-shots traen ~38 % de cola sin movimiento al final. No es un defecto que rechace el ingest (un one-shot puede acabar parado), pero acorta el clip util: por eso los tiempos son cortos.",
+    "genero_por_medir": "Los 606 clips dicen 'A person'. Duplicar todo a hombre/mujer serian 1212 clips, lo cual solo tiene sentido si el generador de verdad cambia el movimiento con el sujeto. Los tres clips de test lo responden con 12 generaciones en vez de con 606."
   },
   "pair_convention": {
     "naming": "Dos mitades con el mismo nombre base: '<base>_give' (inicia) y '<base>_receive' (recibe).",
@@ -18,7 +19,10 @@
     "fps": 30,
     "diffusion_steps": 100,
     "cfg_type": "separated",
-    "cfg_weight": [2.5, 1.5],
+    "cfg_weight": [
+      2.5,
+      1.5
+    ],
     "num_samples": 4,
     "base_seed": 20260822,
     "bvh": true,
@@ -42,7 +46,10 @@
         "bodyRegion": "full",
         "clipKind": "oneshot",
         "function": "combat",
-        "moodTags": ["aggressive", "tense"],
+        "moodTags": [
+          "aggressive",
+          "tense"
+        ],
         "pairId": "fight_jab",
         "pairRole": "give",
         "contactAt": 0.5
@@ -65,7 +72,10 @@
         "bodyRegion": "full",
         "clipKind": "oneshot",
         "function": "combat",
-        "moodTags": ["pain", "tense"],
+        "moodTags": [
+          "pain",
+          "tense"
+        ],
         "pairId": "fight_jab",
         "pairRole": "receive",
         "contactAt": 0.3
@@ -88,7 +98,10 @@
         "bodyRegion": "full",
         "clipKind": "oneshot",
         "function": "contact",
-        "moodTags": ["neutral", "warm"],
+        "moodTags": [
+          "neutral",
+          "warm"
+        ],
         "pairId": "contact_handshake",
         "pairRole": "give",
         "contactAt": 0.45
@@ -111,7 +124,10 @@
         "bodyRegion": "full",
         "clipKind": "oneshot",
         "function": "contact",
-        "moodTags": ["neutral", "warm"],
+        "moodTags": [
+          "neutral",
+          "warm"
+        ],
         "pairId": "contact_handshake",
         "pairRole": "receive",
         "contactAt": 0.45
@@ -121,6 +137,75 @@
         "max_root_drift_cm": 10.0
       },
       "note": "Las dos mitades del apreton son casi simetricas; la diferencia la pone la colocacion (0.90 m enfrentados) y la sincronia de los peaks."
+    },
+    {
+      "category": "locomotion",
+      "duration": 2.0,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      },
+      "id": "loco_walk_test_person",
+      "prompt": "A person walks forward at a casual pace.",
+      "note": "CONTROL: la misma caminata que ya tienes generada, para comparar contra las dos de abajo."
+    },
+    {
+      "category": "locomotion",
+      "duration": 2.0,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      },
+      "id": "loco_walk_test_man",
+      "prompt": "A man walks forward at a casual pace.",
+      "note": "Test de genero: si sale IGUAL al control, el generador ignora el sujeto y no vale la pena duplicar el catalogo."
+    },
+    {
+      "category": "locomotion",
+      "duration": 2.0,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      },
+      "id": "loco_walk_test_woman",
+      "prompt": "A woman walks forward at a casual pace.",
+      "note": "Test de genero: si el paso, la cadera y el balanceo de brazos difieren del de arriba, SI vale la pena hacer variantes _m/_f de locomocion e idles."
     }
   ]
 }

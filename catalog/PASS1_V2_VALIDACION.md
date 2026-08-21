@@ -77,3 +77,35 @@ En la primera vuelta ya corrigió sola la reacción, del 25 % declarado al 46 % 
 
 Si los tres pasan, el pass 2 sale sin más cambios: sus 61 pares ya llevan estas mismas
 correcciones aplicadas automáticamente.
+
+---
+
+## Añadido: test de género (3 clips)
+
+Los 606 clips del catálogo dicen **"A person"**. Hacer versión masculina y femenina
+de todo serían 1212 clips, y eso solo tiene sentido si el generador de verdad cambia
+el movimiento según el sujeto.
+
+Estos tres clips lo responden con 12 generaciones en vez de con 606:
+
+| clip | prompt |
+|---|---|
+| `loco_walk_test_person` | A person walks forward at a casual pace. |
+| `loco_walk_test_man` | A man walks forward at a casual pace. |
+| `loco_walk_test_woman` | A woman walks forward at a casual pace. |
+
+**Cómo lo leo cuando me los pases:** mido ancho de paso, balanceo de cadera, balanceo
+de brazos y cadencia en los tres. Si `man` y `woman` salen a menos de un 10 % del
+control, el generador ignora el sujeto y no duplicamos nada. Si difieren de verdad,
+la recomendación no es duplicar los 606 — sería hacer variantes `_m`/`_f` solo donde
+el dimorfismo se nota:
+
+- **Sí**: locomoción (caminar, correr, trotar), idles de pie y sentado, bailes,
+  algunos gestos sociales. Unos 90 clips → 180.
+- **No**: abrir una puerta, teclear, apuñalar, conducir, casi todos los one-shots
+  técnicos. Ahí el movimiento lo dicta el objeto, no el cuerpo.
+
+Y una advertencia: aunque el generador responda al sujeto, el clip se **retargetea**
+a tu personaje en Unity, así que parte del dimorfismo (altura, anchura de cadera) ya
+lo aporta el propio rig. Lo que aportaría el clip es el estilo del paso, no la
+proporción.

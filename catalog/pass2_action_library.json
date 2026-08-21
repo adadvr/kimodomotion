@@ -1,6 +1,6 @@
 {
   "version": "3.1-pass2v2",
-  "notes": "PASS 2 v2 — LIBRERIA DE ACCIONES COMPLETA (generar SOLO despues de validar pass1_v2_validation.json). Los 61 pares llevan ya las dos correcciones medidas en Unity sobre el piloto: los golpes piden la EXTENSION explicita del brazo o la pierna (sin eso el modelo entrega una finta de 15 cm) y las reacciones llevan 'without stepping away' con el root fijado (sin eso retroceden 1 m dentro del clip, horneado en los huesos, y se salen del alcance del atacante). Las duraciones de los pares vienen recortadas un 28 % porque el generador entrega mas largo de lo que se le pide. Una sola tanda con todo lo que ocupa los planos de una cinematica: conversacion a dos; peleas con pares golpe/reaccion, armas blancas, muerte, forcejeo y sigilo; vida cotidiana y hogar; vestirse y aseo; vehiculos; oficios y servicios (barberia, cocina, taller, clinica, caja); oficina; calle y compras; deporte; estados corporales; cuidado de ninos y animales; supervivencia y peligro; fiesta y borrachera; ritual, culto y horror; crimen, poder y acecho; instrumentos y canto; danza (ballet, folklor, contemporanea) y escena teatral. Prompts en el estilo declarativo corto del catalogo 2.1: los constraints van en root_policy / loop / bookends / mask / qc, NUNCA en el texto.",
+  "notes": "PASS 2 v2 — LIBRERIA DE ACCIONES COMPLETA (generar SOLO despues de validar pass1_v2_validation.json). Los 61 pares llevan ya las dos correcciones medidas en Unity sobre el piloto: los golpes piden la EXTENSION explicita del brazo o la pierna (sin eso el modelo entrega una finta de 15 cm) y las reacciones llevan 'without stepping away' con el root fijado (sin eso retroceden 1 m dentro del clip, horneado en los huesos, y se salen del alcance del atacante). Las duraciones de los pares vienen recortadas un 28 % porque el generador entrega mas largo de lo que se le pide. Una sola tanda con todo lo que ocupa los planos de una cinematica: conversacion a dos; peleas con pares golpe/reaccion, armas blancas, muerte, forcejeo y sigilo; vida cotidiana y hogar; vestirse y aseo; vehiculos; oficios y servicios (barberia, cocina, taller, clinica, caja); oficina; calle y compras; deporte; estados corporales; cuidado de ninos y animales; supervivencia y peligro; fiesta y borrachera; ritual, culto y horror; crimen, poder y acecho; instrumentos y canto; danza (ballet, folklor, contemporanea) y escena teatral; locomocion avanzada (arrancar, frenar, girar en carrera, saltos con carrera) y acrobacias (volteretas, rueda, flips, parkour); artes marciales (posturas, patadas altas, giradas y barridas, katas, llaves y proyecciones). Prompts en el estilo declarativo corto del catalogo 2.1: los constraints van en root_policy / loop / bookends / mask / qc, NUNCA en el texto.",
   "pair_convention": {
     "naming": "Acciones de DOS personajes en dos mitades: '<base>_give' (inicia) y '<base>_receive' (recibe).",
     "taxonomy.pairId": "Nombre base compartido por las dos mitades.",
@@ -12202,6 +12202,1458 @@
         "pairId": "contact_teach_instrument",
         "pairRole": "receive",
         "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_walk_to_run",
+      "category": "transition",
+      "prompt": "A person walks forward and breaks into a run.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_run_to_walk",
+      "category": "transition",
+      "prompt": "A person runs forward and eases down into a walk.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_run_start",
+      "category": "transition",
+      "prompt": "A person pushes off from standing into a run.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_run_stop_skid",
+      "category": "transition",
+      "prompt": "A person runs forward and stops hard, sliding the front foot.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_sprint_start",
+      "category": "transition",
+      "prompt": "A person drops low and explodes forward into a sprint.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_sprint_stop",
+      "category": "transition",
+      "prompt": "A person sprints and decelerates over several strides to a stop.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_run_turn_left",
+      "category": "transition",
+      "prompt": "A person runs forward and cuts left, leaning into the turn.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_run_turn_right",
+      "category": "transition",
+      "prompt": "A person runs forward and cuts right, leaning into the turn.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_run_turn_180",
+      "category": "transition",
+      "prompt": "A person runs forward, plants one foot and reverses direction.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "loco_run_tired_loop",
+      "category": "locomotion",
+      "prompt": "A person runs forward heavily, shoulders slumped and stride short.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_run_carry_loop",
+      "category": "locomotion",
+      "prompt": "A person runs forward holding something against the chest with both arms.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_sprint_all_out_loop",
+      "category": "locomotion",
+      "prompt": "A person sprints forward at full effort, arms driving high.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "trans_jump_running_long",
+      "category": "transition",
+      "prompt": "A person runs forward, takes off from one foot and lands running.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_jump_vertical_high",
+      "category": "transition",
+      "prompt": "A person crouches and springs straight up with both arms reaching.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_jump_down_land",
+      "category": "transition",
+      "prompt": "A person steps off a height, drops and absorbs the landing in a crouch.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_jump_over_obstacle",
+      "category": "transition",
+      "prompt": "A person runs forward and hurdles something at knee height.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_land_roll",
+      "category": "transition",
+      "prompt": "A person lands from a fall and rolls forward over one shoulder to standing.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_roll_forward",
+      "category": "transition",
+      "prompt": "A person dives forward, rolls over one shoulder and comes up standing.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_roll_backward",
+      "category": "transition",
+      "prompt": "A person drops onto the back, rolls over one shoulder and stands.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_roll_sideways",
+      "category": "transition",
+      "prompt": "A person throws the body sideways, rolls once and rises.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_cartwheel",
+      "category": "transition",
+      "prompt": "A person reaches down to one side, swings both legs overhead in a wheel and lands.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_handspring_front",
+      "category": "transition",
+      "prompt": "A person runs two steps, plants both hands and flips forward onto the feet.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_backflip",
+      "category": "transition",
+      "prompt": "A person crouches and throws the body backward through the air, landing on the feet.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_handstand_hold",
+      "category": "transition",
+      "prompt": "A person kicks up onto both hands and holds inverted, then comes down.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_slide_under",
+      "category": "transition",
+      "prompt": "A person runs forward, drops into a slide on one hip and rises running.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_wall_run_push",
+      "category": "transition",
+      "prompt": "A person runs at a wall, plants one foot high on it and pushes off sideways.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_vault_over_rail",
+      "category": "transition",
+      "prompt": "A person runs to something waist high, plants one hand and swings both legs over.",
+      "duration": 5.0,
+      "root_policy": "keep",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 3.5
+      }
+    },
+    {
+      "id": "trans_ledge_climb_up",
+      "category": "transition",
+      "prompt": "A person hangs from both hands, pulls the chest up and swings a knee over.",
+      "duration": 5.0,
+      "root_policy": "keep",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 3.5
+      }
+    },
+    {
+      "id": "trans_drop_hang",
+      "category": "transition",
+      "prompt": "A person lowers over an edge, hangs from both hands and drops.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "loco_parkour_run_loop",
+      "category": "locomotion",
+      "prompt": "A person runs forward fast and low, arms tight, ready to vault.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_martial_stance_loop",
+      "category": "locomotion",
+      "prompt": "A person stands in a fighting stance, weight low, hands open and ready, shifting slightly.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_horse_stance_hold",
+      "category": "locomotion",
+      "prompt": "A person stands with the feet wide and knees deeply bent, both fists at the ribs.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_martial_bounce_loop",
+      "category": "locomotion",
+      "prompt": "A person bounces lightly on the balls of the feet with the guard up.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_palm_strike",
+      "category": "upper",
+      "prompt": "A person drives an open palm forward from the ribs, fully extending the arm.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_elbow_strike",
+      "category": "upper",
+      "prompt": "A person swings one elbow horizontally across the front.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_backfist",
+      "category": "upper",
+      "prompt": "A person snaps the back of one fist outward and retracts it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_double_block",
+      "category": "upper",
+      "prompt": "A person sweeps both forearms outward from the centre and holds.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_parry_deflect",
+      "category": "upper",
+      "prompt": "A person sweeps one forearm across the body to knock something aside.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "react_knee_strike",
+      "category": "reaction",
+      "prompt": "A person drives one knee upward while pulling both hands down.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_front_kick_high",
+      "category": "reaction",
+      "prompt": "A person chambers the knee and snaps the leg forward at chest height, fully extending it.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_roundhouse_kick",
+      "category": "reaction",
+      "prompt": "A person pivots on the standing foot and swings the other leg horizontally, fully extending it.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_spin_kick",
+      "category": "reaction",
+      "prompt": "A person spins a full turn and whips one leg out at head height.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_axe_kick",
+      "category": "reaction",
+      "prompt": "A person lifts one leg high and drops the heel down in front.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_side_kick",
+      "category": "reaction",
+      "prompt": "A person chambers the knee and thrusts one leg sideways, fully extending it.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_sweep_low",
+      "category": "reaction",
+      "prompt": "A person drops low and sweeps one leg in a wide arc along the ground.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_jump_kick",
+      "category": "reaction",
+      "prompt": "A person runs a step, leaps and kicks forward in the air, then lands.",
+      "duration": 2.5,
+      "root_policy": "keep",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 3.5
+      }
+    },
+    {
+      "id": "trans_kata_sequence",
+      "category": "transition",
+      "prompt": "A person steps forward through a sequence of blocks and strikes, then returns to a stance.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_martial_bow",
+      "category": "upper",
+      "prompt": "A person brings one fist into the opposite open palm at the chest and bows the head.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_breathing_form_loop",
+      "category": "upper",
+      "prompt": "A person raises both arms slowly from the waist and lowers them, breathing deeply.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_drop_to_stance",
+      "category": "transition",
+      "prompt": "A person steps out from standing into a deep fighting stance.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_stance_to_stand",
+      "category": "transition",
+      "prompt": "A person rises from a deep stance back to a relaxed standing pose.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_dodge_duck",
+      "category": "reaction",
+      "prompt": "A person ducks sharply under an incoming swing and rises on the other side.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_dodge_lean_back",
+      "category": "reaction",
+      "prompt": "A person leans the torso far back to let something pass over the face.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "react_block_kick_shin",
+      "category": "reaction",
+      "prompt": "A person lifts one knee to the side to take an impact on the shin.",
+      "duration": 2.5,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "reaction",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_spin_kick_give",
+      "category": "combat",
+      "prompt": "A person spins a full turn and whips one leg out at head height, fully extending it into the target.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense"
+        ],
+        "pairId": "fight_spin_kick",
+        "pairRole": "give",
+        "contactAt": 0.55
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_spin_kick_receive",
+      "category": "combat",
+      "prompt": "A person head is snapped sideways by a kick to the face, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense",
+          "pain"
+        ],
+        "pairId": "fight_spin_kick",
+        "pairRole": "receive",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_palm_strike_give",
+      "category": "combat",
+      "prompt": "A person drives an open palm forward into the opponent's chest, fully extending the arm.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense"
+        ],
+        "pairId": "fight_palm_strike",
+        "pairRole": "give",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_palm_strike_receive",
+      "category": "combat",
+      "prompt": "A person chest is driven back by a palm strike, torso folding, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense",
+          "pain"
+        ],
+        "pairId": "fight_palm_strike",
+        "pairRole": "receive",
+        "contactAt": 0.4
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_knee_strike_give",
+      "category": "combat",
+      "prompt": "A person grabs the opponent's shoulders and drives one knee up into the midsection.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense"
+        ],
+        "pairId": "fight_knee_strike",
+        "pairRole": "give",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_knee_strike_receive",
+      "category": "combat",
+      "prompt": "A person folds over a knee to the midsection, both hands clutching the belly, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense",
+          "pain"
+        ],
+        "pairId": "fight_knee_strike",
+        "pairRole": "receive",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_shoulder_throw_give",
+      "category": "combat",
+      "prompt": "A person grips an arm, turns the back in and throws the opponent over one shoulder.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense"
+        ],
+        "pairId": "fight_shoulder_throw",
+        "pairRole": "give",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_shoulder_throw_receive",
+      "category": "combat",
+      "prompt": "A person is pulled over an opponent's shoulder, flips through the air and lands on the back, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense",
+          "pain"
+        ],
+        "pairId": "fight_shoulder_throw",
+        "pairRole": "receive",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_leg_sweep_give",
+      "category": "combat",
+      "prompt": "A person drops low and sweeps one leg through the opponent's ankles.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense"
+        ],
+        "pairId": "fight_leg_sweep",
+        "pairRole": "give",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_leg_sweep_receive",
+      "category": "combat",
+      "prompt": "A person legs are swept out and the body drops flat onto the back, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense",
+          "pain"
+        ],
+        "pairId": "fight_leg_sweep",
+        "pairRole": "receive",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_joint_lock_give",
+      "category": "combat",
+      "prompt": "A person catches an arm, twists it behind the opponent and holds them bent over.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense"
+        ],
+        "pairId": "fight_joint_lock",
+        "pairRole": "give",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "fight_joint_lock_receive",
+      "category": "combat",
+      "prompt": "A person arm is twisted behind the back, bending forward at the waist and freezing, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": [
+          "aggressive",
+          "tense",
+          "pain"
+        ],
+        "pairId": "fight_joint_lock",
+        "pairRole": "receive",
+        "contactAt": 0.5
       },
       "qc": {
         "max_foot_skate_cm": 1.5,

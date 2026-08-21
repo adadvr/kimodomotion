@@ -22,7 +22,7 @@ python scripts/run_catalog.py --catalog ../catalog/pass1_v2_validation.json --ra
 y no hay que regenerarlos. El catálogo de la primera vuelta queda como
 `pass1_validation.json` para referencia.
 
-### 2. `pass2_action_library.json` — 540 clips · SOLO tras validar
+### 2. `pass2_action_library.json` — 606 clips · SOLO tras validar
 
 Una sola tanda, para no volver a generar en trozos.
 
@@ -45,7 +45,10 @@ Una sola tanda, para no volver a generar en trozos.
 | Crimen y acecho | jefe dando órdenes, chasquear los dedos, gesto de degüello, golpear la mesa, contar dinero, puro y whisky; acechar, limpiar la hoja, afilarla, lavarse las manos, cavar de noche |
 | Música | guitarra (rasgueo, punteo, solo), batería, bajo, piano, violín, arpa, flauta, saxo, trompeta, acordeón, dirigir, cantar con micro |
 | Danza y escena | ballet (plié, pirueta, arabesque, jeté, bourrée), folklor (zapateado, faldas, palmas, círculo), contemporánea (rodar, caída, contracción), claqué, vals, flamenco, declamar, monólogo, muerte teatral, reverencia |
-| Pares 2 personajes | 61 pares: apretón, abrazo, entrega, corte de pelo, afeitado, examen médico, vendaje, inyección, baile en pareja (giro, dip, alzada), cargar entre dos, susurro, consuelo, esposar, foto, brindis, empujón de borracho, separar una pelea, bendición, sujetar en un ritual, mano en la boca, registro, arrastrar del cuello |
+| Locomoción avanzada | arrancar a correr, frenar derrapando, girar en carrera, giro de 180 en carrera, salto con carrera, salto vertical, caer y rodar, saltar obstáculos |
+| Acrobacias y parkour | voltereta adelante, atrás y lateral, rueda, flic-flac, mortal atrás, pino, deslizarse, correr por la pared, saltar una barandilla, trepar una cornisa |
+| Artes marciales | posturas (guardia, del jinete), palma, codo, revés, rodillazo, patada frontal alta, circular, giratoria, de hacha, lateral, barrido, patada en salto, kata, bloqueos y esquivas |
+| Pares 2 personajes | 67 pares: apretón, abrazo, entrega, corte de pelo, afeitado, examen médico, vendaje, inyección, baile en pareja (giro, dip, alzada), cargar entre dos, susurro, consuelo, esposar, foto, brindis, empujón de borracho, separar una pelea, bendición, sujetar en un ritual, mano en la boca, registro, arrastrar del cuello |
 
 ## Convención de pares
 
