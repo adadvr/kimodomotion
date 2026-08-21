@@ -21,12 +21,26 @@ Unity y se corre `kimodo_ingest`. **Qué debe verse**: el apretón y el golpe
 emparejados, con el puño conectando en la reacción y los personajes a la
 distancia correcta.
 
-### 2. `pass2_action_library.json` — 190 clips · SOLO tras validar
+### 2. `pass2_action_library.json` — 352 clips · SOLO tras validar
 
-Cubre la librería completa para armar cinemáticas: conversación a dos, peleas
-con pares golpe/reacción, vida cotidiana, deporte y juego, baile y emotes,
-contacto social, contenedores del hogar (refri, alacena, cajones), armas
-blancas, muerte, amenaza y rendición, forcejeo y sigilo.
+Una sola tanda, para no volver a generar en trozos. Cubre:
+
+| bloque | contenido |
+|---|---|
+| Acción y conflicto | peleas con pares golpe/reacción, armas blancas, forcejeo, estrangulamiento, amenaza y rendición, muerte y consecuencias |
+| Conversación | 11 loops de habla + reacciones de escucha, interrupción, desacuerdo |
+| Vida cotidiana | comer, beber, dormir, despertar, teclear, leer, asearse |
+| Hogar | refrigerador, alacena, cajones, servir, fregar, microondas, basura |
+| Vestirse y aseo | audífonos, gorra, gafas, chaqueta, zapatos, mochila, bufanda, guantes, reloj, cinturón, peinarse, maquillarse, afeitarse |
+| Vehículos | abrir puerta y entrar, cinturón, conducir, retrovisor, maletero, moto, bicicleta, autobús, taxi |
+| Oficios | barbería (tijeras, secador, capa), cocina (picar, remover, sartén, amasar), taller (llave, capó, martillo, taladro), clínica (estetoscopio, vendaje, inyección), caja, limpieza, pintura |
+| Oficina | escribir, firmar, sellar, pasar páginas, presentar, videollamada, archivar |
+| Calle y compras | carrito, estantes, pagar con tarjeta, cola, paraguas, escaleras mecánicas, cruzar, selfie, fumar |
+| Deporte | pesas, flexiones, abdominales, cinta, saco, estiramientos, yoga, escalada, remo, arco, golf, tenis |
+| Estados | borracho, mareado, con frío, con calor, nervioso, impaciente, llorando, riendo, estornudo, tos, bostezo, alivio |
+| Cuidado | acariciar un perro, cargar un bebé, alzar a un niño, dar de comer, regar |
+| Baile y emotes | 10 loops de baile + 14 emotes |
+| Pares 2 personajes | 43 pares: apretón, abrazo, choque de manos, entrega, corte de pelo, afeitado, examen médico, vendaje, inyección, baile en pareja, cargar entre dos, susurro, consuelo, choque casual, esposar, foto, ir de la mano, corregir postura, brindis |
 
 ## Convención de pares
 
