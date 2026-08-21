@@ -1,6 +1,6 @@
 {
   "version": "3.1-pass2v2",
-  "notes": "PASS 2 v2 — LIBRERIA DE ACCIONES COMPLETA (generar SOLO despues de validar pass1_v2_validation.json). Los 61 pares llevan ya las dos correcciones medidas en Unity sobre el piloto: los golpes piden la EXTENSION explicita del brazo o la pierna (sin eso el modelo entrega una finta de 15 cm) y las reacciones llevan 'without stepping away' con el root fijado (sin eso retroceden 1 m dentro del clip, horneado en los huesos, y se salen del alcance del atacante). Las duraciones de los pares vienen recortadas un 28 % porque el generador entrega mas largo de lo que se le pide. Una sola tanda con todo lo que ocupa los planos de una cinematica: conversacion a dos; peleas con pares golpe/reaccion, armas blancas, muerte, forcejeo y sigilo; vida cotidiana y hogar; vestirse y aseo; vehiculos; oficios y servicios (barberia, cocina, taller, clinica, caja); oficina; calle y compras; deporte; estados corporales; cuidado de ninos y animales; supervivencia y peligro; fiesta y borrachera; ritual, culto y horror; crimen, poder y acecho; instrumentos y canto; danza (ballet, folklor, contemporanea) y escena teatral; locomocion avanzada (arrancar, frenar, girar en carrera, saltos con carrera) y acrobacias (volteretas, rueda, flips, parkour); artes marciales (posturas, patadas altas, giradas y barridas, katas, llaves y proyecciones). Prompts en el estilo declarativo corto del catalogo 2.1: los constraints van en root_policy / loop / bookends / mask / qc, NUNCA en el texto.",
+  "notes": "PASS 2 v2 — LIBRERIA DE ACCIONES COMPLETA (generar SOLO despues de validar pass1_v2_validation.json). Los 61 pares llevan ya las dos correcciones medidas en Unity sobre el piloto: los golpes piden la EXTENSION explicita del brazo o la pierna (sin eso el modelo entrega una finta de 15 cm) y las reacciones llevan 'without stepping away' con el root fijado (sin eso retroceden 1 m dentro del clip, horneado en los huesos, y se salen del alcance del atacante). Las duraciones de los pares vienen recortadas un 28 % porque el generador entrega mas largo de lo que se le pide. Una sola tanda con todo lo que ocupa los planos de una cinematica: conversacion a dos; peleas con pares golpe/reaccion, armas blancas, muerte, forcejeo y sigilo; vida cotidiana y hogar; vestirse y aseo; vehiculos; oficios y servicios (barberia, cocina, taller, clinica, caja); oficina; calle y compras; deporte; estados corporales; cuidado de ninos y animales; supervivencia y peligro; fiesta y borrachera; ritual, culto y horror; crimen, poder y acecho; instrumentos y canto; danza (ballet, folklor, contemporanea) y escena teatral; locomocion avanzada (arrancar, frenar, girar en carrera, saltos con carrera) y acrobacias (volteretas, rueda, flips, parkour); artes marciales (posturas, patadas altas, giradas y barridas, katas, llaves y proyecciones); y estilo de movimiento por genero — el caminar, los gestos de manos y pelo y las acciones con accesorios, que es donde la diferencia se lee en pantalla (sufijo _f / _m). El resto del catalogo NO se duplica: abrir una puerta o teclear lo dicta el objeto, no el cuerpo. Prompts en el estilo declarativo corto del catalogo 2.1: los constraints van en root_policy / loop / bookends / mask / qc, NUNCA en el texto.",
   "pair_convention": {
     "naming": "Acciones de DOS personajes en dos mitades: '<base>_give' (inicia) y '<base>_receive' (recibe).",
     "taxonomy.pairId": "Nombre base compartido por las dos mitades.",
@@ -13654,6 +13654,1118 @@
         "pairId": "fight_joint_lock",
         "pairRole": "receive",
         "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "loco_walk_hips_f",
+      "category": "locomotion",
+      "prompt": "A woman walks forward placing each foot almost in line with the other, hips swaying, arms swinging close to the body.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_walk_heels_f",
+      "category": "locomotion",
+      "prompt": "A woman walks forward in heels with short precise steps, weight on the balls of the feet, back straight.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_walk_runway_f",
+      "category": "locomotion",
+      "prompt": "A woman walks forward along a straight line with long deliberate steps, one hip leading, arms loose.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_walk_purse_f",
+      "category": "locomotion",
+      "prompt": "A woman walks forward with one hand steadying a strap on the shoulder.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_walk_skirt_f",
+      "category": "locomotion",
+      "prompt": "A woman walks forward with short steps, one hand resting lightly on the thigh.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_walk_cold_arms_f",
+      "category": "locomotion",
+      "prompt": "A woman walks forward with both arms folded tight across the chest, shoulders drawn up.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_run_heels_f",
+      "category": "locomotion",
+      "prompt": "A woman runs forward in short quick steps on the balls of the feet, one hand out for balance.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_walk_confident_f",
+      "category": "locomotion",
+      "prompt": "A woman walks forward with the chin level and shoulders back, hands relaxed, a slight roll through the hips.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_idle_weight_hip_f",
+      "category": "locomotion",
+      "prompt": "A woman stands with the weight settled onto one hip, one knee soft, arms loose.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "calm"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_idle_arms_crossed_f",
+      "category": "locomotion",
+      "prompt": "A woman stands with the arms folded under the chest, weight on one leg, shifting slowly.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "calm"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_sit_knees_together_f",
+      "category": "transition",
+      "prompt": "A woman sits down and settles with the knees together, both hands in the lap.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_sit_cross_legs_f",
+      "category": "transition",
+      "prompt": "A woman sits down and crosses one leg over the other, hands resting on the knee.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_sit_side_saddle_f",
+      "category": "transition",
+      "prompt": "A woman sits down and swings both legs to one side, angled away from the front.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_stand_smooth_skirt_f",
+      "category": "transition",
+      "prompt": "A woman stands up from a seat and smooths the front of the clothing down with both hands.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "seated_idle_legs_crossed_f",
+      "category": "locomotion",
+      "prompt": "A woman sits with one leg crossed over the other, the top foot bobbing slightly.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "calm"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_walk_wide_m",
+      "category": "locomotion",
+      "prompt": "A man walks forward with the feet apart and the shoulders leading, arms swinging wide.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_walk_heavy_m",
+      "category": "locomotion",
+      "prompt": "A man walks forward planting each foot firmly, torso still, arms hanging.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_walk_confident_m",
+      "category": "locomotion",
+      "prompt": "A man walks forward with the chest lifted and a slow roll through the shoulders.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "loco_idle_wide_stance_m",
+      "category": "locomotion",
+      "prompt": "A man stands with the feet apart and the arms crossed over the chest.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "calm"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "loco_idle_hands_pockets_m",
+      "category": "locomotion",
+      "prompt": "A man stands with both hands in the pockets, weight even, rocking slightly on the heels.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "idle",
+        "moodTags": [
+          "calm"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "trans_sit_legs_apart_m",
+      "category": "transition",
+      "prompt": "A man sits down and settles with the knees apart, forearms on the thighs.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_sit_ankle_on_knee_m",
+      "category": "transition",
+      "prompt": "A man sits down and rests one ankle on the opposite knee, one arm over the backrest.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "loco_run_heavy_m",
+      "category": "locomotion",
+      "prompt": "A man runs forward with heavy strides and the fists driving across the body.",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
+      "loop": true,
+      "loop_cycle": "gait",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "loop",
+        "function": "locomotion",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "require_loop": true,
+        "min_gait_cycles": 2
+      }
+    },
+    {
+      "id": "upper_hair_tuck_ear_f",
+      "category": "upper",
+      "prompt": "A woman sweeps a strand of hair back behind one ear with two fingers.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_hair_toss_back_f",
+      "category": "upper",
+      "prompt": "A woman tilts the head and sweeps the hair back over one shoulder with one hand.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_hair_gather_ponytail_f",
+      "category": "upper",
+      "prompt": "A woman gathers the hair back with both hands, twists it and ties it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_hair_bun_twist_f",
+      "category": "upper",
+      "prompt": "A woman gathers the hair, twists it up against the back of the head and pins it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_hair_brush_long_f",
+      "category": "upper",
+      "prompt": "A woman draws a brush down the length of the hair with one hand, the other holding it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_hair_smooth_f",
+      "category": "upper",
+      "prompt": "A woman runs both palms down the sides of the hair from the crown.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_earring_put_f",
+      "category": "upper",
+      "prompt": "A woman raises one hand to the ear, works something small into it and lowers the hand.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_necklace_touch_f",
+      "category": "upper",
+      "prompt": "A woman brings the fingertips to the base of the throat and holds them there.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_nails_look_f",
+      "category": "upper",
+      "prompt": "A woman spreads the fingers of one hand and turns it, looking at the nails.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_lotion_hands_f",
+      "category": "upper",
+      "prompt": "A woman rubs both palms and backs of the hands together slowly.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_mascara_apply_f",
+      "category": "upper",
+      "prompt": "A woman raises one hand to the eye with the other steadying, and blinks.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_powder_compact_f",
+      "category": "upper",
+      "prompt": "A woman holds something small open in one hand and dabs at the face with the other.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_laugh_cover_mouth_f",
+      "category": "upper",
+      "prompt": "A woman laughs and raises the fingers of one hand to cover the mouth.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_talk_soft_hands_f",
+      "category": "upper",
+      "prompt": "A woman talks with small light gestures, the fingers slightly apart, hands near the chest.",
+      "duration": 4.0,
+      "root_policy": "pin_origin",
+      "loop": true,
+      "loop_cycle": "full",
+      "mask": "upper_body",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "loop",
+        "function": "prop_use",
+        "moodTags": [
+          "conversation"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0,
+        "require_loop": true
+      }
+    },
+    {
+      "id": "upper_point_open_hand_f",
+      "category": "upper",
+      "prompt": "A woman indicates something to the side with a flat open hand, palm up.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_adjust_strap_f",
+      "category": "upper",
+      "prompt": "A woman lifts a strap back onto the shoulder with two fingers.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_fan_face_hand_f",
+      "category": "upper",
+      "prompt": "A woman fans the face quickly with one flat hand.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_wave_fingers_f",
+      "category": "upper",
+      "prompt": "A woman waves with just the fingers of one raised hand.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_blow_kiss_f",
+      "category": "upper",
+      "prompt": "A woman touches the fingertips to the lips and opens the hand forward.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "upper_smooth_dress_sit_f",
+      "category": "upper",
+      "prompt": "A woman reaches back with both hands and smooths the clothing before settling.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_heels_put_on_f",
+      "category": "transition",
+      "prompt": "A woman sits, guides one foot into a shoe and fastens it at the ankle, then the other.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_heels_take_off_f",
+      "category": "transition",
+      "prompt": "A woman sits, unfastens one shoe and slips the foot out, then the other.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_bag_shoulder_f",
+      "category": "transition",
+      "prompt": "A woman lifts a strap over one shoulder and settles it.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_bag_search_f",
+      "category": "upper",
+      "prompt": "A woman holds a bag open with one hand and rummages inside with the other.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "sneaky",
+          "tense"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_mirror_turn_check_f",
+      "category": "transition",
+      "prompt": "A woman turns to look back over one shoulder, then faces front again.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "trans_photo_pose_f",
+      "category": "transition",
+      "prompt": "A woman steps into a pose with one hand on the hip and the weight on one leg, and holds.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      }
+    },
+    {
+      "id": "upper_scarf_adjust_f",
+      "category": "upper",
+      "prompt": "A woman loops a scarf once more around the neck and pulls the ends even.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "mask": "upper_body",
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "upper",
+        "clipKind": "oneshot",
+        "function": "prop_use",
+        "moodTags": [
+          "neutral"
+        ]
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.0,
+        "max_leg_motion_deg": 8.0
+      }
+    },
+    {
+      "id": "trans_coat_shrug_on_f",
+      "category": "transition",
+      "prompt": "A woman holds a coat behind the shoulders and shrugs into it, then pulls the collar straight.",
+      "duration": 5.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "posture_change",
+        "moodTags": [
+          "neutral"
+        ]
       },
       "qc": {
         "max_foot_skate_cm": 1.5,

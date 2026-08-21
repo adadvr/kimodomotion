@@ -22,7 +22,7 @@ python scripts/run_catalog.py --catalog ../catalog/pass1_v2_validation.json --ra
 y no hay que regenerarlos. El catálogo de la primera vuelta queda como
 `pass1_validation.json` para referencia.
 
-### 2. `pass2_action_library.json` — 606 clips · SOLO tras validar
+### 2. `pass2_action_library.json` — 657 clips · SOLO tras validar
 
 Una sola tanda, para no volver a generar en trozos.
 
@@ -47,6 +47,7 @@ Una sola tanda, para no volver a generar en trozos.
 | Danza y escena | ballet (plié, pirueta, arabesque, jeté, bourrée), folklor (zapateado, faldas, palmas, círculo), contemporánea (rodar, caída, contracción), claqué, vals, flamenco, declamar, monólogo, muerte teatral, reverencia |
 | Locomoción avanzada | arrancar a correr, frenar derrapando, girar en carrera, giro de 180 en carrera, salto con carrera, salto vertical, caer y rodar, saltar obstáculos |
 | Acrobacias y parkour | voltereta adelante, atrás y lateral, rueda, flic-flac, mortal atrás, pino, deslizarse, correr por la pared, saltar una barandilla, trepar una cornisa |
+| Estilo por género | El caminar (contoneo, tacones, pasarela, con bolso, con abrigo cruzado), la postura de pie y al sentarse, los gestos de manos y pelo (recogerse el pelo tras la oreja, coleta, moño, cepillarse, pendientes, uñas, reír tapándose la boca, hablar con las manos suaves) y las acciones con accesorios (ponerse y quitarse tacones, bolso al hombro, buscar en el bolso, posar, ajustarse la bufanda, ponerse el abrigo). 43 femeninos + 8 masculinos de contraste, con sufijo `_f` / `_m` |
 | Artes marciales | posturas (guardia, del jinete), palma, codo, revés, rodillazo, patada frontal alta, circular, giratoria, de hacha, lateral, barrido, patada en salto, kata, bloqueos y esquivas |
 | Pares 2 personajes | 67 pares: apretón, abrazo, entrega, corte de pelo, afeitado, examen médico, vendaje, inyección, baile en pareja (giro, dip, alzada), cargar entre dos, susurro, consuelo, esposar, foto, brindis, empujón de borracho, separar una pelea, bendición, sujetar en un ritual, mano en la boca, registro, arrastrar del cuello |
 
