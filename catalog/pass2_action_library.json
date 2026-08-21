@@ -497,7 +497,7 @@
     {
       "id": "fight_cross_give",
       "category": "combat",
-      "prompt": "A person throws a heavy straight cross with the rear hand, hips rotating fully through the punch, fully extending the arm into the target.",
+      "prompt": "A person throws a heavy straight cross with the rear hand, hips rotating fully through the punch, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -548,7 +548,7 @@
     {
       "id": "fight_hook_body_give",
       "category": "combat",
-      "prompt": "A person drives a hook into the opponent's ribs, torso rotating low, fully extending the arm into the target.",
+      "prompt": "A person drives a hook into the opponent's ribs, torso rotating low, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -599,7 +599,7 @@
     {
       "id": "fight_uppercut_give",
       "category": "combat",
-      "prompt": "A person throws an uppercut from a crouch, driving upward through the legs, fully extending the arm into the target.",
+      "prompt": "A person throws an uppercut from a crouch, driving upward through the legs, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -650,7 +650,7 @@
     {
       "id": "fight_push_shove_give",
       "category": "combat",
-      "prompt": "A person shoves the opponent in the chest with both hands, stepping into it, fully extending the arm into the target.",
+      "prompt": "A person shoves the opponent in the chest with both hands, stepping into it, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -701,7 +701,7 @@
     {
       "id": "fight_grab_collar_give",
       "category": "combat",
-      "prompt": "A person grabs the opponent by the collar with both hands and pulls them in, fully extending the arm into the target.",
+      "prompt": "A person grabs the opponent by the collar with both hands and pulls them in, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -752,7 +752,7 @@
     {
       "id": "fight_kick_low_give",
       "category": "combat",
-      "prompt": "A person throws a low round kick to the opponent's thigh, pivoting on the standing foot, fully extending the leg into the target.",
+      "prompt": "A person throws a low round kick to the opponent's thigh, pivoting on the standing foot, the leg completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -803,7 +803,7 @@
     {
       "id": "fight_kick_front_give",
       "category": "combat",
-      "prompt": "A person throws a straight front kick to the midsection, chambering the knee first, fully extending the leg into the target.",
+      "prompt": "A person throws a straight front kick to the midsection, chambering the knee first, the leg completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -854,7 +854,7 @@
     {
       "id": "fight_slap_give",
       "category": "combat",
-      "prompt": "A person delivers an open-handed slap across the face, arm swinging through, fully extending the arm into the target.",
+      "prompt": "A person delivers an open-handed slap across the face, arm swinging through, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -905,7 +905,7 @@
     {
       "id": "fight_block_high_give",
       "category": "combat",
-      "prompt": "A person throws a downward strike that is blocked, fully extending the arm into the target.",
+      "prompt": "A person throws a downward strike that is blocked, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -1007,7 +1007,7 @@
     {
       "id": "fight_knockout_give",
       "category": "combat",
-      "prompt": "A person lands a final heavy punch and stands over the fallen opponent, fully extending the arm into the target.",
+      "prompt": "A person lands a final heavy punch and stands over the fallen opponent, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -1244,7 +1244,7 @@
     {
       "id": "loco_skateboard_push",
       "category": "locomotion",
-      "prompt": "A person rides a skateboard forward, pushing off the ground with the back foot every cycle.",
+      "prompt": "A person rides a skateboard forward, pushing off the ground with the back foot every cycle, the arm completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "strip_xz",
       "loop": true,
@@ -1461,7 +1461,7 @@
     {
       "id": "trans_sit_floor_cross",
       "category": "transition",
-      "prompt": "A person lowers from standing to sitting cross-legged on the floor.",
+      "prompt": "A person lowers from standing to sitting cross-legged on the floor, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -1524,7 +1524,7 @@
     {
       "id": "trans_open_door_push",
       "category": "transition",
-      "prompt": "A person reaches forward, pushes a door open and steps through it.",
+      "prompt": "A person reaches forward, pushes a door open and steps through it, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "keep",
       "loop": false,
@@ -1852,7 +1852,7 @@
     {
       "id": "seated_idle_floor_cross",
       "category": "locomotion",
-      "prompt": "A person sits cross-legged on the floor, hands on the knees, quiet breathing.",
+      "prompt": "A person sits cross-legged on the floor, hands on the knees, quiet breathing, the arm completely straight at full reach.",
       "duration": 4.0,
       "root_policy": "pin_origin",
       "loop": true,
@@ -1918,7 +1918,7 @@
     {
       "id": "contact_ball_pass_give",
       "category": "contact",
-      "prompt": "A person passes a ball forward with both hands from the chest, fully extending the arm into the target.",
+      "prompt": "A person passes a ball forward with both hands from the chest, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -1968,7 +1968,7 @@
     {
       "id": "contact_ball_throw_give",
       "category": "contact",
-      "prompt": "A person throws a ball overhand forward with one arm, fully extending the arm into the target.",
+      "prompt": "A person throws a ball overhand forward with one arm, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -2018,7 +2018,7 @@
     {
       "id": "contact_tag_touch_give",
       "category": "contact",
-      "prompt": "A person reaches out and taps the other person on the shoulder while moving past, fully extending the arm into the target.",
+      "prompt": "A person reaches out and taps the other person on the shoulder while moving past, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -2116,7 +2116,7 @@
     {
       "id": "react_kick_ball",
       "category": "reaction",
-      "prompt": "A person takes a short run-up and kicks a ball forward with the instep.",
+      "prompt": "A person takes a short run-up and kicks a ball forward with the instep, the leg completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "pin_origin",
       "loop": false,
@@ -3090,7 +3090,7 @@
     {
       "id": "contact_highfive_give",
       "category": "contact",
-      "prompt": "A person swings one hand up to slap the other person's raised palm, fully extending the arm into the target.",
+      "prompt": "A person swings one hand up to slap the other person's raised palm, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -3139,7 +3139,7 @@
     {
       "id": "contact_fistbump_give",
       "category": "contact",
-      "prompt": "A person extends a closed fist forward and bumps, then withdraws, fully extending the arm into the target.",
+      "prompt": "A person extends a closed fist forward and bumps, then withdraws, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -3188,7 +3188,7 @@
     {
       "id": "contact_pat_shoulder_give",
       "category": "contact",
-      "prompt": "A person reaches out and pats the other person twice on the shoulder, fully extending the arm into the target.",
+      "prompt": "A person reaches out and pats the other person twice on the shoulder, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -3237,7 +3237,7 @@
     {
       "id": "contact_handover_object_give",
       "category": "contact",
-      "prompt": "A person extends both hands forward offering an object and releases it, fully extending the arm into the target.",
+      "prompt": "A person extends both hands forward offering an object and releases it, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -3592,7 +3592,7 @@
     {
       "id": "upper_knife_draw",
       "category": "upper",
-      "prompt": "A person pulls a knife from the belt with the right hand and holds it low and ready.",
+      "prompt": "A person pulls a knife from the belt with the right hand and holds it low and ready, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -3615,7 +3615,7 @@
     {
       "id": "upper_knife_threat_hold",
       "category": "upper",
-      "prompt": "A person holds a knife pointed forward at arm's length, tense and still.",
+      "prompt": "A person holds a knife pointed forward at arm's length, tense and still, the arm completely straight at full reach.",
       "duration": 4.0,
       "root_policy": "pin_origin",
       "loop": true,
@@ -3639,7 +3639,7 @@
     {
       "id": "upper_knife_scared_hold",
       "category": "upper",
-      "prompt": "A person holds a knife with both hands close to the chest, arms trembling, backing the head away.",
+      "prompt": "A person holds a knife with both hands close to the chest, arms trembling, backing the head away, the arm completely straight at full reach.",
       "duration": 4.0,
       "root_policy": "pin_origin",
       "loop": true,
@@ -3709,7 +3709,7 @@
     {
       "id": "fight_knife_stab_give",
       "category": "combat",
-      "prompt": "A person drives a knife forward into the opponent's midsection with the right hand and pulls it back, fully extending the arm into the target.",
+      "prompt": "A person drives a knife forward into the opponent's midsection with the right hand, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -3760,7 +3760,7 @@
     {
       "id": "fight_knife_slash_give",
       "category": "combat",
-      "prompt": "A person slashes a knife horizontally across the front, fully extending the arm into the target.",
+      "prompt": "A person slashes a knife horizontally across the front, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -5031,7 +5031,7 @@
     {
       "id": "trans_car_push",
       "category": "transition",
-      "prompt": "A person leans both hands against something in front and drives forward with the legs.",
+      "prompt": "A person leans both hands against something in front and drives forward with the legs, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -5697,7 +5697,7 @@
     {
       "id": "upper_sweep_floor_loop",
       "category": "upper",
-      "prompt": "A person sweeps a broom across the floor in wide repeated strokes.",
+      "prompt": "A person sweeps a broom across the floor in wide repeated strokes, the arm completely straight at full reach.",
       "duration": 4.0,
       "root_policy": "pin_origin",
       "loop": true,
@@ -6074,7 +6074,7 @@
     {
       "id": "loco_push_cart_walk",
       "category": "locomotion",
-      "prompt": "A person walks forward pushing something at waist height with both hands.",
+      "prompt": "A person walks forward pushing something at waist height with both hands, the arm completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "strip_xz",
       "loop": true,
@@ -6225,7 +6225,7 @@
     {
       "id": "loco_cross_street_look",
       "category": "locomotion",
-      "prompt": "A person walks forward while turning the head to look both ways.",
+      "prompt": "A person walks forward while turning the head to look both ways, the arm completely straight at full reach.",
       "duration": 4.0,
       "root_policy": "pin_origin",
       "loop": true,
@@ -6355,7 +6355,7 @@
     {
       "id": "upper_wave_across_street",
       "category": "upper",
-      "prompt": "A person raises one arm and waves broadly at someone far away.",
+      "prompt": "A person raises one arm and waves broadly at someone far away, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -6487,7 +6487,7 @@
     {
       "id": "trans_pushups_loop",
       "category": "transition",
-      "prompt": "A person lowers the chest to the ground on both hands and pushes back up.",
+      "prompt": "A person lowers the chest to the ground on both hands and pushes back up, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -6551,7 +6551,7 @@
     {
       "id": "upper_punch_bag_loop",
       "category": "upper",
-      "prompt": "A person throws alternating punches forward at head height.",
+      "prompt": "A person throws alternating punches forward at head height, the arm completely straight at full reach.",
       "duration": 4.0,
       "root_policy": "pin_origin",
       "loop": true,
@@ -6835,7 +6835,7 @@
     {
       "id": "loco_wait_impatient_loop",
       "category": "locomotion",
-      "prompt": "A person stands with arms crossed, tapping one foot and glancing aside.",
+      "prompt": "A person stands with arms crossed, tapping one foot and glancing aside, the arm completely straight at full reach.",
       "duration": 4.0,
       "root_policy": "pin_origin",
       "loop": true,
@@ -7989,7 +7989,7 @@
     {
       "id": "upper_fire_strike_loop",
       "category": "upper",
-      "prompt": "A person strikes two objects together over the ground in repeated sharp motions.",
+      "prompt": "A person strikes two objects together over the ground in repeated sharp motions, the arm completely straight at full reach.",
       "duration": 4.0,
       "root_policy": "pin_origin",
       "loop": true,
@@ -8396,7 +8396,7 @@
     {
       "id": "upper_dig_shovel_loop",
       "category": "upper",
-      "prompt": "A person drives a shovel down into the ground, lifts and throws to the side.",
+      "prompt": "A person drives a shovel down into the ground, lifts and throws to the side, the arm completely straight at full reach.",
       "duration": 4.0,
       "root_policy": "pin_origin",
       "loop": true,
@@ -8964,7 +8964,7 @@
     {
       "id": "upper_sweep_table_arm",
       "category": "upper",
-      "prompt": "A person swings one arm hard across a table in front, clearing it.",
+      "prompt": "A person swings one arm hard across a table in front, clearing it, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -8986,7 +8986,7 @@
     {
       "id": "trans_kick_chair_over",
       "category": "transition",
-      "prompt": "A person kicks something at knee height and shoves it away.",
+      "prompt": "A person kicks something at knee height and shoves it away, the leg completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -10211,7 +10211,7 @@
     {
       "id": "contact_drunk_shove_give",
       "category": "contact",
-      "prompt": "A person shoves someone in the chest with both hands and spreads the arms wide, fully extending the arm into the target.",
+      "prompt": "A person shoves someone in the chest with both hands and spreads the arms wide, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -10260,7 +10260,7 @@
     {
       "id": "contact_shirt_grab_give",
       "category": "contact",
-      "prompt": "A person grabs a fistful of someone's shirt at the chest and pulls them close, fully extending the arm into the target.",
+      "prompt": "A person grabs a fistful of someone's shirt at the chest and pulls them close, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -10507,7 +10507,7 @@
     {
       "id": "contact_ritual_strike_give",
       "category": "contact",
-      "prompt": "A person brings both hands down together over someone lying in front.",
+      "prompt": "A person brings both hands down together over someone lying in front, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -10754,7 +10754,7 @@
     {
       "id": "contact_drag_by_collar_give",
       "category": "contact",
-      "prompt": "A person grabs the back of someone's collar and drags them forward, fully extending the arm into the target.",
+      "prompt": "A person grabs the back of someone's collar and drags them forward, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -10803,7 +10803,7 @@
     {
       "id": "contact_push_to_knees_give",
       "category": "contact",
-      "prompt": "A person pushes down on someone's shoulders until they drop to their knees, fully extending the arm into the target.",
+      "prompt": "A person pushes down on someone's shoulders until they drop to their knees, the arm completely straight at full reach.",
       "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
@@ -11743,7 +11743,7 @@
     {
       "id": "trans_contemporary_extend_reach",
       "category": "transition",
-      "prompt": "A person reaches one arm high and lets the whole body stretch after it, then folds down.",
+      "prompt": "A person reaches one arm high and lets the whole body stretch after it, then folds down, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -12739,7 +12739,7 @@
     {
       "id": "trans_wall_run_push",
       "category": "transition",
-      "prompt": "A person runs at a wall, plants one foot high on it and pushes off sideways.",
+      "prompt": "A person runs at a wall, plants one foot high on it and pushes off sideways, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -12909,7 +12909,7 @@
     {
       "id": "upper_palm_strike",
       "category": "upper",
-      "prompt": "A person drives an open palm forward from the ribs, fully extending the arm.",
+      "prompt": "A person drives an open palm forward from the ribs, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -12931,7 +12931,7 @@
     {
       "id": "upper_elbow_strike",
       "category": "upper",
-      "prompt": "A person swings one elbow horizontally across the front.",
+      "prompt": "A person swings one elbow horizontally across the front, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -12953,7 +12953,7 @@
     {
       "id": "upper_backfist",
       "category": "upper",
-      "prompt": "A person snaps the back of one fist outward and retracts it.",
+      "prompt": "A person snaps the back of one fist outward and retracts it, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -12975,7 +12975,7 @@
     {
       "id": "upper_double_block",
       "category": "upper",
-      "prompt": "A person sweeps both forearms outward from the centre and holds.",
+      "prompt": "A person sweeps both forearms outward from the centre and holds, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13019,7 +13019,7 @@
     {
       "id": "react_knee_strike",
       "category": "reaction",
-      "prompt": "A person drives one knee upward while pulling both hands down.",
+      "prompt": "A person drives one knee upward while pulling both hands down, the arm completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13040,7 +13040,7 @@
     {
       "id": "react_front_kick_high",
       "category": "reaction",
-      "prompt": "A person chambers the knee and snaps the leg forward at chest height, fully extending it.",
+      "prompt": "A person chambers the knee and snaps the leg forward at chest height, the leg completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13061,7 +13061,7 @@
     {
       "id": "react_roundhouse_kick",
       "category": "reaction",
-      "prompt": "A person pivots on the standing foot and swings the other leg horizontally, fully extending it.",
+      "prompt": "A person pivots on the standing foot and swings the other leg horizontally, the leg completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13082,7 +13082,7 @@
     {
       "id": "react_spin_kick",
       "category": "reaction",
-      "prompt": "A person spins a full turn and whips one leg out at head height.",
+      "prompt": "A person spins a full turn and whips one leg out at head height, the leg completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13103,7 +13103,7 @@
     {
       "id": "react_axe_kick",
       "category": "reaction",
-      "prompt": "A person lifts one leg high and drops the heel down in front.",
+      "prompt": "A person lifts one leg high and drops the heel down in front, the leg completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13124,7 +13124,7 @@
     {
       "id": "react_side_kick",
       "category": "reaction",
-      "prompt": "A person chambers the knee and thrusts one leg sideways, fully extending it.",
+      "prompt": "A person chambers the knee and thrusts one leg sideways, the leg completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13145,7 +13145,7 @@
     {
       "id": "react_sweep_low",
       "category": "reaction",
-      "prompt": "A person drops low and sweeps one leg in a wide arc along the ground.",
+      "prompt": "A person drops low and sweeps one leg in a wide arc along the ground, the arm completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13166,7 +13166,7 @@
     {
       "id": "react_jump_kick",
       "category": "reaction",
-      "prompt": "A person runs a step, leaps and kicks forward in the air, then lands.",
+      "prompt": "A person runs a step, leaps and kicks forward in the air, then lands, the leg completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "keep",
       "loop": false,
@@ -13336,7 +13336,7 @@
     {
       "id": "react_block_kick_shin",
       "category": "reaction",
-      "prompt": "A person lifts one knee to the side to take an impact on the shin.",
+      "prompt": "A person lifts one knee to the side to take an impact on the shin, the leg completely straight at full reach.",
       "duration": 2.5,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13357,7 +13357,7 @@
     {
       "id": "fight_spin_kick_give",
       "category": "combat",
-      "prompt": "A person spins a full turn and whips one leg out at head height, fully extending it into the target.",
+      "prompt": "A person spins a full turn and whips one leg out at head height, the leg completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13408,7 +13408,7 @@
     {
       "id": "fight_palm_strike_give",
       "category": "combat",
-      "prompt": "A person drives an open palm forward into the opponent's chest, fully extending the arm.",
+      "prompt": "A person drives an open palm forward into the opponent's chest, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13459,7 +13459,7 @@
     {
       "id": "fight_knee_strike_give",
       "category": "combat",
-      "prompt": "A person grabs the opponent's shoulders and drives one knee up into the midsection.",
+      "prompt": "A person grabs the opponent's shoulders and drives one knee up into the midsection, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13561,7 +13561,7 @@
     {
       "id": "fight_leg_sweep_give",
       "category": "combat",
-      "prompt": "A person drops low and sweeps one leg through the opponent's ankles.",
+      "prompt": "A person drops low and sweeps one leg through the opponent's ankles, the arm completely straight at full reach.",
       "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
@@ -13904,7 +13904,7 @@
     {
       "id": "trans_sit_cross_legs_f",
       "category": "transition",
-      "prompt": "A woman sits down and crosses one leg over the other, hands resting on the knee.",
+      "prompt": "A woman sits down and crosses one leg over the other, hands resting on the knee, the arm completely straight at full reach.",
       "duration": 5.0,
       "root_policy": "pin_origin",
       "loop": false,

@@ -70,3 +70,27 @@ cara. Sin ese dato el par se alinea por el arranque y el golpe llega tarde.
 - Techo real ~3 m/s: pedir sprint da un trote. Retimar el clip, no acelerar.
 - Un loop de locomoción sin ciclo de marcha se **regenera**, no se recorta.
 - Idles máximo 4 s.
+
+## Correcciones medidas en el piloto, ya aplicadas a los 657
+
+| Qué se midió | v1 | v2 | Qué cambió en el catálogo |
+|---|---|---|---|
+| La reacción se alejaba dentro de su clip | 100 cm | **3 cm** | `without stepping away` + `root_policy: pin_origin` en las 53 reacciones que no deben viajar |
+| Duración entregada vs pedida | +35 % | exacta | duraciones de los pares recortadas un 28 % |
+| Cola sin movimiento al final | 38 % | 0 % | duraciones cortas |
+| Extensión del brazo al golpear | 15 cm | 7 cm | **formula reforzada** (ver abajo) |
+
+La extensión es la que resistió. En v2 el prompt decía *"fully extending the arm
+forward at head height, then pulls it back to the chest"* y aun así dio 7 cm. Dos
+sospechas, las dos corregidas en los 64 clips que golpean:
+
+1. **Pedía dos acciones opuestas** (extender Y retraer) y el modelo promedia. La
+   retracción se elimina del prompt — el plugin puede recortar o sostener la cola.
+2. **Una acción pesa menos que un estado.** Ahora la extensión se declara como la
+   condición del brazo en el pico, y va al **final** de la frase:
+
+   > A person throws a heavy straight cross with the rear hand, hips rotating fully
+   > through the punch, **the arm completely straight at full reach.**
+
+Si aun así el modelo no extiende, es un techo suyo con los golpes y el remate va por
+autoría: para eso está la ronda de herramientas de trayectorias e inbetween.
