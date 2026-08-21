@@ -1,6 +1,6 @@
 {
-  "version": "3.0-pass2",
-  "notes": "PASS 2 — LIBRERIA DE ACCIONES COMPLETA (generar SOLO despues de validar pass1_validation.json). Una sola tanda con todo lo que ocupa los planos de una cinematica: conversacion a dos; peleas con pares golpe/reaccion, armas blancas, muerte, forcejeo y sigilo; vida cotidiana y hogar; vestirse y aseo; vehiculos; oficios y servicios (barberia, cocina, taller, clinica, caja); oficina; calle y compras; deporte; estados corporales; cuidado de ninos y animales; supervivencia y peligro; fiesta y borrachera; ritual, culto y horror; crimen, poder y acecho; instrumentos y canto; danza (ballet, folklor, contemporanea) y escena teatral. Prompts en el estilo declarativo corto del catalogo 2.1: los constraints van en root_policy / loop / bookends / mask / qc, NUNCA en el texto.",
+  "version": "3.1-pass2v2",
+  "notes": "PASS 2 v2 — LIBRERIA DE ACCIONES COMPLETA (generar SOLO despues de validar pass1_v2_validation.json). Los 61 pares llevan ya las dos correcciones medidas en Unity sobre el piloto: los golpes piden la EXTENSION explicita del brazo o la pierna (sin eso el modelo entrega una finta de 15 cm) y las reacciones llevan 'without stepping away' con el root fijado (sin eso retroceden 1 m dentro del clip, horneado en los huesos, y se salen del alcance del atacante). Las duraciones de los pares vienen recortadas un 28 % porque el generador entrega mas largo de lo que se le pide. Una sola tanda con todo lo que ocupa los planos de una cinematica: conversacion a dos; peleas con pares golpe/reaccion, armas blancas, muerte, forcejeo y sigilo; vida cotidiana y hogar; vestirse y aseo; vehiculos; oficios y servicios (barberia, cocina, taller, clinica, caja); oficina; calle y compras; deporte; estados corporales; cuidado de ninos y animales; supervivencia y peligro; fiesta y borrachera; ritual, culto y horror; crimen, poder y acecho; instrumentos y canto; danza (ballet, folklor, contemporanea) y escena teatral. Prompts en el estilo declarativo corto del catalogo 2.1: los constraints van en root_policy / loop / bookends / mask / qc, NUNCA en el texto.",
   "pair_convention": {
     "naming": "Acciones de DOS personajes en dos mitades: '<base>_give' (inicia) y '<base>_receive' (recibe).",
     "taxonomy.pairId": "Nombre base compartido por las dos mitades.",
@@ -497,8 +497,8 @@
     {
       "id": "fight_cross_give",
       "category": "combat",
-      "prompt": "A person throws a heavy straight cross with the rear hand, hips rotating fully through the punch.",
-      "duration": 2.5,
+      "prompt": "A person throws a heavy straight cross with the rear hand, hips rotating fully through the punch, fully extending the arm into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -522,9 +522,9 @@
     {
       "id": "fight_cross_receive",
       "category": "combat",
-      "prompt": "A person takes a heavy straight punch to the face, torso twisting and staggering half a step sideways.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person takes a heavy straight punch to the face, torso twisting, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -541,14 +541,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_hook_body_give",
       "category": "combat",
-      "prompt": "A person drives a hook into the opponent's ribs, torso rotating low.",
-      "duration": 2.5,
+      "prompt": "A person drives a hook into the opponent's ribs, torso rotating low, fully extending the arm into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -572,9 +573,9 @@
     {
       "id": "fight_hook_body_receive",
       "category": "combat",
-      "prompt": "A person doubles over from a hook to the ribs, one arm clamping the side.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person doubles over from a hook to the ribs, one arm clamping the side, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -591,14 +592,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_uppercut_give",
       "category": "combat",
-      "prompt": "A person throws an uppercut from a crouch, driving upward through the legs.",
-      "duration": 2.5,
+      "prompt": "A person throws an uppercut from a crouch, driving upward through the legs, fully extending the arm into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -622,9 +624,9 @@
     {
       "id": "fight_uppercut_receive",
       "category": "combat",
-      "prompt": "A person head is snapped upward by an uppercut, body lifting on the toes then dropping back.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person head is snapped upward by an uppercut, body lifting on the toes then dropping back, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -641,14 +643,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_push_shove_give",
       "category": "combat",
-      "prompt": "A person shoves the opponent in the chest with both hands, stepping into it.",
-      "duration": 2.5,
+      "prompt": "A person shoves the opponent in the chest with both hands, stepping into it, fully extending the arm into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -672,9 +675,9 @@
     {
       "id": "fight_push_shove_receive",
       "category": "combat",
-      "prompt": "A person is shoved in the chest, staggering two steps backward with the arms windmilling.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person is shoved in the chest, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -691,14 +694,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_grab_collar_give",
       "category": "combat",
-      "prompt": "A person grabs the opponent by the collar with both hands and pulls them in.",
-      "duration": 2.5,
+      "prompt": "A person grabs the opponent by the collar with both hands and pulls them in, fully extending the arm into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -722,9 +726,9 @@
     {
       "id": "fight_grab_collar_receive",
       "category": "combat",
-      "prompt": "A person is grabbed by the collar and yanked forward off balance.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person is grabbed by the collar and yanked forward off balance, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -741,14 +745,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_kick_low_give",
       "category": "combat",
-      "prompt": "A person throws a low round kick to the opponent's thigh, pivoting on the standing foot.",
-      "duration": 2.5,
+      "prompt": "A person throws a low round kick to the opponent's thigh, pivoting on the standing foot, fully extending the leg into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -772,9 +777,9 @@
     {
       "id": "fight_kick_low_receive",
       "category": "combat",
-      "prompt": "A person takes a low kick to the thigh, leg buckling and weight dropping onto the other side.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person takes a low kick to the thigh, leg buckling and weight dropping onto the other side, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -791,14 +796,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_kick_front_give",
       "category": "combat",
-      "prompt": "A person throws a straight front kick to the midsection, chambering the knee first.",
-      "duration": 2.5,
+      "prompt": "A person throws a straight front kick to the midsection, chambering the knee first, fully extending the leg into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -822,9 +828,9 @@
     {
       "id": "fight_kick_front_receive",
       "category": "combat",
-      "prompt": "A person is kicked in the midsection, folding forward and sliding back a step.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person is kicked in the midsection, folding forward, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -841,14 +847,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_slap_give",
       "category": "combat",
-      "prompt": "A person delivers an open-handed slap across the face, arm swinging through.",
-      "duration": 2.5,
+      "prompt": "A person delivers an open-handed slap across the face, arm swinging through, fully extending the arm into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -872,9 +879,9 @@
     {
       "id": "fight_slap_receive",
       "category": "combat",
-      "prompt": "A person head is turned violently by a slap, hand rising to the cheek afterwards.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person head is turned violently by a slap, hand rising to the cheek afterwards, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -891,14 +898,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_block_high_give",
       "category": "combat",
-      "prompt": "A person throws a downward strike that is blocked.",
-      "duration": 2.5,
+      "prompt": "A person throws a downward strike that is blocked, fully extending the arm into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -922,9 +930,9 @@
     {
       "id": "fight_block_high_receive",
       "category": "combat",
-      "prompt": "A person raises both forearms into a high block, absorbing the impact with a knee bend.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person raises both forearms into a high block, absorbing the impact with a knee bend, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -941,14 +949,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_dodge_slip_give",
       "category": "combat",
       "prompt": "A person throws a wide hook that misses.",
-      "duration": 2.5,
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -972,9 +981,9 @@
     {
       "id": "fight_dodge_slip_receive",
       "category": "combat",
-      "prompt": "A person slips under the incoming hook, bending the knees and rolling the shoulder.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person slips under the incoming hook, bending the knees and rolling the shoulder, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -991,14 +1000,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_knockout_give",
       "category": "combat",
-      "prompt": "A person lands a final heavy punch and stands over the fallen opponent.",
-      "duration": 2.5,
+      "prompt": "A person lands a final heavy punch and stands over the fallen opponent, fully extending the arm into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -1023,7 +1033,7 @@
       "id": "fight_knockout_receive",
       "category": "combat",
       "prompt": "A person is knocked out cold, going limp and collapsing backward to the ground.",
-      "duration": 2.5,
+      "duration": 1.8,
       "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
@@ -1908,8 +1918,8 @@
     {
       "id": "contact_ball_pass_give",
       "category": "contact",
-      "prompt": "A person passes a ball forward with both hands from the chest.",
-      "duration": 4.0,
+      "prompt": "A person passes a ball forward with both hands from the chest, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -1932,8 +1942,8 @@
     {
       "id": "contact_ball_pass_receive",
       "category": "contact",
-      "prompt": "A person catches a ball arriving at chest height with both hands.",
-      "duration": 4.0,
+      "prompt": "A person catches a ball arriving at chest height with both hands, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -1958,8 +1968,8 @@
     {
       "id": "contact_ball_throw_give",
       "category": "contact",
-      "prompt": "A person throws a ball overhand forward with one arm.",
-      "duration": 4.0,
+      "prompt": "A person throws a ball overhand forward with one arm, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -1982,8 +1992,8 @@
     {
       "id": "contact_ball_throw_receive",
       "category": "contact",
-      "prompt": "A person catches a ball arriving high with both hands raised.",
-      "duration": 4.0,
+      "prompt": "A person catches a ball arriving high with both hands raised, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -2008,8 +2018,8 @@
     {
       "id": "contact_tag_touch_give",
       "category": "contact",
-      "prompt": "A person reaches out and taps the other person on the shoulder while moving past.",
-      "duration": 4.0,
+      "prompt": "A person reaches out and taps the other person on the shoulder while moving past, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -2032,8 +2042,8 @@
     {
       "id": "contact_tag_touch_receive",
       "category": "contact",
-      "prompt": "A person is tapped on the shoulder and spins around startled.",
-      "duration": 4.0,
+      "prompt": "A person is tapped on the shoulder and spins around startled, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -2058,7 +2068,7 @@
       "id": "contact_lift_child_give",
       "category": "contact",
       "prompt": "A person crouches, lifts a light person up under the arms and sets them down.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -2082,7 +2092,7 @@
       "id": "contact_lift_child_receive",
       "category": "contact",
       "prompt": "A person is lifted up under the arms, legs coming off the ground, and set back down.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -2983,7 +2993,7 @@
       "id": "contact_hug_warm_give",
       "category": "contact",
       "prompt": "A person steps in and wraps both arms around the other person in a warm hug, then releases.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3006,8 +3016,8 @@
     {
       "id": "contact_hug_warm_receive",
       "category": "contact",
-      "prompt": "A person receives a hug, arms coming up around the other person, then releases.",
-      "duration": 4.0,
+      "prompt": "A person receives a hug, arms coming up around the other person, then releases, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3032,7 +3042,7 @@
       "id": "contact_hug_quick_give",
       "category": "contact",
       "prompt": "A person gives a quick one-armed hug with a pat on the back and steps away.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3055,8 +3065,8 @@
     {
       "id": "contact_hug_quick_receive",
       "category": "contact",
-      "prompt": "A person receives a quick one-armed hug and steps away.",
-      "duration": 4.0,
+      "prompt": "A person receives a quick one-armed hug and steps away, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3080,8 +3090,8 @@
     {
       "id": "contact_highfive_give",
       "category": "contact",
-      "prompt": "A person swings one hand up to slap the other person's raised palm.",
-      "duration": 4.0,
+      "prompt": "A person swings one hand up to slap the other person's raised palm, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3104,8 +3114,8 @@
     {
       "id": "contact_highfive_receive",
       "category": "contact",
-      "prompt": "A person raises one palm and takes the high five, hand recoiling from the impact.",
-      "duration": 4.0,
+      "prompt": "A person raises one palm and takes the high five, hand recoiling from the impact, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3129,8 +3139,8 @@
     {
       "id": "contact_fistbump_give",
       "category": "contact",
-      "prompt": "A person extends a closed fist forward and bumps, then withdraws.",
-      "duration": 4.0,
+      "prompt": "A person extends a closed fist forward and bumps, then withdraws, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3154,7 +3164,7 @@
       "id": "contact_fistbump_receive",
       "category": "contact",
       "prompt": "A person extends a closed fist to meet the bump, then withdraws.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3178,8 +3188,8 @@
     {
       "id": "contact_pat_shoulder_give",
       "category": "contact",
-      "prompt": "A person reaches out and pats the other person twice on the shoulder.",
-      "duration": 4.0,
+      "prompt": "A person reaches out and pats the other person twice on the shoulder, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3202,8 +3212,8 @@
     {
       "id": "contact_pat_shoulder_receive",
       "category": "contact",
-      "prompt": "A person is patted on the shoulder, turning the head toward the hand.",
-      "duration": 4.0,
+      "prompt": "A person is patted on the shoulder, turning the head toward the hand, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3227,8 +3237,8 @@
     {
       "id": "contact_handover_object_give",
       "category": "contact",
-      "prompt": "A person extends both hands forward offering an object and releases it.",
-      "duration": 4.0,
+      "prompt": "A person extends both hands forward offering an object and releases it, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3251,8 +3261,8 @@
     {
       "id": "contact_handover_object_receive",
       "category": "contact",
-      "prompt": "A person reaches forward, takes the offered object with both hands and brings it to the chest.",
-      "duration": 4.0,
+      "prompt": "A person reaches forward, takes the offered object with both hands and brings it to the chest, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3277,7 +3287,7 @@
       "id": "contact_pull_up_help_give",
       "category": "contact",
       "prompt": "A person plants the feet, grabs an outstretched hand and pulls the other person up.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3301,7 +3311,7 @@
       "id": "contact_pull_up_help_receive",
       "category": "contact",
       "prompt": "A person reaches up from the ground, is pulled up by the hand and ends standing.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3699,8 +3709,8 @@
     {
       "id": "fight_knife_stab_give",
       "category": "combat",
-      "prompt": "A person drives a knife forward into the opponent's midsection with the right hand and pulls it back.",
-      "duration": 2.5,
+      "prompt": "A person drives a knife forward into the opponent's midsection with the right hand and pulls it back, fully extending the arm into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3724,9 +3734,9 @@
     {
       "id": "fight_knife_stab_receive",
       "category": "combat",
-      "prompt": "A person doubles over from a stab to the midsection, both hands clamping the wound.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person doubles over from a stab to the midsection, both hands clamping the wound, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -3743,14 +3753,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_knife_slash_give",
       "category": "combat",
-      "prompt": "A person slashes a knife horizontally across the front.",
-      "duration": 2.5,
+      "prompt": "A person slashes a knife horizontally across the front, fully extending the arm into the target.",
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3774,9 +3785,9 @@
     {
       "id": "fight_knife_slash_receive",
       "category": "combat",
-      "prompt": "A person recoils backward from a slash, one arm flying up to shield the face.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person recoils backward from a slash, one arm flying up to shield the face, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -3793,14 +3804,15 @@
         "contactAt": 0.28
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_choke_give",
       "category": "combat",
       "prompt": "A person grabs the opponent's throat with both hands and squeezes, driving them backward.",
-      "duration": 2.5,
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3824,9 +3836,9 @@
     {
       "id": "fight_choke_receive",
       "category": "combat",
-      "prompt": "A person is grabbed by the throat, hands clawing at the attacker's wrists, feet stumbling backward.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person is grabbed by the throat, hands clawing at the attacker's wrists, feet, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -3843,14 +3855,15 @@
         "contactAt": 0.3
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_grapple_give",
       "category": "combat",
       "prompt": "A person grabs the opponent by both shoulders and wrestles them side to side.",
-      "duration": 2.5,
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3874,9 +3887,9 @@
     {
       "id": "fight_grapple_receive",
       "category": "combat",
-      "prompt": "A person is grabbed by the shoulders and wrestled, pushing back against the grip.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person is grabbed by the shoulders and wrestled, pushing back against the grip, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -3893,14 +3906,15 @@
         "contactAt": 0.3
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
       "id": "fight_gun_threat_give",
       "category": "combat",
       "prompt": "A person raises a pistol in both hands aimed forward and holds it steady.",
-      "duration": 2.5,
+      "duration": 1.8,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -3924,9 +3938,9 @@
     {
       "id": "fight_gun_threat_receive",
       "category": "combat",
-      "prompt": "A person freezes, raises both hands open above the shoulders and backs away a step.",
-      "duration": 2.5,
-      "root_policy": "keep",
+      "prompt": "A person freezes, raises both hands open above the shoulders, without stepping away.",
+      "duration": 1.8,
+      "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -3943,7 +3957,8 @@
         "contactAt": 0.3
       },
       "qc": {
-        "max_foot_skate_cm": 3.5
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
       }
     },
     {
@@ -7187,7 +7202,7 @@
       "id": "contact_haircut_give",
       "category": "contact",
       "prompt": "A person stands behind someone seated, lifting a section of their hair with a comb and snipping it.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7210,8 +7225,8 @@
     {
       "id": "contact_haircut_receive",
       "category": "contact",
-      "prompt": "A person sits still with the head slightly bowed, eyes down, hands in the lap.",
-      "duration": 4.0,
+      "prompt": "A person sits still with the head slightly bowed, eyes down, hands in the lap, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7236,7 +7251,7 @@
       "id": "contact_shave_client_give",
       "category": "contact",
       "prompt": "A person leans over someone seated and draws a razor down their cheek.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7259,8 +7274,8 @@
     {
       "id": "contact_shave_client_receive",
       "category": "contact",
-      "prompt": "A person sits with the head tilted back and still, chin raised.",
-      "duration": 4.0,
+      "prompt": "A person sits with the head tilted back and still, chin raised, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7285,7 +7300,7 @@
       "id": "contact_cape_on_give",
       "category": "contact",
       "prompt": "A person sweeps a cape over someone seated and fastens it at their neck.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7308,8 +7323,8 @@
     {
       "id": "contact_cape_on_receive",
       "category": "contact",
-      "prompt": "A person sits leaning slightly forward, then settles back as the cape lands.",
-      "duration": 4.0,
+      "prompt": "A person sits leaning slightly forward, then settles back as the cape lands, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7334,7 +7349,7 @@
       "id": "contact_exam_listen_give",
       "category": "contact",
       "prompt": "A person presses a stethoscope against the chest of someone in front and leans in.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7357,8 +7372,8 @@
     {
       "id": "contact_exam_listen_receive",
       "category": "contact",
-      "prompt": "A person stands still, breathing deeply with the chest lifted.",
-      "duration": 4.0,
+      "prompt": "A person stands still, breathing deeply with the chest lifted, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7384,7 +7399,7 @@
       "id": "contact_bandage_arm_give",
       "category": "contact",
       "prompt": "A person wraps a bandage around the outstretched arm of someone in front.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7407,8 +7422,8 @@
     {
       "id": "contact_bandage_arm_receive",
       "category": "contact",
-      "prompt": "A person holds one arm out straight and steady, watching it.",
-      "duration": 4.0,
+      "prompt": "A person holds one arm out straight and steady, watching it, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7433,7 +7448,7 @@
       "id": "contact_injection_give",
       "category": "contact",
       "prompt": "A person holds someone's upper arm and presses a syringe into it.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7456,8 +7471,8 @@
     {
       "id": "contact_injection_receive",
       "category": "contact",
-      "prompt": "A person turns the head away and tenses, then relaxes the shoulder.",
-      "duration": 4.0,
+      "prompt": "A person turns the head away and tenses, then relaxes the shoulder, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7482,7 +7497,7 @@
       "id": "contact_dance_partner_give",
       "category": "contact",
       "prompt": "A person takes a partner's hand and waist and leads a slow turn.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7507,7 +7522,7 @@
       "id": "contact_dance_partner_receive",
       "category": "contact",
       "prompt": "A person places one hand on a partner's shoulder and follows a slow turn.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7534,7 +7549,7 @@
       "id": "contact_carry_together_give",
       "category": "contact",
       "prompt": "A person lifts one end of something heavy and walks backward with it.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7558,7 +7573,7 @@
       "id": "contact_carry_together_receive",
       "category": "contact",
       "prompt": "A person lifts the other end of something heavy and walks forward with it.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7583,7 +7598,7 @@
       "id": "contact_whisper_ear_give",
       "category": "contact",
       "prompt": "A person leans in and cups a hand beside the mouth close to someone's ear.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7606,8 +7621,8 @@
     {
       "id": "contact_whisper_ear_receive",
       "category": "contact",
-      "prompt": "A person tilts the head toward someone leaning in and their eyes widen.",
-      "duration": 4.0,
+      "prompt": "A person tilts the head toward someone leaning in and their eyes widen, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7632,7 +7647,7 @@
       "id": "contact_console_hug_give",
       "category": "contact",
       "prompt": "A person steps in and pulls someone's head onto their shoulder, one hand on their back.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7655,8 +7670,8 @@
     {
       "id": "contact_console_hug_receive",
       "category": "contact",
-      "prompt": "A person lets the head drop onto a shoulder and the arms hang, then holds on.",
-      "duration": 4.0,
+      "prompt": "A person lets the head drop onto a shoulder and the arms hang, then holds on, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7681,7 +7696,7 @@
       "id": "contact_bump_collide_give",
       "category": "contact",
       "prompt": "A person walks forward and knocks shoulders with someone passing, spinning half around.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7705,7 +7720,7 @@
       "id": "contact_bump_collide_receive",
       "category": "contact",
       "prompt": "A person is knocked sideways at the shoulder and drops what they were holding.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7730,7 +7745,7 @@
       "id": "contact_handcuff_give",
       "category": "contact",
       "prompt": "A person pulls someone's arms behind their back and snaps cuffs around the wrists.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7753,8 +7768,8 @@
     {
       "id": "contact_handcuff_receive",
       "category": "contact",
-      "prompt": "A person is turned around and has both arms pulled behind the back.",
-      "duration": 4.0,
+      "prompt": "A person is turned around and has both arms pulled behind the back, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7779,7 +7794,7 @@
       "id": "contact_photo_pose_give",
       "category": "contact",
       "prompt": "A person raises a camera to the eye with both hands, steadies and lowers it.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7802,8 +7817,8 @@
     {
       "id": "contact_photo_pose_receive",
       "category": "contact",
-      "prompt": "A person stands up straight, smiles and holds a pose.",
-      "duration": 4.0,
+      "prompt": "A person stands up straight, smiles and holds a pose, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7828,7 +7843,7 @@
       "id": "contact_hand_hold_walk_give",
       "category": "contact",
       "prompt": "A person takes the hand of someone beside them and walks forward.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7852,7 +7867,7 @@
       "id": "contact_hand_hold_walk_receive",
       "category": "contact",
       "prompt": "A person gives a hand to someone beside them and walks forward alongside.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7877,7 +7892,7 @@
       "id": "contact_teach_correct_give",
       "category": "contact",
       "prompt": "A person reaches out and adjusts the position of someone's arms.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7900,8 +7915,8 @@
     {
       "id": "contact_teach_correct_receive",
       "category": "contact",
-      "prompt": "A person holds their arms out and lets them be adjusted, then settles.",
-      "duration": 4.0,
+      "prompt": "A person holds their arms out and lets them be adjusted, then settles, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7926,7 +7941,7 @@
       "id": "contact_toast_glasses_give",
       "category": "contact",
       "prompt": "A person raises a glass forward and taps it against another.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -7949,8 +7964,8 @@
     {
       "id": "contact_toast_glasses_receive",
       "category": "contact",
-      "prompt": "A person raises a glass to meet another and then drinks.",
-      "duration": 4.0,
+      "prompt": "A person raises a glass to meet another and then drinks, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10196,8 +10211,8 @@
     {
       "id": "contact_drunk_shove_give",
       "category": "contact",
-      "prompt": "A person shoves someone in the chest with both hands and spreads the arms wide.",
-      "duration": 4.0,
+      "prompt": "A person shoves someone in the chest with both hands and spreads the arms wide, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10220,8 +10235,8 @@
     {
       "id": "contact_drunk_shove_receive",
       "category": "contact",
-      "prompt": "A person is shoved backward, arms flailing, and catches their balance.",
-      "duration": 4.0,
+      "prompt": "A person is shoved backward, arms flailing, and catches their balance, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10245,8 +10260,8 @@
     {
       "id": "contact_shirt_grab_give",
       "category": "contact",
-      "prompt": "A person grabs a fistful of someone's shirt at the chest and pulls them close.",
-      "duration": 4.0,
+      "prompt": "A person grabs a fistful of someone's shirt at the chest and pulls them close, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10269,8 +10284,8 @@
     {
       "id": "contact_shirt_grab_receive",
       "category": "contact",
-      "prompt": "A person is yanked forward by the chest and grabs the other's wrists.",
-      "duration": 4.0,
+      "prompt": "A person is yanked forward by the chest and grabs the other's wrists, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10295,7 +10310,7 @@
       "id": "contact_break_up_fight_give",
       "category": "contact",
       "prompt": "A person steps between two people and pushes outward with both arms.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10319,8 +10334,8 @@
     {
       "id": "contact_break_up_fight_receive",
       "category": "contact",
-      "prompt": "A person is pushed back by an arm across the chest and strains forward against it.",
-      "duration": 4.0,
+      "prompt": "A person is pushed back by an arm across the chest and strains forward against it, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10346,7 +10361,7 @@
       "id": "contact_help_drunk_walk_give",
       "category": "contact",
       "prompt": "A person pulls someone's arm over their shoulders and walks forward supporting them.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10370,7 +10385,7 @@
       "id": "contact_help_drunk_walk_receive",
       "category": "contact",
       "prompt": "A person hangs off someone's shoulder, legs dragging, head lolling.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10395,7 +10410,7 @@
       "id": "contact_blessing_hands_give",
       "category": "contact",
       "prompt": "A person reaches out and lays both hands on the bowed head of someone kneeling.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10418,8 +10433,8 @@
     {
       "id": "contact_blessing_hands_receive",
       "category": "contact",
-      "prompt": "A person kneels with the head bowed, then jerks upright at the touch.",
-      "duration": 4.0,
+      "prompt": "A person kneels with the head bowed, then jerks upright at the touch, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10444,7 +10459,7 @@
       "id": "contact_hold_down_ritual_give",
       "category": "contact",
       "prompt": "A person pins someone's shoulders to the ground with both hands, leaning their weight in.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10467,8 +10482,8 @@
     {
       "id": "contact_hold_down_ritual_receive",
       "category": "contact",
-      "prompt": "A person lies on their back thrashing against hands pinning the shoulders.",
-      "duration": 4.0,
+      "prompt": "A person lies on their back thrashing against hands pinning the shoulders, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10493,7 +10508,7 @@
       "id": "contact_ritual_strike_give",
       "category": "contact",
       "prompt": "A person brings both hands down together over someone lying in front.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10516,8 +10531,8 @@
     {
       "id": "contact_ritual_strike_receive",
       "category": "contact",
-      "prompt": "A person arches off the ground and then falls back limp.",
-      "duration": 4.0,
+      "prompt": "A person arches off the ground and then falls back limp, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10542,7 +10557,7 @@
       "id": "contact_lead_by_hand_slow_give",
       "category": "contact",
       "prompt": "A person takes someone's wrist and walks forward pulling them along.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10565,8 +10580,8 @@
     {
       "id": "contact_lead_by_hand_slow_receive",
       "category": "contact",
-      "prompt": "A person is pulled forward by the wrist, feet dragging, head turned back.",
-      "duration": 4.0,
+      "prompt": "A person is pulled forward by the wrist, feet dragging, head turned back, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10591,7 +10606,7 @@
       "id": "contact_hand_over_mouth_give",
       "category": "contact",
       "prompt": "A person steps in from behind and clamps one hand over someone's mouth, pulling them back.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10614,8 +10629,8 @@
     {
       "id": "contact_hand_over_mouth_receive",
       "category": "contact",
-      "prompt": "A person is pulled backward with a hand over the mouth, hands clawing at it.",
-      "duration": 4.0,
+      "prompt": "A person is pulled backward with a hand over the mouth, hands clawing at it, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10640,7 +10655,7 @@
       "id": "contact_lift_chin_give",
       "category": "contact",
       "prompt": "A person hooks a finger under someone's chin and lifts their face up.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10664,7 +10679,7 @@
       "id": "contact_lift_chin_receive",
       "category": "contact",
       "prompt": "A person has their face lifted by the chin and holds the stare.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10689,7 +10704,7 @@
       "id": "contact_frisk_search_give",
       "category": "contact",
       "prompt": "A person pats down someone's arms and sides with both hands.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10713,8 +10728,8 @@
     {
       "id": "contact_frisk_search_receive",
       "category": "contact",
-      "prompt": "A person stands with both arms out to the sides while being patted down.",
-      "duration": 4.0,
+      "prompt": "A person stands with both arms out to the sides while being patted down, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10739,8 +10754,8 @@
     {
       "id": "contact_drag_by_collar_give",
       "category": "contact",
-      "prompt": "A person grabs the back of someone's collar and drags them forward.",
-      "duration": 4.0,
+      "prompt": "A person grabs the back of someone's collar and drags them forward, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10764,7 +10779,7 @@
       "id": "contact_drag_by_collar_receive",
       "category": "contact",
       "prompt": "A person is dragged forward by the collar, stumbling and clutching at the neck.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10788,8 +10803,8 @@
     {
       "id": "contact_push_to_knees_give",
       "category": "contact",
-      "prompt": "A person pushes down on someone's shoulders until they drop to their knees.",
-      "duration": 4.0,
+      "prompt": "A person pushes down on someone's shoulders until they drop to their knees, fully extending the arm into the target.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10812,8 +10827,8 @@
     {
       "id": "contact_push_to_knees_receive",
       "category": "contact",
-      "prompt": "A person is forced down onto both knees by weight on the shoulders.",
-      "duration": 4.0,
+      "prompt": "A person is forced down onto both knees by weight on the shoulders, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10838,7 +10853,7 @@
       "id": "contact_gun_execute_give",
       "category": "contact",
       "prompt": "A person extends one arm forward and down at head height, holds, and lowers it.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -10861,8 +10876,8 @@
     {
       "id": "contact_gun_execute_receive",
       "category": "contact",
-      "prompt": "A person kneels with the head bowed and hands behind the back, then falls forward.",
-      "duration": 4.0,
+      "prompt": "A person kneels with the head bowed and hands behind the back, then falls forward, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -11992,7 +12007,7 @@
       "id": "contact_dance_lift_give",
       "category": "contact",
       "prompt": "A person steps in, grips someone's waist with both hands and lifts them straight overhead.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -12017,7 +12032,7 @@
       "id": "contact_dance_lift_receive",
       "category": "contact",
       "prompt": "A person is lifted by the waist, arching up with both arms opening wide.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -12044,7 +12059,7 @@
       "id": "contact_dance_dip_give",
       "category": "contact",
       "prompt": "A person supports someone's back with one arm and lowers them backward, then pulls them upright.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -12069,7 +12084,7 @@
       "id": "contact_dance_dip_receive",
       "category": "contact",
       "prompt": "A person leans back over a supporting arm, one arm trailing to the floor, then rises.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -12096,7 +12111,7 @@
       "id": "contact_dance_spin_partner_give",
       "category": "contact",
       "prompt": "A person raises one hand and turns someone under it, then catches their hand.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -12121,7 +12136,7 @@
       "id": "contact_dance_spin_partner_receive",
       "category": "contact",
       "prompt": "A person turns under a raised hand and comes out of the spin facing front.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -12148,7 +12163,7 @@
       "id": "contact_teach_instrument_give",
       "category": "contact",
       "prompt": "A person reaches over and adjusts the position of someone's hands on an instrument.",
-      "duration": 4.0,
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",
@@ -12171,8 +12186,8 @@
     {
       "id": "contact_teach_instrument_receive",
       "category": "contact",
-      "prompt": "A person holds an instrument still while their hands are repositioned, then plays on.",
-      "duration": 4.0,
+      "prompt": "A person holds an instrument still while their hands are repositioned, then plays on, without stepping away.",
+      "duration": 2.9,
       "root_policy": "pin_origin",
       "loop": false,
       "bookends": "neutral",

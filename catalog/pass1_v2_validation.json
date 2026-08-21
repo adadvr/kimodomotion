@@ -1,0 +1,126 @@
+{
+  "version": "3.1-pass1v2",
+  "notes": "PASS 1 v2 — VALIDACION, segunda vuelta (4 clips). La primera tanda valido toda la cadena (ingest, taxonomia, emparejamiento, distancia 1.10 m exacta, sincronia de impactos) pero los DOS clips de combate resultaron inservibles para un golpe conectado, por dos motivos MEDIDOS en Unity: (1) el jab solo extiende el brazo 15 cm sobre la guardia — el prompt no pedia extension y el modelo entrego una finta; (2) la reaccion RETROCEDE 1 metro dentro del propio clip (la pelvis viaja de 1.12 a 2.13 mientras el root no se mueve), asi que en el instante del impacto quedan 152 cm entre puno y cara. Ningun IK salva eso: el brazo mide 60 cm. Estos 4 clips corrigen ambas cosas. Los otros 2 del pass1 (talk_explain_measured y upper_reach_mid_right) salieron bien y NO hay que regenerarlos.",
+  "lessons": {
+    "extension_explicita": "Un golpe hay que pedirlo con la extension dentro del prompt ('fully extending the arm forward at head height'). Sin eso el modelo entrega el gesto minimo que satisface la frase.",
+    "reacciones_no_viajan": "Toda reaccion a un contacto lleva 'without stepping away' o 'feet planted': el desplazamiento del retroceso se hornea en los HUESOS (no en el root), asi que el plugin no puede descontarlo y el personaje se sale del alcance.",
+    "duracion_real": "El generador entrega ~35 % mas de lo pedido (2.5 s -> 3.37 s). Las duraciones de abajo ya vienen recortadas para compensar.",
+    "cola_congelada": "Los one-shots traen ~38 % de cola sin movimiento al final. No es un defecto que rechace el ingest (un one-shot puede acabar parado), pero acorta el clip util: por eso los tiempos son cortos."
+  },
+  "pair_convention": {
+    "naming": "Dos mitades con el mismo nombre base: '<base>_give' (inicia) y '<base>_receive' (recibe).",
+    "taxonomy.pairId": "Nombre base compartido por las dos mitades.",
+    "taxonomy.pairRole": "give | receive.",
+    "taxonomy.contactAt": "Fraccion 0-1 donde ocurre el contacto. Es solo una PISTA: desde esta ronda el plugin mide el instante real sobre el clip (busca el frame de maxima extension hacia el oponente) y corrige el valor declarado."
+  },
+  "defaults": {
+    "model": "Kimodo-SOMA-RP-v1",
+    "fps": 30,
+    "diffusion_steps": 100,
+    "cfg_type": "separated",
+    "cfg_weight": [2.5, 1.5],
+    "num_samples": 4,
+    "base_seed": 20260822,
+    "bvh": true,
+    "bvh_standard_tpose": true
+  },
+  "root_policies": {
+    "strip_xz": "Desplazamiento libre y separado despues. Loops de locomocion.",
+    "pin_origin": "Root clavado en (0,0). Idles, upper actions, reacciones y golpes sin desplazamiento.",
+    "keep": "Desplazamiento horneado. Solo para one-shots donde moverse ES la accion."
+  },
+  "clips": [
+    {
+      "id": "fight_jab_give",
+      "category": "combat",
+      "prompt": "A person throws a straight punch with the right hand, fully extending the arm forward at head height, then pulls it back to the chest.",
+      "duration": 2.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": ["aggressive", "tense"],
+        "pairId": "fight_jab",
+        "pairRole": "give",
+        "contactAt": 0.5
+      },
+      "qc": {
+        "max_foot_skate_cm": 2.0,
+        "max_root_drift_cm": 12.0
+      },
+      "note": "v1 media 0.36 m de alcance contra 0.21 m en guardia: 15 cm de golpe. El brazo tiene que quedar RECTO en el punto de maxima extension — es lo unico que se mide para dar el clip por bueno."
+    },
+    {
+      "id": "fight_jab_receive",
+      "category": "combat",
+      "prompt": "A person's head snaps back from a punch to the face, rocking onto the back foot without stepping away.",
+      "duration": 2.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "combat",
+        "moodTags": ["pain", "tense"],
+        "pairId": "fight_jab",
+        "pairRole": "receive",
+        "contactAt": 0.3
+      },
+      "qc": {
+        "max_foot_skate_cm": 2.0,
+        "max_root_drift_cm": 25.0
+      },
+      "note": "v1 alejaba la cabeza 90 cm dentro del clip. Ahora root_policy pin_origin ademas del 'without stepping away': la reaccion es del torso y la cabeza, los pies se quedan. max_root_drift 25 cm permite el balanceo real sin permitir el paso atras."
+    },
+    {
+      "id": "contact_handshake_give",
+      "category": "contact",
+      "prompt": "A person extends the right arm forward until it is straight, shakes twice and lowers it.",
+      "duration": 3.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": ["neutral", "warm"],
+        "pairId": "contact_handshake",
+        "pairRole": "give",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      },
+      "note": "v1 funcionaba pero con el brazo poco extendido; 'until it is straight' fuerza el alcance para que las dos manos se encuentren."
+    },
+    {
+      "id": "contact_handshake_receive",
+      "category": "contact",
+      "prompt": "A person extends the right arm forward until it is straight, shakes twice and lowers it, feet planted.",
+      "duration": 3.0,
+      "root_policy": "pin_origin",
+      "loop": false,
+      "bookends": "neutral",
+      "taxonomy": {
+        "bodyRegion": "full",
+        "clipKind": "oneshot",
+        "function": "contact",
+        "moodTags": ["neutral", "warm"],
+        "pairId": "contact_handshake",
+        "pairRole": "receive",
+        "contactAt": 0.45
+      },
+      "qc": {
+        "max_foot_skate_cm": 1.5,
+        "max_root_drift_cm": 10.0
+      },
+      "note": "Las dos mitades del apreton son casi simetricas; la diferencia la pone la colocacion (0.90 m enfrentados) y la sincronia de los peaks."
+    }
+  ]
+}

@@ -2,24 +2,25 @@
 
 ## Orden de trabajo
 
-### 1. `pass1_validation.json` — 6 clips · GENERAR PRIMERO
+### 1. `pass1_v2_validation.json` — 4 clips · GENERAR PRIMERO
 
-Existe para validar las convenciones nuevas antes de gastar 190 generaciones:
+Segunda vuelta del piloto. La primera validó toda la cadena (ingest, taxonomía,
+emparejamiento, distancia 1.10 m exacta, sincronía de impactos) pero los dos clips
+de combate no servían para un golpe conectado: el jab extendía **15 cm** el brazo y
+la reacción retrocedía **1 metro** dentro del clip, dejando 152 cm entre puño y cara.
 
-- **Pares de dos personajes** (`contact_handshake_*`, `fight_jab_*`): dos clips
-  que el plugin empareja y sincroniza por el instante del contacto.
-- **Categoría `talk`** como loop de upper body.
-- **Reach direccional** para el sistema de grips de props.
+Los prompts corregidos piden la **extensión explícita** del brazo o la pierna, y las
+reacciones llevan **"without stepping away"** con el root fijado. Detalle completo en
+`PASS1_V2_VALIDACION.md`.
 
 ```
-python scripts/generate.py    --catalog ../catalog/pass1_validation.json --outdir ../raw_pass1
-python scripts/run_catalog.py --catalog ../catalog/pass1_validation.json --raw ../raw_pass1 --out ../kimodo_animations_pass1
+python scripts/generate.py    --catalog ../catalog/pass1_v2_validation.json --outdir ../raw_pass1v2
+python scripts/run_catalog.py --catalog ../catalog/pass1_v2_validation.json --raw ../raw_pass1v2 --out ../kimodo_animations_pass1v2
 ```
 
-Luego los FBX/BVH + `manifest.json` van a `Assets/eea_base_motion/` del proyecto
-Unity y se corre `kimodo_ingest`. **Qué debe verse**: el apretón y el golpe
-emparejados, con el puño conectando en la reacción y los personajes a la
-distancia correcta.
+`talk_explain_measured` y `upper_reach_mid_right` salieron bien en la primera vuelta
+y no hay que regenerarlos. El catálogo de la primera vuelta queda como
+`pass1_validation.json` para referencia.
 
 ### 2. `pass2_action_library.json` — 540 clips · SOLO tras validar
 
