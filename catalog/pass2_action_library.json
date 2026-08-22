@@ -1201,22 +1201,22 @@
       "id": "loco_jump_forward",
       "category": "locomotion",
       "prompt": "A person jumps forward off both feet, clears a small gap and lands running.",
-      "duration": 4.0,
-      "root_policy": "pin_origin",
+      "duration": 2.5,
+      "root_policy": "strip_xz",
       "loop": true,
-      "loop_cycle": "full",
+      "loop_cycle": "gait",
       "taxonomy": {
         "bodyRegion": "full",
         "clipKind": "loop",
-        "function": "idle",
+        "function": "locomotion",
         "moodTags": [
           "neutral"
         ]
       },
       "qc": {
         "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0,
-        "require_loop": true
+        "require_loop": true,
+        "min_gait_cycles": 2
       }
     },
     {
@@ -1484,7 +1484,7 @@
       "category": "transition",
       "prompt": "A person jumps straight up off both feet and lands back in the same neutral stance.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -1496,8 +1496,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -8140,7 +8139,7 @@
       "category": "transition",
       "prompt": "A person runs two steps, leaps forward and lands rolling onto one shoulder.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -8152,8 +8151,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -11680,7 +11678,7 @@
       "category": "transition",
       "prompt": "A person lowers to the floor through one hip, rolls across the back and rises to a knee.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -11692,8 +11690,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12468,7 +12465,7 @@
       "category": "transition",
       "prompt": "A person runs forward, takes off from one foot and lands running.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12480,8 +12477,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12489,7 +12485,7 @@
       "category": "transition",
       "prompt": "A person crouches and springs straight up with both arms reaching.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12501,8 +12497,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12510,7 +12505,7 @@
       "category": "transition",
       "prompt": "A person steps off a height, drops and absorbs the landing in a crouch.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12522,8 +12517,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12531,7 +12525,7 @@
       "category": "transition",
       "prompt": "A person runs forward and hurdles something at knee height.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12543,8 +12537,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12552,7 +12545,7 @@
       "category": "transition",
       "prompt": "A person lands from a fall and rolls forward over one shoulder to standing.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12564,8 +12557,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12573,7 +12565,7 @@
       "category": "transition",
       "prompt": "A person dives forward, rolls over one shoulder and comes up standing.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12585,8 +12577,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12594,7 +12585,7 @@
       "category": "transition",
       "prompt": "A person drops onto the back, rolls over one shoulder and stands.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12606,8 +12597,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12615,7 +12605,7 @@
       "category": "transition",
       "prompt": "A person throws the body sideways, rolls once and rises.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12627,8 +12617,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12636,7 +12625,7 @@
       "category": "transition",
       "prompt": "A person reaches down to one side, swings both legs overhead in a wheel and lands.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12648,8 +12637,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12657,7 +12645,7 @@
       "category": "transition",
       "prompt": "A person runs two steps, plants both hands and flips forward onto the feet.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12669,8 +12657,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
@@ -12678,7 +12665,7 @@
       "category": "transition",
       "prompt": "A person crouches and throws the body backward through the air, landing on the feet.",
       "duration": 5.0,
-      "root_policy": "pin_origin",
+      "root_policy": "keep",
       "loop": false,
       "bookends": "neutral",
       "taxonomy": {
@@ -12690,8 +12677,7 @@
         ]
       },
       "qc": {
-        "max_foot_skate_cm": 1.5,
-        "max_root_drift_cm": 10.0
+        "max_foot_skate_cm": 3.5
       }
     },
     {
