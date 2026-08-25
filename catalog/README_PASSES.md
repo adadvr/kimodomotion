@@ -94,3 +94,18 @@ sospechas, las dos corregidas en los 64 clips que golpean:
 
 Si aun así el modelo no extiende, es un techo suyo con los golpes y el remate va por
 autoría: para eso está la ronda de herramientas de trayectorias e inbetween.
+
+
+## Lecciones del pass 2 (aplicadas en 3.2-pass2-lessons)
+
+- **El scorer ya mide extension** (`strike_reach_cm` en run_catalog.py): en combate
+  con role give, 1 punto por cm — la limpieza solo desempata entre golpes que llegan.
+  En el pass 2 el scorer ciego habria entregado el golpe flojo en 11 de 16 clips.
+- **El sujeto del prompt no cambia el estilo** (medido en _gtest: la semilla pesa mas
+  que decir man/woman, y el esqueleto es siempre el mismo). El estilo se pide con la
+  instruccion de movimiento explicita, nunca con el sustantivo.
+- **Instrucciones que compiten se promedian**: "hips rotating fully" + "at full reach"
+  dio un cross corto en los 4 candidatos. Una sola orden dominante por clip.
+- `generate_inproc.py` siempre (una carga de modelo por bloque); `to_fbx.py` acepta
+  `--in` y `--input`, y corre DENTRO de blender:
+  `blender --background --python to_fbx.py -- --input <carpeta> --out <fbx> --scale 0.01`

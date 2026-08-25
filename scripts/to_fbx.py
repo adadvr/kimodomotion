@@ -62,7 +62,7 @@ def argv_after_dashes():
 def parse_args():
     import argparse
     ap = argparse.ArgumentParser()
-    ap.add_argument("--input", required=True, help="archivo .bvh o carpeta")
+    ap.add_argument("--input", "--in", required=True, help="archivo .bvh o carpeta")
     ap.add_argument("--out", required=True)
     ap.add_argument("--scale", type=float, default=0.01, help="cm->m = 0.01")
     ap.add_argument("--fps", type=int, default=30)

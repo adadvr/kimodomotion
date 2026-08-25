@@ -50,6 +50,74 @@ def candidates_for(raw_dir: str, clip_id: str) -> list[str]:
     return sorted(set(files), key=suffix_rank, reverse=True)
 
 
+def strike_reach_cm(bvh_path: str) -> float | None:
+    """Extension maxima del golpe: proyeccion de mano (vs hombro) o punta del
+    pie (vs raiz) sobre el frente del torso, en cm.
+
+    Existe porque el score de limpieza es CIEGO al alcance: un golpe timido y
+    suave le gana siempre a uno extendido. En el pass 2 eso habria entregado el
+    golpe flojo en 11 de los 16 clips de combate con "at full reach" — se
+    corrigieron a mano midiendo exactamente esto (README del pass 2, problema 2).
+
+    Validada contra las mediciones de ese informe: brazos a ±2 cm
+    (grab_collar 58.9 vs 61.1, knee 53.3 vs 52.9, cross 30.6 vs 29.6).
+    """
+    try:
+        from bvhtools import load_bvh, detect_key_joints
+        import numpy as np
+        bvh = load_bvh(bvh_path)
+        pos, rot = bvh.forward_kinematics()
+        hips = bvh.root
+        fwd = rot[:, hips] @ np.array([0.0, 0.0, 1.0])
+        fwd[:, 1] = 0
+        n = np.linalg.norm(fwd, axis=1, keepdims=True)
+        n[n < 1e-6] = 1
+        fwd /= n
+
+        def find(side_pat, part_pat):
+            best, bestd = None, 99
+            for j in bvh.joints:
+                if j.is_end:
+                    continue
+                nm = j.name.lower().replace("_", "").replace(" ", "").replace(".", "")
+                if re.search(side_pat, nm) and re.search(part_pat, nm):
+                    d, cur = 0, j.index
+                    while bvh.joints[cur].parent >= 0:
+                        cur = bvh.joints[cur].parent
+                        d += 1
+                    if d < bestd:
+                        best, bestd = j.index, d
+            return best
+
+        reach = 0.0
+        for sp in (r"^(l|left)", r"^(r|right)"):
+            tip = find(sp, r"(hand|wrist)")
+            base = find(sp, r"(shoulder|clavicle|collar|uparm|upperarm)")
+            if tip is None or base is None:
+                continue
+            proj = np.einsum("td,td->t", pos[:, tip] - pos[:, base], fwd)
+            reach = max(reach, float(proj.max()))
+        legs = detect_key_joints(bvh)
+        for side in ("left", "right"):
+            tip = legs.get(f"{side}_toe") or legs.get(f"{side}_ankle")
+            if tip is None:
+                continue
+            proj = np.einsum("td,td->t", pos[:, tip] - pos[:, hips], fwd)
+            reach = max(reach, float(proj.max()))
+        return round(reach, 1)
+    except Exception:                                        # noqa: BLE001
+        return None
+
+
+def wants_reach(clip: dict) -> bool:
+    """Golpes que se seleccionan por extension ademas de por limpieza."""
+    tax = clip.get("taxonomy", {})
+    if tax.get("function") != "combat":
+        return False
+    # El receive no golpea: puntuar su "alcance" premiaria aspavientos.
+    return tax.get("pairRole") != "receive"
+
+
 def score(report: dict, clip_qc: dict | None = None) -> float:
     """Menor es mejor. Penaliza skate, penetracion, jitter, mal loop y falta de ciclo."""
     clip_qc = clip_qc or {}
@@ -150,6 +218,14 @@ def main():
             rep["source"] = src
             rep["passed"] = _verdict(rep, clip.get("qc", {}))
             rep["score"] = round(score(rep, clip.get("qc", {})), 4)
+            if wants_reach(clip):
+                stem_c = os.path.splitext(os.path.basename(src))[0]
+                rep["reach_cm"] = strike_reach_cm(os.path.join(work, stem_c + ".bvh"))
+                # El alcance manda: 1 punto por cm aplasta los pocos puntos que
+                # separan a dos candidatos "limpios", que es la intencion — la
+                # limpieza solo desempata entre golpes que SI llegan.
+                if rep["reach_cm"] is not None:
+                    rep["score"] = round(rep["score"] - rep["reach_cm"], 4)
             results.append((rep, work))
 
         if not results:
@@ -194,6 +270,8 @@ def main():
             "expectedSpeedMs": clip.get("qc", {}).get("expected_speed_m_s"),
             "qcPassed": best["passed"]["all"],
             "qcFailed": [k for k, v in best["passed"].items() if k != "all" and not v],
+            **({"reachCm": best["reach_cm"], "selectedBy": "reach"}
+               if best.get("reach_cm") is not None else {}),
             **clip.get("taxonomy", {}),
         }
         manifest.append(entry)
